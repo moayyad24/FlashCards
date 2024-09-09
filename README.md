@@ -1,16 +1,9 @@
-# flashcards
+#🎴 flashcards
 
-A new Flutter project.
+A powerful flashcard app that allows you to easily manage your flashcards and organize them into personalized groups.
+Keep important concepts fresh in your mind and ensure you never forget them.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+##🎨 System design
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![flash_cards_design](https://github.com/user-attachments/assets/28afc806-883d-4426-80dd-da65328d54f7)
