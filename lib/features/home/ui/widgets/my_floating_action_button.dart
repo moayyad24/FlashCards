@@ -1,4 +1,5 @@
 import 'package:flashcards/core/theme/colors.dart';
+import 'package:flashcards/features/home/ui/add_new_set_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyFloatingActionButton extends StatelessWidget {
@@ -18,7 +19,12 @@ class MyFloatingActionButton extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context)
+                          .push(MaterialPageRoute(builder: (context) {
+                        return const AddNewSetScreen();
+                      }));
+                    },
                     leading: const Icon(Icons.folder),
                     title: const Text('Create new study set'),
                   ),
