@@ -11,21 +11,21 @@ class AddNewSetScreen extends StatelessWidget {
         title: const Text('Create a new set'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('***********Saved***********');
-        },
+        onPressed: () {},
         child: const Icon(Icons.add),
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: Column(
           children: [
             AppTextField(
               hintText: 'Title',
+              onChanged: (v) {},
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             AppTextField(
               hintText: 'Description',
+              onChanged: (v) {},
             )
           ],
         ),
