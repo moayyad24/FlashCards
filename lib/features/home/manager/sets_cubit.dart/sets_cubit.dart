@@ -14,6 +14,7 @@ class SetsCubit extends Cubit<SetsState> {
       List<SetModel> setsList = await homeRepo.fetchAllSets();
       emit(SetsSuccess(setsList: setsList));
     } catch (e) {
+      debugPrint(e.toString());
       emit(SetsFailure());
     }
   }

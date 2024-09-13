@@ -13,28 +13,47 @@ mixin DbHelper {
     }
   }
 
-  final String _sqlTable = '''
-      CREATE TABLE "sets" (
-          set_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          set_title TEXT NOT NULL,
-          set_desc TEXT NOT NULL
-      );
-      CREATE TABLE "card" (
-          card_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-          card_question TEXT NOT NULL,
-          card_s_question TEXT,
-          card_answer TEXT,
-          card_s_answer TEXT,
-          set_id INT,
-          FOREIGN KEY (set_id) REFERENCES SETS(set_id)
-      ); 
-      ''';
+  final String _sqlTableFolders = '''
+    CREATE TABLE folders (
+    folder_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    folder_title TEXT NOT NULL,
+    folder_desc  TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+''';
+
+  final String _sqlTableSets = '''
+    CREATE TABLE sets (
+        set_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        set_title TEXT NOT NULL,
+        set_desc TEXT NOT NULL,
+        folder_id INTEGER NOT NULL DEFAULT 0,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (folder_id) REFERENCES folders(folder_id)
+    );
+''';
+
+  final String _sqlTableCard = '''
+    CREATE TABLE card (
+        card_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        card_question TEXT NOT NULL,
+        card_s_question TEXT,
+        card_answer TEXT,
+        card_s_answer TEXT,
+        set_id INTEGER NOT NULL,  
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (set_id) REFERENCES sets(set_id)
+    ); 
+''';
+
   Future<Database?> instance() async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, 'flash_cards.db');
     Database database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
-      await db.execute(_sqlTable);
+      await db.execute(_sqlTableFolders);
+      await db.execute(_sqlTableSets);
+      await db.execute(_sqlTableCard);
       debugPrint('Text Database has been created');
     });
 

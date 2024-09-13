@@ -28,6 +28,8 @@ class _AddNewSetScreenState extends State<AddNewSetScreen> {
             final newSet = SetModel(
               title: _titleController.text,
               description: _descController.text,
+              folderId: 0,
+              createdAt: DateTime.now().toString(),
             );
             await BlocProvider.of<SetsCubit>(context).insertAnewSet(newSet);
             if (context.mounted) {

@@ -6,7 +6,7 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
   @override
   Future<List<SetModel>> fetchAllSets() async {
     List<SetModel> setsList = [];
-    String sql = "SELECT * FROM sets ORDER BY set_id DESC;";
+    String sql = "SELECT * FROM sets WHERE folder_id = 0 ORDER BY set_id DESC;";
     var setsMap = await inquiry(sql);
     for (var e in setsMap) {
       setsList.add(SetModel.fromSql(e));
