@@ -13,12 +13,7 @@ mixin DbHelper {
     }
   }
 
-  Future<Database?> instance() async {
-    String databasePath = await getDatabasesPath();
-    String path = join(databasePath, 'flash_cards.db');
-    Database database = await openDatabase(path, version: 1,
-        onCreate: (Database db, int version) async {
-      await db.execute('''
+  final String _sqlTable = '''
       CREATE TABLE "sets" (
           set_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
           set_title TEXT NOT NULL,
@@ -33,9 +28,16 @@ mixin DbHelper {
           set_id INT,
           FOREIGN KEY (set_id) REFERENCES SETS(set_id)
       ); 
-      ''');
+      ''';
+  Future<Database?> instance() async {
+    String databasePath = await getDatabasesPath();
+    String path = join(databasePath, 'flash_cards.db');
+    Database database = await openDatabase(path, version: 1,
+        onCreate: (Database db, int version) async {
+      await db.execute(_sqlTable);
+      debugPrint('Text Database has been created');
     });
-    debugPrint('Text Database has been created');
+
     return database;
   }
 

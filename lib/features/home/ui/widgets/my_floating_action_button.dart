@@ -20,6 +20,7 @@ class MyFloatingActionButton extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () {
+                      Navigator.of(context).pop();
                       Navigator.of(context)
                           .push(MaterialPageRoute(builder: (context) {
                         return const AddNewSetScreen();
