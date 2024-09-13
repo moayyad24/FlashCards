@@ -4,14 +4,14 @@ import 'package:flashcards/core/widgets/app_text_field.dart';
 import 'package:flashcards/features/home/data/model/set_model.dart';
 import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_cubit.dart';
 
-class AddNewSetScreen extends StatefulWidget {
-  const AddNewSetScreen({super.key});
+class AddFolderSetScreen extends StatefulWidget {
+  const AddFolderSetScreen({super.key});
 
   @override
-  State<AddNewSetScreen> createState() => _AddNewSetScreenState();
+  State<AddFolderSetScreen> createState() => _AddFolderSetScreenState();
 }
 
-class _AddNewSetScreenState extends State<AddNewSetScreen> {
+class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descController = TextEditingController();
