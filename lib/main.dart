@@ -2,7 +2,7 @@ import 'package:flashcards/core/helper/simple_bloc_observer.dart';
 import 'package:flashcards/core/theme/app_theme.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/home/data/repo/home_repo_impl.dart';
-import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_cubit.dart';
+import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class FlashCards extends StatelessWidget {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(systemNavigationBarColor: AppColors.black));
     return BlocProvider(
-      create: (context) => SetsCubit(HomeRepoImpl())..fetchAllSets(),
+      create: (context) => HomeCubit(HomeRepoImpl())..homeFetchDate(),
       child: MaterialApp(
         title: 'FlashCards',
         darkTheme: AppTheme.appTheme,

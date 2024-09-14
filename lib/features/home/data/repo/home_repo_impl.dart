@@ -1,17 +1,23 @@
 import 'package:flashcards/core/helper/db_helper.dart';
-import 'package:flashcards/features/home/data/model/set_model.dart';
+import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends HomeRepo with DbHelper {
   @override
-  Future<List<SetModel>> fetchAllSets() async {
-    List<SetModel> setsList = [];
-    String sql = "SELECT * FROM sets WHERE folder_id = 0 ORDER BY set_id DESC;";
+  Future<List<HomeDataModel>> fetchHomeData() async {
+    List<HomeDataModel> homeDataList = [];
+    String sql = '''
+          SELECT folder_id AS id, folder_title AS title, folder_desc AS description, created_at
+          FROM folders
+          UNION ALL
+          SELECT folder_id AS id, set_title AS title, set_desc AS description, created_at
+          FROM sets;
+             ''';
     var setsMap = await inquiry(sql);
     for (var e in setsMap) {
-      setsList.add(SetModel.fromSql(e));
+      homeDataList.add(HomeDataModel.fromSql(e));
     }
-    return setsList;
+    return homeDataList;
   }
 
   @override

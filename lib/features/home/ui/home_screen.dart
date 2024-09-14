@@ -1,5 +1,5 @@
-import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_cubit.dart';
-import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_state.dart';
+import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:flashcards/features/home/manager/home_cubit/home_state.dart';
 import 'package:flashcards/features/home/ui/widgets/card_list_tile.dart';
 import 'package:flashcards/features/home/ui/widgets/home_title.dart';
 import 'package:flashcards/features/home/ui/widgets/my_floating_action_button.dart';
@@ -26,16 +26,16 @@ class HomeScreen extends StatelessWidget {
           child: Column(
         children: [
           const HomeTitle(),
-          BlocBuilder<SetsCubit, SetsState>(
+          BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
-              if (state is SetsLoading) {
+              if (state is HomeFetchLoading) {
                 return const CircularProgressIndicator();
-              } else if (state is SetsSuccess) {
+              } else if (state is HomeFetchSuccess) {
                 return Expanded(
                   child: ListView.builder(
-                    itemCount: state.setsList.length,
+                    itemCount: state.homeDataList.length,
                     itemBuilder: (context, index) {
-                      return CardListTile(setModel: state.setsList[index]);
+                      return CardListTile(homeModel: state.homeDataList[index]);
                     },
                   ),
                 );
