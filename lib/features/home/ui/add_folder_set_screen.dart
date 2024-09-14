@@ -1,8 +1,6 @@
+import 'package:flashcards/features/home/ui/widgets/add_folder_set_body.dart';
+import 'package:flashcards/features/home/ui/widgets/add_folder_set_floating_action_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flashcards/core/widgets/app_text_field.dart';
-import 'package:flashcards/features/home/data/model/set_model.dart';
-import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_cubit.dart';
 
 class AddFolderSetScreen extends StatefulWidget {
   const AddFolderSetScreen({super.key});
@@ -12,9 +10,17 @@ class AddFolderSetScreen extends StatefulWidget {
 }
 
 class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _descController = TextEditingController();
+  late GlobalKey<FormState> _formKey;
+  late TextEditingController _titleController;
+  late TextEditingController _descController;
+
+  @override
+  void initState() {
+    _formKey = GlobalKey<FormState>();
+    _titleController = TextEditingController();
+    _descController = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,54 +28,14 @@ class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
       appBar: AppBar(
         title: const Text('Create a new set'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          if (_formKey.currentState?.validate() ?? false) {
-            final newSet = SetModel(
-              title: _titleController.text,
-              description: _descController.text,
-              folderId: 0,
-              createdAt: DateTime.now().toString(),
-            );
-            await BlocProvider.of<SetsCubit>(context).insertAnewSet(newSet);
-            if (context.mounted) {
-              Navigator.of(context).pop();
-            }
-          }
-        },
-        child: const Icon(Icons.check),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              AppTextField(
-                controller: _titleController,
-                hintText: 'Title',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a title';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              AppTextField(
-                controller: _descController,
-                hintText: 'Description',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
+      floatingActionButton: AddFolderSetFloatingActionButton(
+          formKey: _formKey,
+          titleController: _titleController,
+          descController: _descController),
+      body: AddFolderSetBody(
+          formKey: _formKey,
+          titleController: _titleController,
+          descController: _descController),
     );
   }
 

@@ -1,5 +1,4 @@
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flutter/material.dart';
 
 class MyFloatingActionButton extends StatelessWidget {
@@ -21,16 +20,24 @@ class MyFloatingActionButton extends StatelessWidget {
                   ListTile(
                     onTap: () {
                       Navigator.of(context).pop();
-                      Navigator.of(context)
-                          .push(MaterialPageRoute(builder: (context) {
-                        return const AddFolderSetScreen();
-                      }));
+                      Navigator.pushNamed(
+                        context,
+                        '/addFolderSet',
+                        arguments: 0, //0 means add a set
+                      );
                     },
                     leading: const Icon(Icons.folder),
                     title: const Text('Create new study set'),
                   ),
                   ListTile(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      Navigator.pushNamed(
+                        context,
+                        '/addFolderSet',
+                        arguments: 1, //1 means add a folder
+                      );
+                    },
                     leading: const Icon(Icons.folder_copy),
                     title: const Text('Create new bundle of set'),
                   ),

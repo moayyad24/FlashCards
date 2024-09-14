@@ -3,6 +3,7 @@ import 'package:flashcards/core/theme/app_theme.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/home/data/repo/home_repo_impl.dart';
 import 'package:flashcards/features/home/manager/sets_cubit.dart/sets_cubit.dart';
+import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,9 @@ class FlashCards extends StatelessWidget {
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
         home: const HomeScreen(),
+        routes: {
+          '/addFolderSet': (context) => const AddFolderSetScreen(),
+        },
       ),
     );
   }
