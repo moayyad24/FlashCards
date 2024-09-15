@@ -29,7 +29,7 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<HomeCubit, HomeState>(
             builder: (context, state) {
               if (state is HomeFetchLoading) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (state is HomeFetchSuccess) {
                 return Expanded(
                   child: ListView.builder(

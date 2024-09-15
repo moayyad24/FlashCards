@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/collection_type.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,9 @@ class CardListTile extends StatelessWidget {
     return ListTile(
       onTap: () {},
       leading: Icon(
-        homeModel.folderId == 0 ? Icons.folder : Icons.folder_copy,
+        homeModel.type == CollectionType.sets
+            ? Icons.folder
+            : Icons.folder_copy,
         color: AppColors.sulu,
       ),
       title: Text(homeModel.title),

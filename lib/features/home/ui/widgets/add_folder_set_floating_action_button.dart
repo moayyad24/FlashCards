@@ -1,4 +1,4 @@
-import 'package:flashcards/core/helper/type.dart';
+import 'package:flashcards/core/helper/collection_type.dart';
 import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
@@ -21,23 +21,18 @@ class AddFolderSetFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int myInt = ModalRoute.of(context)?.settings.arguments as int;
-    Type type = getType(myInt);
+    CollectionType type = getType(myInt);
     return FloatingActionButton(
       onPressed: () async {
         if (_formKey.currentState?.validate() ?? false) {
-          if (type == Type.sets) {
-            final newSet = HomeDataModel(
-              title: _titleController.text,
-              description: _descController.text,
-            );
-            await BlocProvider.of<HomeCubit>(context).insertAnewSet(newSet);
+          final newData = HomeDataModel(
+            title: _titleController.text,
+            description: _descController.text,
+          );
+          if (type == CollectionType.sets) {
+            await BlocProvider.of<HomeCubit>(context).insertAnewSet(newData);
           } else {
-            final newFolder = HomeDataModel(
-              title: _titleController.text,
-              description: _descController.text,
-            );
-            await BlocProvider.of<HomeCubit>(context)
-                .insertAnewFolder(newFolder);
+            await BlocProvider.of<HomeCubit>(context).insertAnewFolder(newData);
           }
           if (context.mounted) {
             Navigator.of(context).pop();
