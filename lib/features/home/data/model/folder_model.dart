@@ -1,12 +1,12 @@
 class FolderModel {
   final String title;
   final String description;
-  final String createdAt;
+  final String? createdAt;
 
   FolderModel({
     required this.title,
     required this.description,
-    required this.createdAt,
+    this.createdAt,
   });
 
   factory FolderModel.fromSql(Map<String, dynamic> map) {

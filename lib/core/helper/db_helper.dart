@@ -31,7 +31,7 @@ mixin DbHelper {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (folder_id) REFERENCES folders(folder_id)
     );
-''';
+'''; //if folder_id is 0 then it not related to any folder
 
   final String _sqlTableCard = '''
     CREATE TABLE card (

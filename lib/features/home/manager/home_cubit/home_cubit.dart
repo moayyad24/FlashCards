@@ -25,4 +25,13 @@ class HomeCubit extends Cubit<HomeState> {
       debugPrint(e.toString());
     }
   }
+
+  insertAnewFolder(folderModel) async {
+    try {
+      await homeRepo.insertAnewFolder(folderModel);
+      await homeFetchDate();
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }

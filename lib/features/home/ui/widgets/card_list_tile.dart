@@ -1,6 +1,5 @@
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/home/data/model/home_data_model.dart';
-import 'package:flashcards/features/home/data/model/set_model.dart';
 import 'package:flutter/material.dart';
 
 class CardListTile extends StatelessWidget {
@@ -14,8 +13,8 @@ class CardListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {},
-      leading: const Icon(
-        Icons.folder,
+      leading: Icon(
+        homeModel.folderId == 0 ? Icons.folder : Icons.folder_copy,
         color: AppColors.sulu,
       ),
       title: Text(homeModel.title),
