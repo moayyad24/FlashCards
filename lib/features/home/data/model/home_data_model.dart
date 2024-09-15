@@ -1,14 +1,14 @@
 class HomeDataModel {
   final String title;
   final String description;
-  final int folderId;
-  final String createdAt;
+  final int? folderId;
+  final String? createdAt;
 
   HomeDataModel(
       {required this.title,
       required this.description,
-      required this.folderId,
-      required this.createdAt});
+      this.folderId,
+      this.createdAt});
 
   factory HomeDataModel.fromSql(Map<String, dynamic> map) {
     return HomeDataModel(

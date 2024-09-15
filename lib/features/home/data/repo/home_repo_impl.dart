@@ -1,5 +1,4 @@
 import 'package:flashcards/core/helper/db_helper.dart';
-import 'package:flashcards/features/home/data/model/folder_model.dart';
 import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
 
@@ -36,7 +35,7 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
   }
 
   @override
-  Future<int> insertAnewFolder(FolderModel folderModel) async {
+  Future<int> insertAnewFolder(folderModel) async {
     String sql = '''
     INSERT INTO folders(folder_title, folder_desc)
     VALUES ('${folderModel.title}', '${folderModel.description}')

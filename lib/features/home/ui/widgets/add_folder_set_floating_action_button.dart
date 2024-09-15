@@ -1,6 +1,5 @@
 import 'package:flashcards/core/helper/type.dart';
-import 'package:flashcards/features/home/data/model/folder_model.dart';
-import 'package:flashcards/features/home/data/model/set_model.dart';
+import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,13 +26,13 @@ class AddFolderSetFloatingActionButton extends StatelessWidget {
       onPressed: () async {
         if (_formKey.currentState?.validate() ?? false) {
           if (type == Type.sets) {
-            final newSet = SetModel(
+            final newSet = HomeDataModel(
               title: _titleController.text,
               description: _descController.text,
             );
             await BlocProvider.of<HomeCubit>(context).insertAnewSet(newSet);
           } else {
-            final newFolder = FolderModel(
+            final newFolder = HomeDataModel(
               title: _titleController.text,
               description: _descController.text,
             );
