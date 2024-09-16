@@ -16,6 +16,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           width: 50,
           child: FloatingActionButton(
             onPressed: () {},
+            heroTag: 'first',
             backgroundColor: AppColors.greyLight,
             child: const Icon(Icons.add),
           ),
@@ -26,6 +27,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           width: 60,
           child: FloatingActionButton(
             onPressed: () {},
+            heroTag: 'second',
             child: const Icon(Icons.play_arrow),
           ),
         ),

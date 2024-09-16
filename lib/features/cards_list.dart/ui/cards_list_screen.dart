@@ -20,7 +20,15 @@ class CardsListScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: const CardsListsFloatingActionButton(),
-      body: Container(),
+      body: ListView.builder(
+          itemCount: 6,
+          itemBuilder: (context, index) {
+            return const ListTile(
+              leading: Icon(Icons.format_line_spacing),
+              title: Text('test test'),
+              subtitle: Text('for testing purpose'),
+            );
+          }),
     );
   }
 }
