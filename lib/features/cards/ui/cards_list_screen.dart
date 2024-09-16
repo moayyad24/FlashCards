@@ -1,6 +1,6 @@
 import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/cards_list.dart/ui/widgets/card_list_view_body.dart';
-import 'package:flashcards/features/cards_list.dart/ui/widgets/cards_list_floating_action_button.dart';
+import 'package:flashcards/features/cards/ui/widgets/card_list_view_body.dart';
+import 'package:flashcards/features/cards/ui/widgets/cards_list_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 class CardsListScreen extends StatelessWidget {
