@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/app_routes.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,9 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           height: 50,
           width: 50,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(AppRoutes.addNewCard);
+            },
             heroTag: 'first',
             backgroundColor: AppColors.greyLight,
             child: const Icon(Icons.add),
