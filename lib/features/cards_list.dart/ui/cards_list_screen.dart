@@ -1,4 +1,5 @@
 import 'package:flashcards/core/models/collection_model.dart';
+import 'package:flashcards/features/cards_list.dart/ui/widgets/card_list_view_body.dart';
 import 'package:flashcards/features/cards_list.dart/ui/widgets/cards_list_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
@@ -20,15 +21,7 @@ class CardsListScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: const CardsListsFloatingActionButton(),
-      body: ListView.builder(
-          itemCount: 6,
-          itemBuilder: (context, index) {
-            return const ListTile(
-              leading: Icon(Icons.format_line_spacing),
-              title: Text('test test'),
-              subtitle: Text('for testing purpose'),
-            );
-          }),
+      body: const CardListViewBody(),
     );
   }
 }
