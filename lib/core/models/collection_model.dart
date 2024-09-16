@@ -1,13 +1,13 @@
 import 'package:flashcards/core/helper/collection_type.dart';
 
-class HomeDataModel {
+class CollectionModel {
   final String title;
   final String description;
   final int? folderId;
   final String? createdAt;
   final CollectionType? type;
 
-  HomeDataModel({
+  CollectionModel({
     required this.title,
     required this.description,
     this.folderId,
@@ -15,8 +15,8 @@ class HomeDataModel {
     this.type,
   });
 
-  factory HomeDataModel.fromSql(Map<String, dynamic> map) {
-    return HomeDataModel(
+  factory CollectionModel.fromSql(Map<String, dynamic> map) {
+    return CollectionModel(
       title: map['title'],
       description: map['description'],
       folderId: map['id'],

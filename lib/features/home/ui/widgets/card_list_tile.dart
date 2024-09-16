@@ -1,10 +1,11 @@
+import 'package:flashcards/core/helper/app_routes.dart';
 import 'package:flashcards/core/helper/collection_type.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/home/data/model/home_data_model.dart';
 import 'package:flutter/material.dart';
 
 class CardListTile extends StatelessWidget {
-  final HomeDataModel homeModel;
+  final CollectionModel homeModel;
   const CardListTile({
     required this.homeModel,
     super.key,
@@ -13,7 +14,12 @@ class CardListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () {},
+      onTap: () {
+        homeModel.type == CollectionType.sets
+            ? Navigator.of(context)
+                .pushNamed(AppRoutes.cardsList, arguments: homeModel)
+            : null;
+      },
       leading: Icon(
         homeModel.type == CollectionType.sets
             ? Icons.folder

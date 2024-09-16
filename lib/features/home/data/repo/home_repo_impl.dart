@@ -1,11 +1,11 @@
 import 'package:flashcards/core/helper/db_helper.dart';
-import 'package:flashcards/features/home/data/model/home_data_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends HomeRepo with DbHelper {
   @override
-  Future<List<HomeDataModel>> fetchHomeData() async {
-    List<HomeDataModel> homeDataList = [];
+  Future<List<CollectionModel>> fetchHomeData() async {
+    List<CollectionModel> homeDataList = [];
     String sql = '''
          SELECT *
          FROM (
@@ -19,7 +19,7 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
           ''';
     var dataMap = await inquiry(sql);
     for (var e in dataMap) {
-      homeDataList.add(HomeDataModel.fromSql(e));
+      homeDataList.add(CollectionModel.fromSql(e));
     }
     return homeDataList;
   }

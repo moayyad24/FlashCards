@@ -1,7 +1,7 @@
-import 'package:flashcards/features/home/data/model/home_data_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 
 abstract class HomeRepo {
-  Future<List<HomeDataModel>> fetchHomeData();
-  Future<int> insertAnewSet(HomeDataModel setModel);
-  Future<int> insertAnewFolder(HomeDataModel folderModel);
+  Future<List<CollectionModel>> fetchHomeData();
+  Future<int> insertAnewSet(CollectionModel setModel);
+  Future<int> insertAnewFolder(CollectionModel folderModel);
 }

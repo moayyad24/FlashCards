@@ -1,5 +1,5 @@
 import 'package:flashcards/core/helper/collection_type.dart';
-import 'package:flashcards/features/home/data/model/home_data_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,7 @@ class AddFolderSetFloatingActionButton extends StatelessWidget {
     return FloatingActionButton(
       onPressed: () async {
         if (_formKey.currentState?.validate() ?? false) {
-          final newData = HomeDataModel(
+          final newData = CollectionModel(
             title: _titleController.text,
             description: _descController.text,
           );

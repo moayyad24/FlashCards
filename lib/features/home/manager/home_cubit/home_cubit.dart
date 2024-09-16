@@ -1,4 +1,4 @@
-import 'package:flashcards/features/home/data/model/home_data_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_state.dart';
 import 'package:flutter/foundation.dart';
@@ -10,7 +10,7 @@ class HomeCubit extends Cubit<HomeState> {
   homeFetchDate() async {
     emit(HomeFetchLoading());
     try {
-      List<HomeDataModel> homeDataList = await homeRepo.fetchHomeData();
+      List<CollectionModel> homeDataList = await homeRepo.fetchHomeData();
       emit(HomeFetchSuccess(homeDataList: homeDataList));
     } catch (e) {
       debugPrint(e.toString());
