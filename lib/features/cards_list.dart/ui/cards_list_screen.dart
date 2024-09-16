@@ -1,4 +1,5 @@
 import 'package:flashcards/core/models/collection_model.dart';
+import 'package:flashcards/features/cards_list.dart/ui/widgets/cards_list_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 class CardsListScreen extends StatelessWidget {
@@ -18,6 +19,7 @@ class CardsListScreen extends StatelessWidget {
           IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
         ],
       ),
+      floatingActionButton: const CardsListsFloatingActionButton(),
       body: Container(),
     );
   }
