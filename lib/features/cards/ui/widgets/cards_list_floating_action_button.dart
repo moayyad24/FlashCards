@@ -1,10 +1,14 @@
-import 'package:flashcards/core/helper/app_routes.dart';
 import 'package:flashcards/core/theme/colors.dart';
+import 'package:flashcards/features/cards/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards/ui/add_new_card_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardsListsFloatingActionButton extends StatelessWidget {
+  final int setId;
   const CardsListsFloatingActionButton({
     super.key,
+    required this.setId,
   });
 
   @override
@@ -17,7 +21,12 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           width: 50,
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(AppRoutes.addNewCard);
+              Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
+                return BlocProvider.value(
+                  value: BlocProvider.of<CardListCubit>(context),
+                  child: AddNewCardScreen(setId: setId),
+                );
+              }));
             },
             heroTag: 'first',
             backgroundColor: AppColors.greyLight,

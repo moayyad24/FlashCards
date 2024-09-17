@@ -67,10 +67,10 @@ mixin DbHelper {
     return list;
   }
 
-  insert(String sqlTxt) async {
+  insert(String sqlTxt, arguments) async {
     Database? db = await getInstance;
     // Insert some record
-    int count = await db!.rawInsert(sqlTxt);
+    int count = await db!.rawInsert(sqlTxt, arguments);
     return count;
   }
 

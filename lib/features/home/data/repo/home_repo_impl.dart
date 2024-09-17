@@ -28,9 +28,13 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
   Future<int> insertAnewSet(setModel) async {
     String sql = '''
     INSERT INTO sets(set_title, set_desc)
-    VALUES ('${setModel.title}', '${setModel.description}')
+    VALUES (?, ?)
    ''';
-    int result = await insert(sql);
+    List<dynamic> arguments = [
+      setModel.title,
+      setModel.description,
+    ];
+    int result = await insert(sql, arguments);
     return result;
   }
 
@@ -38,9 +42,13 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
   Future<int> insertAnewFolder(folderModel) async {
     String sql = '''
     INSERT INTO folders(folder_title, folder_desc)
-    VALUES ('${folderModel.title}', '${folderModel.description}')
+    VALUES (?, ?)
     ''';
-    int result = await insert(sql);
+    List<dynamic> arguments = [
+      folderModel.title,
+      folderModel.description,
+    ];
+    int result = await insert(sql, arguments);
     return result;
   }
 }
