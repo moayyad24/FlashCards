@@ -40,7 +40,7 @@ class CardListTile extends StatelessWidget {
         ? Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => BlocProvider(
                   create: (context) => CardListCubit(CardsRepoImpl())
-                    ..fetchCards(homeModel.folderId!),
+                    ..fetchCards(homeModel.setId!),
                   child: CardsListScreen(collectionModel: homeModel),
                 )))
         : null;

@@ -9,10 +9,10 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
     String sql = '''
          SELECT *
          FROM (
-             SELECT folder_id AS id, folder_title AS title, folder_desc AS description, created_at
+             SELECT folder_id AS id, folder_title AS title, folder_desc AS description, NULL AS set_id, created_at
              FROM folders
              UNION ALL
-             SELECT folder_id AS id, set_title AS title, set_desc AS description, created_at
+             SELECT folder_id AS id, set_title AS title, set_desc AS description, set_id AS set_id, created_at
              FROM sets
          ) AS combined
             ORDER BY created_at DESC;

@@ -28,6 +28,9 @@ AppBar addCardAppBar(
               supplementAnswer: supplementAnswerController.text,
               setId: setId);
           await BlocProvider.of<CardListCubit>(context).insertAnewCard(card);
+          if (context.mounted) {
+            Navigator.pop(context);
+          }
         },
         icon: const Icon(Icons.check),
       ),

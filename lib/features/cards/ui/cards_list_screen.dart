@@ -24,7 +24,7 @@ class CardsListScreen extends StatelessWidget {
           ],
         ),
         floatingActionButton:
-            CardsListsFloatingActionButton(setId: _collectionModel.folderId!),
+            CardsListsFloatingActionButton(setId: _collectionModel.setId!),
         body: BlocBuilder<CardListCubit, CardListState>(
           builder: (context, state) {
             if (state is CardListSuccess) {
