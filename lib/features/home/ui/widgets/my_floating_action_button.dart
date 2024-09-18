@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/app_routes.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class MyFloatingActionButton extends StatelessWidget {
                       Navigator.of(context).pop();
                       Navigator.pushNamed(
                         context,
-                        '/addFolderSet',
+                        AppRoutes.addFolderSet,
                         arguments: 0, //0 means add a set
                       );
                     },
@@ -34,7 +35,7 @@ class MyFloatingActionButton extends StatelessWidget {
                       Navigator.of(context).pop();
                       Navigator.pushNamed(
                         context,
-                        '/addFolderSet',
+                        AppRoutes.addFolderSet,
                         arguments: 1, //1 means add a folder
                       );
                     },

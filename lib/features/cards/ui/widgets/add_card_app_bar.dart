@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 AppBar addCardAppBar(
   BuildContext context, {
+  required GlobalKey<FormState> formKey,
   required TextEditingController questionController,
   required TextEditingController supplementQuestionController,
   required TextEditingController answerController,
@@ -21,15 +22,17 @@ AppBar addCardAppBar(
     actions: [
       IconButton(
         onPressed: () async {
-          CardModel card = CardModel(
-              question: questionController.text,
-              supplementQuestion: supplementQuestionController.text,
-              answer: answerController.text,
-              supplementAnswer: supplementAnswerController.text,
-              setId: setId);
-          await BlocProvider.of<CardListCubit>(context).insertAnewCard(card);
-          if (context.mounted) {
-            Navigator.pop(context);
+          if (formKey.currentState?.validate() ?? false) {
+            CardModel card = CardModel(
+                question: questionController.text,
+                supplementQuestion: supplementQuestionController.text,
+                answer: answerController.text,
+                supplementAnswer: supplementAnswerController.text,
+                setId: setId);
+            await BlocProvider.of<CardListCubit>(context).insertAnewCard(card);
+            if (context.mounted) {
+              Navigator.pop(context);
+            }
           }
         },
         icon: const Icon(Icons.check),

@@ -11,6 +11,7 @@ class AddNewCardScreen extends StatefulWidget {
 }
 
 class _AddNewCardScreenState extends State<AddNewCardScreen> {
+  late GlobalKey<FormState> _formKey;
   late TextEditingController _questionController;
   late TextEditingController _supplementQuestionController;
   late TextEditingController _answerController;
@@ -18,6 +19,7 @@ class _AddNewCardScreenState extends State<AddNewCardScreen> {
   @override
   void initState() {
     super.initState();
+    _formKey = GlobalKey<FormState>();
     _questionController = TextEditingController();
     _supplementQuestionController = TextEditingController();
     _answerController = TextEditingController();
@@ -28,12 +30,14 @@ class _AddNewCardScreenState extends State<AddNewCardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: addCardAppBar(context,
+          formKey: _formKey,
           questionController: _questionController,
           supplementQuestionController: _supplementQuestionController,
           answerController: _answerController,
           supplementAnswerController: _supplementAnswerController,
           setId: widget.setId),
       body: Form(
+        key: _formKey,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Column(
@@ -41,6 +45,12 @@ class _AddNewCardScreenState extends State<AddNewCardScreen> {
               AppTextField(
                 hintText: 'Question',
                 controller: _questionController,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter a question';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 20),
               AppTextField(
