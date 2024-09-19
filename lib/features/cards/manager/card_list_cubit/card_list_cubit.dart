@@ -17,7 +17,7 @@ class CardListCubit extends Cubit<CardListState> {
     int result = await cardsRepo.insertAnewCard(card);
     if (result > 0) {
       debugPrint('----------successfully inserted------------');
-      fetchCards(card.setId);
+      fetchCards(card.setId!);
     } else {
       debugPrint('----------error while inserted------------');
     }

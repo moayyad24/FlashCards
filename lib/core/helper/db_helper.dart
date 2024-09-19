@@ -74,17 +74,17 @@ mixin DbHelper {
     return count;
   }
 
-  update(String sqlTxt) async {
+  update(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Update some record
-    int count = await db!.rawUpdate(sqlTxt);
+    int count = await db!.rawUpdate(sqlTxt, arguments);
     return count;
   }
 
-  delete(String sqlTxt) async {
+  delete(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Delete some record
-    int count = await db!.rawDelete(sqlTxt);
+    int count = await db!.rawDelete(sqlTxt, arguments);
     return count;
   }
 }

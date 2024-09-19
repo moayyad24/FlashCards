@@ -4,7 +4,7 @@ class CardModel {
   final String supplementQuestion;
   final String answer;
   final String supplementAnswer;
-  final int setId;
+  final int? setId;
   final String? createdAt;
 
   CardModel({
@@ -13,7 +13,7 @@ class CardModel {
     required this.supplementQuestion,
     required this.answer,
     required this.supplementAnswer,
-    required this.setId,
+    this.setId,
     this.createdAt,
   });
   factory CardModel.fromSql(Map<String, dynamic> sqlMap) {

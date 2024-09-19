@@ -1,4 +1,5 @@
 import 'package:flashcards/features/cards/data/models/card_model.dart';
+import 'package:flashcards/features/cards/ui/widgets/card_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class CardListViewBody extends StatelessWidget {
@@ -16,21 +17,5 @@ class CardListViewBody extends StatelessWidget {
             cardModel: _cardList[index],
           );
         });
-  }
-}
-
-class CardListTile extends StatelessWidget {
-  const CardListTile({
-    super.key,
-    required CardModel cardModel,
-  }) : _cardModel = cardModel;
-  final CardModel _cardModel;
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      leading: const Icon(Icons.format_line_spacing),
-      title: Text(_cardModel.question),
-      subtitle: Text(_cardModel.answer),
-    );
   }
 }

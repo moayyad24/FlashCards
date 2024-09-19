@@ -1,6 +1,7 @@
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/features/cards/data/models/card_model.dart';
 import 'package:flashcards/features/cards/data/repo/cards_repo.dart';
+import 'package:flutter/foundation.dart';
 
 class CardsRepoImpl extends CardsRepo with DbHelper {
   @override
@@ -31,5 +32,31 @@ class CardsRepoImpl extends CardsRepo with DbHelper {
 
     int result = await insert(sql, arguments);
     return result;
+  }
+
+  @override
+  Future<int> updateCard(card) async {
+    if (card.id == null) {
+      throw ArgumentError('Card or Card ID cannot be null.');
+    }
+
+    String sql =
+        '''UPDATE card SET card_question = ?, card_s_question = ?, card_answer = ?, card_s_answer = ? WHERE card_id = ?''';
+    List<dynamic> arguments = [
+      card.question,
+      card.supplementQuestion,
+      card.answer,
+      card.supplementAnswer,
+      card.id,
+    ];
+
+    try {
+      int result = await update(sql, arguments);
+      return result;
+    } catch (e) {
+      // Handle the error (log it, rethrow, etc.)
+      debugPrint('Error updating card: $e');
+      rethrow; // Rethrow the exception if you don't want to handle it here
+    }
   }
 }
