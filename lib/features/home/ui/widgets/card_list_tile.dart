@@ -3,6 +3,7 @@ import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/cards/data/repo/cards_repo_impl.dart';
 import 'package:flashcards/features/cards/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards/ui/cards_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,13 +37,24 @@ class CardListTile extends StatelessWidget {
   }
 
   void _navigateToCardListScreen(BuildContext context) {
-    homeModel.type == CollectionType.sets
-        ? Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                  create: (context) => CardListCubit(CardsRepoImpl())
-                    ..fetchCards(homeModel.setId!),
+    switch (homeModel.type) {
+      case CollectionType.sets:
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => SelectInListBloc(),
+                    ),
+                    BlocProvider(
+                      create: (context) => CardListCubit(CardsRepoImpl())
+                        ..fetchCards(homeModel.setId!),
+                    ),
+                  ],
                   child: CardsListScreen(collectionModel: homeModel),
-                )))
-        : null;
+                )));
+        break;
+      default:
+        null;
+    }
   }
 }
