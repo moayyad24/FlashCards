@@ -6,6 +6,3 @@ class StartSelectingState extends SelectInListState {}
 
 class EndSelectingState extends SelectInListState {}
 
-class StartDeletingState extends SelectInListState {}
-
-class EndDeletingState extends SelectInListState {}

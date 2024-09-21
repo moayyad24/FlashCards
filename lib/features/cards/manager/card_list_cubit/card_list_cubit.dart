@@ -23,4 +23,14 @@ class CardListCubit extends Cubit<CardListState> {
     }
     return result;
   }
+
+  deleteCards(List<int> cardsIds) async {
+    int result = await cardsRepo.deleteCards(cardsIds);
+    if (result > 0) {
+      debugPrint('----------successfully deleting------------');
+    } else {
+      debugPrint('----------error while deleting------------');
+    }
+    return result;
+  }
 }

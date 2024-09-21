@@ -23,12 +23,12 @@ class CardListTile extends StatelessWidget {
         SelectInListBloc controller = context.read<SelectInListBloc>();
         return ListTile(
           onLongPress: () {
-            controller.add(AddToSelectedListEvent(card: _cardModel));
+            controller.add(AddToSelectedListEvent(card: _cardModel.id!));
           },
           onTap: () {
             if (state is StartSelectingState &&
-                controller.selectedCardList.isNotEmpty) {
-              controller.add(AddToSelectedListEvent(card: _cardModel));
+                controller.selectedCardIdsList.isNotEmpty) {
+              controller.add(AddToSelectedListEvent(card: _cardModel.id!));
             } else {
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (controller) {
@@ -43,7 +43,7 @@ class CardListTile extends StatelessWidget {
               }));
             }
           },
-          selected: controller.selectedCardList.contains(_cardModel),
+          selected: controller.selectedCardIdsList.contains(_cardModel.id!),
           selectedColor: AppColors.white,
           selectedTileColor: AppColors.greyLight.withOpacity(.6),
           leading: const Icon(Icons.format_line_spacing),

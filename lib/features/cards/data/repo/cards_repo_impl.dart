@@ -59,4 +59,16 @@ class CardsRepoImpl extends CardsRepo with DbHelper {
       rethrow; // Rethrow the exception if you don't want to handle it here
     }
   }
+
+  @override
+  Future<int> deleteCards(cardsIds) async {
+    // Create a list of placeholders for the query
+    String placeholders = List.filled(cardsIds.length, '?').join(', ');
+    // Construct the SQL DELETE statement
+    String sql = 'DELETE FROM card WHERE card_id IN ($placeholders)';
+
+    // Execute the delete command
+    int result = await delete(sql, cardsIds);
+    return result;
+  }
 }
