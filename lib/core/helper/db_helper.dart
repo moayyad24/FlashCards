@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-mixin DbHelper {
+class DbHelper {
   static Database? _db;
   Future<Database?> get getInstance async {
     if (_db == null) {
@@ -67,7 +67,7 @@ mixin DbHelper {
     return list;
   }
 
-  insert(String sqlTxt, arguments) async {
+  insert(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Insert some record
     int count = await db!.rawInsert(sqlTxt, arguments);

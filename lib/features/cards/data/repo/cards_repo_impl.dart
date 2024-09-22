@@ -3,7 +3,7 @@ import 'package:flashcards/features/cards/data/models/card_model.dart';
 import 'package:flashcards/features/cards/data/repo/cards_repo.dart';
 import 'package:flutter/foundation.dart';
 
-class CardsRepoImpl extends CardsRepo with DbHelper {
+class CardsRepoImpl extends DbHelper implements CardsRepo {
   @override
   Future<List<CardModel>> fetchCards(setId) async {
     List<CardModel> cardsList = [];

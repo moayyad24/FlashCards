@@ -2,11 +2,11 @@ import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
 
-class HomeRepoImpl extends HomeRepo with DbHelper {
+class HomeRepoImpl extends DbHelper implements HomeRepo {
   @override
   Future<List<CollectionModel>> fetchHomeData() async {
     List<CollectionModel> homeDataList = [];
-    String sql = '''
+  String sql = '''
          SELECT *
          FROM (
              SELECT folder_id AS id, folder_title AS title, folder_desc AS description, NULL AS set_id, created_at
@@ -14,9 +14,11 @@ class HomeRepoImpl extends HomeRepo with DbHelper {
              UNION ALL
              SELECT folder_id AS id, set_title AS title, set_desc AS description, set_id AS set_id, created_at
              FROM sets
+             WHERE folder_id = 0  -- This line ensures only sets with folder_id = 0 are selected
          ) AS combined
-            ORDER BY created_at DESC;
+         ORDER BY created_at DESC;
           ''';
+
     var dataMap = await inquiry(sql);
     for (var e in dataMap) {
       homeDataList.add(CollectionModel.fromSql(e));
