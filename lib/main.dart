@@ -1,21 +1,23 @@
-import 'package:flashcards/core/helper/app_routes.dart';
+import 'package:flashcards/core/helper/app_router.dart';
 import 'package:flashcards/core/helper/simple_bloc_observer.dart';
 import 'package:flashcards/core/theme/app_theme.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/home/data/repo/home_repo_impl.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
-import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
-  runApp(const FlashCards());
+  runApp(FlashCards(
+    appRouter: AppRouter(),
+  ));
 }
 
 class FlashCards extends StatelessWidget {
-  const FlashCards({super.key});
+  final AppRouter appRouter;
+  const FlashCards({super.key, required this.appRouter});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,7 @@ class FlashCards extends StatelessWidget {
         darkTheme: AppTheme.appTheme,
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,
-        home: const HomeScreen(),
-        routes: AppRoutes.routes,
+        onGenerateRoute: appRouter.generateRoute,
       ),
     );
   }

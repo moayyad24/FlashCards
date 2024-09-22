@@ -20,8 +20,8 @@ class SetsCubit extends Cubit<SetsState> {
 
   Future insertAnewSet(CollectionModel setModel) async {
     try {
-      int result = await setsRepo
-          .insertAnewSet(setModel); // fetchAllSets(setModel.folderId!),
+      int result = await setsRepo.insertAnewSet(setModel);
+      await fetchAllSets(setModel.folderId!);
       if (result > 0) {
         debugPrint('----------successfully inserted------------');
       } else {

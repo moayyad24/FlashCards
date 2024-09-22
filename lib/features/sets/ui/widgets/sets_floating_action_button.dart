@@ -1,7 +1,7 @@
+import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
-import 'package:flashcards/features/sets/ui/add_set_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,12 +22,11 @@ class SetsFloatingActionButton extends StatelessWidget {
               child: ListTile(
                 onTap: () {
                   Navigator.of(context).pop();
-                  Navigator.of(context).push(MaterialPageRoute(builder: (ctx) {
-                    return BlocProvider.value(
-                      value: BlocProvider.of<SetsCubit>(context),
-                      child: AddSetScreen(folderId: folder.folderId!),
-                    );
-                  }));
+                  Navigator.of(context)
+                      .pushNamed(Routes.addSetScreen, arguments: {
+                    'folderId': folder.folderId!,
+                    'setsCubit': BlocProvider.of<SetsCubit>(context),
+                  });
                 },
                 leading: const Icon(Icons.folder),
                 title: const Text('Create new study set'),

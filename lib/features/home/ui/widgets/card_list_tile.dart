@@ -1,15 +1,8 @@
 import 'package:flashcards/core/helper/collection_type.dart';
+import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/cards/data/repo/cards_repo_impl.dart';
-import 'package:flashcards/features/cards/manager/card_list_cubit/card_list_cubit.dart';
-import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_bloc.dart';
-import 'package:flashcards/features/cards/ui/cards_list_screen.dart';
-import 'package:flashcards/features/sets/data/repo/sets_repo_impl.dart';
-import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
-import 'package:flashcards/features/sets/ui/sets_list_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardListTile extends StatelessWidget {
   final CollectionModel homeModel;
@@ -45,28 +38,12 @@ class CardListTile extends StatelessWidget {
   }
 
   void _navigateToCardListScreen(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => SelectInListBloc(),
-                ),
-                BlocProvider(
-                  create: (context) => CardListCubit(CardsRepoImpl())
-                    ..fetchCards(homeModel.setId!),
-                ),
-              ],
-              child: CardsListScreen(collectionModel: homeModel),
-            )));
+    Navigator.of(context)
+        .pushNamed(Routes.cardsListScreen, arguments: homeModel);
   }
 
   void _navigateToSetsListScreen(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-      return BlocProvider(
-        create: (context) =>
-            SetsCubit(SetsRepoImpl())..fetchAllSets(homeModel.folderId!),
-        child: SetsListScreen(folder: homeModel),
-      );
-    }));
+    Navigator.of(context)
+        .pushNamed(Routes.setsListScreen, arguments: homeModel);
   }
 }
