@@ -4,4 +4,5 @@ abstract class HomeRepo {
   Future<List<CollectionModel>> fetchHomeData();
   Future<int> insertAnewSet(CollectionModel setModel);
   Future<int> insertAnewFolder(CollectionModel folderModel);
+  Future<int> deleteSet(int setId);
 }

@@ -1,12 +1,13 @@
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
+import 'package:flutter/material.dart';
 
 class HomeRepoImpl extends DbHelper implements HomeRepo {
   @override
   Future<List<CollectionModel>> fetchHomeData() async {
     List<CollectionModel> homeDataList = [];
-  String sql = '''
+    String sql = '''
          SELECT *
          FROM (
              SELECT folder_id AS id, folder_title AS title, folder_desc AS description, NULL AS set_id, created_at
@@ -51,6 +52,15 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
       folderModel.description,
     ];
     int result = await insert(sql, arguments);
+    return result;
+  }
+
+  @override
+  Future<int> deleteSet(int setId) async {
+    String cardSql = 'DELETE FROM card WHERE set_id = ?';
+    await delete(cardSql, [setId]);
+    String setSql = 'DELETE FROM sets WHERE set_id = ?';
+    int result = await delete(setSql, [setId]);
     return result;
   }
 }
