@@ -1,6 +1,4 @@
 import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_event.dart';
 import 'package:flashcards/features/cards_list/ui/widgets/card_list_view_body.dart';
@@ -35,19 +33,7 @@ class CardsListScreen extends StatelessWidget {
         child: Column(
           children: [
             CardsListAppBar(collectionModel: _collectionModel),
-            Expanded(
-              child: BlocBuilder<CardListCubit, CardListState>(
-                builder: (context, state) {
-                  if (state is CardListSuccess) {
-                    return CardListViewBody(
-                      cardList: state.cardList,
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ),
+           const CardListViewBody(),
           ],
         ),
       ),
