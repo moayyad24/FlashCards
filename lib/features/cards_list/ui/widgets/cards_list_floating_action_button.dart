@@ -1,6 +1,6 @@
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/cards/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

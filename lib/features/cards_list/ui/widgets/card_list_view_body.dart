@@ -1,5 +1,5 @@
-import 'package:flashcards/features/cards/data/models/card_model.dart';
-import 'package:flashcards/features/cards/ui/widgets/card_list_tile.dart';
+import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/features/cards_list/ui/widgets/card_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class CardListViewBody extends StatelessWidget {

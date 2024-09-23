@@ -1,4 +1,4 @@
-import 'package:flashcards/features/cards/data/models/card_model.dart';
+import 'package:flashcards/features/cards_list/data/models/card_model.dart';
 
 abstract class CardListState {}
 

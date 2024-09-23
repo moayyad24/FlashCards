@@ -1,6 +1,6 @@
 import 'package:flashcards/core/helper/db_helper.dart';
-import 'package:flashcards/features/cards/data/models/card_model.dart';
-import 'package:flashcards/features/cards/data/repo/cards_repo.dart';
+import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/features/cards_list/data/repo/cards_repo.dart';
 import 'package:flutter/foundation.dart';
 
 class CardsRepoImpl extends DbHelper implements CardsRepo {

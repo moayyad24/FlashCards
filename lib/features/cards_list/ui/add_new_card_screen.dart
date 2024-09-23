@@ -1,5 +1,5 @@
 import 'package:flashcards/core/widgets/app_text_field.dart';
-import 'package:flashcards/features/cards/ui/widgets/add_card_app_bar.dart';
+import 'package:flashcards/features/cards_list/ui/widgets/add_card_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AddNewCardScreen extends StatefulWidget {
