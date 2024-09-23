@@ -19,8 +19,7 @@ class CardsListView extends StatelessWidget {
                   itemCount: state.setsList.length,
                   itemBuilder: (context, index) {
                     return SetsListTile(
-                      title: state.setsList[index].title,
-                      subtitle: state.setsList[index].description,
+                      setModel: state.setsList[index],
                     );
                   }));
         } else {
