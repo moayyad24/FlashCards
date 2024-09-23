@@ -5,4 +5,5 @@ abstract class HomeRepo {
   Future<int> insertAnewSet(CollectionModel setModel);
   Future<int> insertAnewFolder(CollectionModel folderModel);
   Future<int> deleteSet(int setId);
+  Future<int> deleteFolder(int folderId);
 }

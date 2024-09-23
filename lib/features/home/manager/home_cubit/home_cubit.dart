@@ -38,7 +38,17 @@ class HomeCubit extends Cubit<HomeState> {
   deleteSet(int setId) async {
     int result = await homeRepo.deleteSet(setId);
     if (result > 0) {
-      debugPrint('----------successfully deleting------------');
+      debugPrint('----------successfully deleted------------');
+      await homeFetchDate();
+    } else {
+      debugPrint('----------error while deleting------------');
+    }
+  }
+
+  deleteFolder(int folderId) async {
+    int result = await homeRepo.deleteFolder(folderId);
+    if (result > 0) {
+      debugPrint('----------successfully deleted------------');
       await homeFetchDate();
     } else {
       debugPrint('----------error while deleting------------');

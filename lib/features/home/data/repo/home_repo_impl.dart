@@ -1,7 +1,6 @@
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/home/data/repo/home_repo.dart';
-import 'package:flutter/material.dart';
 
 class HomeRepoImpl extends DbHelper implements HomeRepo {
   @override
@@ -61,6 +60,25 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
     await delete(cardSql, [setId]);
     String setSql = 'DELETE FROM sets WHERE set_id = ?';
     int result = await delete(setSql, [setId]);
+    return result;
+  }
+
+  @override
+  Future<int> deleteFolder(int folderId) async {
+    String cardSql = '''
+      WITH RECURSIVE temp_sets AS (
+          SELECT set_id FROM sets WHERE folder_id = ?
+      ),
+      temp_cards AS (
+          SELECT card_id FROM card WHERE set_id IN (SELECT set_id FROM temp_sets)
+      )
+      DELETE FROM card WHERE card_id IN (SELECT card_id FROM temp_cards);
+        ''';
+    String setsSql = 'DELETE FROM sets WHERE folder_id = ?';
+    String folderSql = 'DELETE FROM folders WHERE folder_id = ?';
+    await delete(cardSql, [folderId]);
+    await delete(setsSql, [folderId]);
+    int result = await delete(folderSql, [folderId]);
     return result;
   }
 }
