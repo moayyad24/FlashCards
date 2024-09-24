@@ -19,7 +19,7 @@ class CardListCubit extends Cubit<CardListState> {
       debugPrint('----------successfully inserted------------');
       fetchCards(card.setId!);
     } else {
-      debugPrint('----------error while inserted------------');
+      debugPrint('----------error while inserting------------');
     }
     return result;
   }
@@ -27,7 +27,7 @@ class CardListCubit extends Cubit<CardListState> {
   deleteCards(List<int> cardsIds) async {
     int result = await cardsRepo.deleteCards(cardsIds);
     if (result > 0) {
-      debugPrint('----------successfully deleting------------');
+      debugPrint('----------successfully deleted------------');
     } else {
       debugPrint('----------error while deleting------------');
     }

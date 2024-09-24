@@ -36,12 +36,8 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
 
   @override
   Future<int> updateCard(card) async {
-    if (card.id == null) {
-      throw ArgumentError('Card or Card ID cannot be null.');
-    }
-
     String sql =
-        '''UPDATE card SET card_question = ?, card_s_question = ?, card_answer = ?, card_s_answer = ? WHERE card_id = ?''';
+        'UPDATE card SET card_question = ?, card_s_question = ?, card_answer = ?, card_s_answer = ? WHERE card_id = ?';
     List<dynamic> arguments = [
       card.question,
       card.supplementQuestion,
