@@ -13,21 +13,21 @@ class EditCardCubit extends Cubit<EditCardState> {
   late TextEditingController supplementQuestionController;
   late TextEditingController answerController;
   late TextEditingController supplementAnswerController;
-  initializeController(CardModel card) {
+  initializeController(CardModel cards) {
     formKey = GlobalKey<FormState>();
     questionController = TextEditingController();
     supplementQuestionController = TextEditingController();
     answerController = TextEditingController();
     supplementAnswerController = TextEditingController();
-    questionController.text = card.question;
-    supplementQuestionController.text = card.supplementQuestion;
-    answerController.text = card.answer;
-    supplementAnswerController.text = card.supplementAnswer;
+    questionController.text = cards.question;
+    supplementQuestionController.text = cards.supplementQuestion;
+    answerController.text = cards.answer;
+    supplementAnswerController.text = cards.supplementAnswer;
   }
 
-  updateCard(CardModel card) async {
+  updateCard(CardModel cards) async {
     emit(EditCardLoading());
-    await cardsRepo.updateCard(card);
+    await cardsRepo.updateCard(cards);
     emit(EditCardSuccess());
   }
 }

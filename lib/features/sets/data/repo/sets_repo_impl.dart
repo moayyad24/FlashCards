@@ -42,7 +42,7 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
 
   @override
   Future<int> deleteASet(setId) async {
-    String cardSql = 'DELETE FROM card WHERE set_id = ?';
+    String cardSql = 'DELETE FROM cards WHERE set_id = ?';
     await delete(cardSql, [setId]);
     String setSql = 'DELETE FROM sets WHERE set_id = ?';
     int result = await delete(setSql, [setId]);

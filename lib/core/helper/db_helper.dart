@@ -34,7 +34,7 @@ class DbHelper {
 '''; //if folder_id is 0 then it not related to any folder
 
   final String _sqlTableCard = '''
-    CREATE TABLE card (
+    CREATE TABLE cards (
         card_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         card_question TEXT NOT NULL,
         card_s_question TEXT,

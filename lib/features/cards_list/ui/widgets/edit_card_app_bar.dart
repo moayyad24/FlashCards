@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
   return AppBar(
-    title: const Text('Edit card'),
+    title: const Text('Edit cards'),
     titleTextStyle: const TextStyle(fontSize: 24),
     leading: IconButton(
       onPressed: () {},
@@ -28,7 +28,7 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
           onPressed: () async {
             EditCardCubit controller = context.read<EditCardCubit>();
             if (controller.formKey.currentState?.validate() ?? false) {
-              CardModel card = CardModel(
+              CardModel cards = CardModel(
                 id: cardModel.id,
                 question: controller.questionController.text,
                 supplementQuestion:
@@ -36,7 +36,7 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
                 answer: controller.answerController.text,
                 supplementAnswer: controller.supplementAnswerController.text,
               );
-              await controller.updateCard(card);
+              await controller.updateCard(cards);
             }
           },
           icon: const Icon(Icons.check),

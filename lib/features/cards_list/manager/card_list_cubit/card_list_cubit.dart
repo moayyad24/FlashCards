@@ -13,11 +13,11 @@ class CardListCubit extends Cubit<CardListState> {
     emit(CardListSuccess(cardList: cardList));
   }
 
-  insertAnewCard(CardModel card) async {
-    int result = await cardsRepo.insertAnewCard(card);
+  insertAnewCard(CardModel cards) async {
+    int result = await cardsRepo.insertAnewCard(cards);
     if (result > 0) {
       debugPrint('----------successfully inserted------------');
-      fetchCards(card.setId!);
+      fetchCards(cards.setId!);
     } else {
       debugPrint('----------error while inserting------------');
     }

@@ -21,12 +21,12 @@ class CardListTile extends StatelessWidget {
         SelectInListBloc controller = context.read<SelectInListBloc>();
         return ListTile(
           onLongPress: () {
-            controller.add(AddToSelectedListEvent(card: _cardModel.id!));
+            controller.add(AddToSelectedListEvent(cards: _cardModel.id!));
           },
           onTap: () {
             if (state is StartSelectingState &&
                 controller.selectedCardIdsList.isNotEmpty) {
-              controller.add(AddToSelectedListEvent(card: _cardModel.id!));
+              controller.add(AddToSelectedListEvent(cards: _cardModel.id!));
             } else {
               Navigator.of(context).pushNamed(
                 Routes.editCardScreen,

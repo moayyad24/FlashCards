@@ -56,7 +56,7 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
 
   @override
   Future<int> deleteSet(int setId) async {
-    String cardSql = 'DELETE FROM card WHERE set_id = ?';
+    String cardSql = 'DELETE FROM cards WHERE set_id = ?';
     await delete(cardSql, [setId]);
     String setSql = 'DELETE FROM sets WHERE set_id = ?';
     int result = await delete(setSql, [setId]);
@@ -70,9 +70,9 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
           SELECT set_id FROM sets WHERE folder_id = ?
       ),
       temp_cards AS (
-          SELECT card_id FROM card WHERE set_id IN (SELECT set_id FROM temp_sets)
+          SELECT card_id FROM cards WHERE set_id IN (SELECT set_id FROM temp_sets)
       )
-      DELETE FROM card WHERE card_id IN (SELECT card_id FROM temp_cards);
+      DELETE FROM cards WHERE card_id IN (SELECT card_id FROM temp_cards);
         ''';
     String setsSql = 'DELETE FROM sets WHERE folder_id = ?';
     String folderSql = 'DELETE FROM folders WHERE folder_id = ?';

@@ -1,9 +1,8 @@
 abstract class SelectInListEvent {}
 
 class AddToSelectedListEvent extends SelectInListEvent {
-  final int card;
-  AddToSelectedListEvent({required this.card});
+  final int cards;
+  AddToSelectedListEvent({required this.cards});
 }
 
 class EndSelectingEvent extends SelectInListEvent {}
-

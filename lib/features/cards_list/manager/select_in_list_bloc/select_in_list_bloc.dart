@@ -7,14 +7,14 @@ class SelectInListBloc extends Bloc<SelectInListEvent, SelectInListState> {
   SelectInListBloc() : super(SelectInListInitial()) {
     on<AddToSelectedListEvent>((event, emit) {
       if (selectedCardIdsList.length == 1 &&
-          selectedCardIdsList.contains(event.card)) {
-        selectedCardIdsList.remove(event.card);
+          selectedCardIdsList.contains(event.cards)) {
+        selectedCardIdsList.remove(event.cards);
         emit(EndSelectingState());
-      } else if (selectedCardIdsList.contains(event.card)) {
-        selectedCardIdsList.remove(event.card);
+      } else if (selectedCardIdsList.contains(event.cards)) {
+        selectedCardIdsList.remove(event.cards);
         emit(StartSelectingState());
       } else {
-        selectedCardIdsList.add(event.card);
+        selectedCardIdsList.add(event.cards);
         emit(StartSelectingState());
       }
     });

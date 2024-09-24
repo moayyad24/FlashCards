@@ -13,7 +13,7 @@ AppBar addCardAppBar(
   required int setId,
 }) {
   return AppBar(
-    title: const Text('Edit card'),
+    title: const Text('Edit cards'),
     titleTextStyle: const TextStyle(fontSize: 24),
     leading: IconButton(
       onPressed: () {},
@@ -23,13 +23,13 @@ AppBar addCardAppBar(
       IconButton(
         onPressed: () async {
           if (formKey.currentState?.validate() ?? false) {
-            CardModel card = CardModel(
+            CardModel cards = CardModel(
                 question: questionController.text,
                 supplementQuestion: supplementQuestionController.text,
                 answer: answerController.text,
                 supplementAnswer: supplementAnswerController.text,
                 setId: setId);
-            await BlocProvider.of<CardListCubit>(context).insertAnewCard(card);
+            await BlocProvider.of<CardListCubit>(context).insertAnewCard(cards);
             if (context.mounted) {
               Navigator.pop(context);
             }
