@@ -31,4 +31,18 @@ class SetsCubit extends Cubit<SetsState> {
       debugPrint(e.toString());
     }
   }
+
+  Future deleteASet(int setId, int folderId) async {
+    try {
+      int result = await setsRepo.deleteASet(setId);
+      if (result > 0) {
+        debugPrint('----------successfully deleted------------');
+        await fetchAllSets(folderId);
+      } else {
+        debugPrint('----------error while deleted------------');
+      }
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
 }
