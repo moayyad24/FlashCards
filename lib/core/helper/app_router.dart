@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/dependency_injection.dart';
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/models/card_model.dart';
@@ -64,8 +65,8 @@ class AppRouter {
             create: (_) => SelectInListBloc(),
           ),
           BlocProvider(
-            create: (_) =>
-                CardListCubit(CardsRepoImpl())..fetchCards(argument.setId!),
+            create: (_) => CardListCubit(getIt.get<CardsRepoImpl>())
+              ..fetchCards(argument.setId!),
           ),
         ],
         child: CardsListScreen(collectionModel: argument),
@@ -112,8 +113,8 @@ class AppRouter {
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
         child: BlocProvider(
-          create: (_) =>
-              EditCardCubit(CardsRepoImpl())..initializeController(cardModel),
+          create: (_) => EditCardCubit(getIt.get<CardsRepoImpl>())
+            ..initializeController(cardModel),
           child: EditCardScreen(cardModel: cardModel),
         ),
       ),

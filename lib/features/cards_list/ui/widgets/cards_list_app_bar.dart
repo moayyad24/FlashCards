@@ -21,7 +21,7 @@ class CardsListAppBar extends StatelessWidget {
               leading: IconButton(
                   onPressed: () {}, icon: const Icon(Icons.close_rounded)),
               title: Text(
-                '${cardIds.length}',
+                '${cardIds.length} Selected',
                 style:
                     const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
               ),
