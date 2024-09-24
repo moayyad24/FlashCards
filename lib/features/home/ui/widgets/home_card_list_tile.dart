@@ -7,9 +7,9 @@ import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardListTile extends StatelessWidget {
+class HomeCardListTile extends StatelessWidget {
   final CollectionModel homeModel;
-  const CardListTile({
+  const HomeCardListTile({
     required this.homeModel,
     super.key,
   });
