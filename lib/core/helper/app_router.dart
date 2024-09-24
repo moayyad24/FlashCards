@@ -1,6 +1,6 @@
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo_impl.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/edit_card_cubit/edit_card_cubit.dart';

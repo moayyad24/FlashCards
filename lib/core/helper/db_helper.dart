@@ -60,28 +60,28 @@ class DbHelper {
     return database;
   }
 
-  inquiry(String sqlTxt) async {
+  Future<List<Map<String, dynamic>>> inquiry(String sqlTxt) async {
     Database? db = await getInstance;
     // Get the records
-    List<Map> list = await db!.rawQuery(sqlTxt);
+    List<Map<String, dynamic>> list = await db!.rawQuery(sqlTxt);
     return list;
   }
 
-  insert(String sqlTxt, List<dynamic> arguments) async {
+  Future<int> insert(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Insert some record
     int count = await db!.rawInsert(sqlTxt, arguments);
     return count;
   }
 
-  update(String sqlTxt, List<dynamic> arguments) async {
+  Future<int> update(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Update some record
     int count = await db!.rawUpdate(sqlTxt, arguments);
     return count;
   }
 
-  delete(String sqlTxt, List<dynamic> arguments) async {
+  Future<int> delete(String sqlTxt, List<dynamic> arguments) async {
     Database? db = await getInstance;
     // Delete some record
     int count = await db!.rawDelete(sqlTxt, arguments);

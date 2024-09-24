@@ -1,4 +1,4 @@
-import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo.dart';
 import 'package:flashcards/features/cards_list/manager/edit_card_cubit/edit_card_state.dart';
 import 'package:flutter/widgets.dart';

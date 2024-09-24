@@ -1,6 +1,6 @@
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_event.dart';

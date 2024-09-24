@@ -1,5 +1,5 @@
 import 'package:flashcards/core/widgets/app_text_field.dart';
-import 'package:flashcards/features/cards_list/data/models/card_model.dart';
+import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards_list/manager/edit_card_cubit/edit_card_cubit.dart';
 import 'package:flashcards/features/cards_list/ui/widgets/edit_card_app_bar.dart';
 import 'package:flutter/material.dart';
