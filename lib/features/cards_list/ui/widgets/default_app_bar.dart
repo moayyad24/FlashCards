@@ -1,22 +1,25 @@
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
+
 import 'package:flashcards/core/theme/colors.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DefaultAppBar extends StatelessWidget {
-  const DefaultAppBar({
-    super.key,
-    required CollectionModel collectionModel,
-  }) : _collectionModel = collectionModel;
-
-  final CollectionModel _collectionModel;
+  const DefaultAppBar({super.key, required CollectionModel collectionModel});
 
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return AppBar(
-      title: Text(
-        _collectionModel.title,
-        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+      title: BlocBuilder<CardListCubit, CardListState>(
+        builder: (context, state) {
+          return Text(
+            context.read<CardListCubit>().setModel.title,
+            style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+          );
+        },
       ),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
@@ -26,8 +29,11 @@ class DefaultAppBar extends StatelessWidget {
             return [
               PopupMenuItem<String>(
                 onTap: () {
-                  Navigator.of(context).pushNamed(Routes.editSetScreen,
-                      arguments: _collectionModel);
+                  Navigator.of(context)
+                      .pushNamed(Routes.editSetScreen, arguments: {
+                    'setModel': context.read<CardListCubit>().setModel,
+                    'cardListCubit': BlocProvider.of<CardListCubit>(context),
+                  });
                 },
                 child: const Row(
                   children: [

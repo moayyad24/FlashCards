@@ -1,4 +1,5 @@
 import 'package:flashcards/core/models/card_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
 import 'package:flutter/material.dart';
@@ -7,17 +8,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CardListCubit extends Cubit<CardListState> {
   CardsRepo cardsRepo;
   CardListCubit(this.cardsRepo) : super(CardListInitial());
-  fetchCards(int setId) async {
+
+  late CollectionModel setModel;
+  List<CardModel> cardList = [];
+  initSetModel(CollectionModel collection) {
+    setModel = collection;
+  }
+
+  editSetModel(CollectionModel collection) {
+    setModel = collection;
+    emit(CardListSetEdited());
+  }
+
+  fetchCards() async {
     emit(CardListLoading());
-    List<CardModel> cardList = await cardsRepo.fetchCards(setId);
-    emit(CardListSuccess(cardList: cardList));
+    cardList.clear();
+    cardList = await cardsRepo.fetchCards(setModel.setId!);
+    emit(CardListSuccess());
   }
 
   insertAnewCard(CardModel cards) async {
     int result = await cardsRepo.insertAnewCard(cards);
     if (result > 0) {
       debugPrint('----------successfully inserted------------');
-      fetchCards(cards.setId!);
+      fetchCards();
     } else {
       debugPrint('----------error while inserting------------');
     }

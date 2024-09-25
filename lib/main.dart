@@ -27,7 +27,7 @@ class FlashCards extends StatelessWidget {
         const SystemUiOverlayStyle(systemNavigationBarColor: AppColors.black));
     return BlocProvider(
       create: (context) =>
-          HomeCubit(getIt.get<HomeRepoImpl>())..homeFetchDate(),
+          HomeCubit(getIt.get<HomeRepoImpl>())..homeFetchData(),
       child: MaterialApp(
         title: 'FlashCards',
         darkTheme: AppTheme.appTheme,

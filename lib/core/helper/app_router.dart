@@ -5,6 +5,7 @@ import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo_impl.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/edit_card_cubit/edit_card_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/edit_set_cubit/edit_set_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/ui/add_new_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/cards_list_screen.dart';
@@ -41,7 +42,8 @@ class AppRouter {
         return _buildEditCardScreenRoute(
             settings.arguments as Map<String, dynamic>);
       case Routes.editSetScreen:
-        return _buildEditSetScreenRoute(settings.arguments as CollectionModel);
+        return _buildEditSetScreenRoute(
+            settings.arguments as Map<String, dynamic>);
       default:
         return _buildDefaultRoute(settings.name!);
     }
@@ -69,10 +71,11 @@ class AppRouter {
           ),
           BlocProvider(
             create: (_) => CardListCubit(getIt.get<CardsRepoImpl>())
-              ..fetchCards(argument.setId!),
+              ..initSetModel(argument)
+              ..fetchCards(),
           ),
         ],
-        child: CardsListScreen(collectionModel: argument),
+        child: const CardsListScreen(),
       ),
     );
   }
@@ -124,9 +127,18 @@ class AppRouter {
     );
   }
 
-  Route _buildEditSetScreenRoute(CollectionModel setModel) {
+  Route _buildEditSetScreenRoute(Map<String, dynamic> data) {
+    CollectionModel setModel = data['setModel'];
+    CardListCubit cardListCubit = data['cardListCubit'];
+
     return MaterialPageRoute(
-      builder: (_) => EditSetScreen(setModel: setModel),
+      builder: (_) => BlocProvider.value(
+        value: cardListCubit,
+        child: BlocProvider(
+          create: (context) => EditSetCubit(getIt.get<CardsRepoImpl>()),
+          child: EditSetScreen(setModel: setModel),
+        ),
+      ),
     );
   }
 

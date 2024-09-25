@@ -5,11 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardsListsFloatingActionButton extends StatelessWidget {
-  final int setId;
-  const CardsListsFloatingActionButton({
-    super.key,
-    required this.setId,
-  });
+  const CardsListsFloatingActionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +17,11 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           width: 50,
           child: FloatingActionButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(Routes.addNewCardScreen,
-                  arguments: {
-                    'setId': setId,
-                    'cardListCubit': BlocProvider.of<CardListCubit>(context)
-                  });
+              Navigator.of(context)
+                  .pushNamed(Routes.addNewCardScreen, arguments: {
+                'setId': BlocProvider.of<CardListCubit>(context).setModel.setId,
+                'cardListCubit': BlocProvider.of<CardListCubit>(context)
+              });
             },
             heroTag: 'first',
             backgroundColor: AppColors.greyLight,

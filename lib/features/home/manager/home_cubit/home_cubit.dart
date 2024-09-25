@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeCubit extends Cubit<HomeState> {
   final HomeRepo homeRepo;
   HomeCubit(this.homeRepo) : super(HomeInitial());
-  homeFetchDate() async {
+  homeFetchData() async {
     emit(HomeFetchLoading());
     try {
       List<CollectionModel> homeDataList = await homeRepo.fetchHomeData();
@@ -20,7 +20,7 @@ class HomeCubit extends Cubit<HomeState> {
   insertAnewSet(setModel) async {
     try {
       await homeRepo.insertAnewSet(setModel);
-      await homeFetchDate();
+      await homeFetchData();
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -29,7 +29,7 @@ class HomeCubit extends Cubit<HomeState> {
   insertAnewFolder(folderModel) async {
     try {
       await homeRepo.insertAnewFolder(folderModel);
-      await homeFetchDate();
+      await homeFetchData();
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -39,7 +39,7 @@ class HomeCubit extends Cubit<HomeState> {
     int result = await homeRepo.deleteSet(setId);
     if (result > 0) {
       debugPrint('----------successfully deleted------------');
-      await homeFetchDate();
+      await homeFetchData();
     } else {
       debugPrint('----------error while deleting------------');
     }
@@ -49,7 +49,7 @@ class HomeCubit extends Cubit<HomeState> {
     int result = await homeRepo.deleteFolder(folderId);
     if (result > 0) {
       debugPrint('----------successfully deleted------------');
-      await homeFetchDate();
+      await homeFetchData();
     } else {
       debugPrint('----------error while deleting------------');
     }

@@ -1,5 +1,6 @@
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/core/models/card_model.dart';
+import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo.dart';
 import 'package:flutter/foundation.dart';
 
@@ -66,5 +67,23 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
     // Execute the delete command
     int result = await delete(sql, cardsIds);
     return result;
+  }
+
+  @override
+  Future<int> updateSet(CollectionModel setModel) async {
+    String sql = 'UPDATE sets SET set_title = ?, set_desc = ? WHERE set_id = ?';
+    List<dynamic> arguments = [
+      setModel.title,
+      setModel.description,
+      setModel.setId,
+    ];
+    try {
+      int result = await update(sql, arguments);
+      return result;
+    } catch (e) {
+      // Handle the error (log it, rethrow, etc.)
+      debugPrint('Error updating cards: $e');
+      rethrow; // Rethrow the exception if you don't want to handle it here
+    }
   }
 }

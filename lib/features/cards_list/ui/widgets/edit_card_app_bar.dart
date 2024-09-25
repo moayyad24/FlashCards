@@ -17,8 +17,7 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
       BlocListener<EditCardCubit, EditCardState>(
         listener: (context, state) async {
           if (state is EditCardSuccess) {
-            await BlocProvider.of<CardListCubit>(context)
-                .fetchCards(cardModel.setId!);
+            await BlocProvider.of<CardListCubit>(context).fetchCards();
             if (context.mounted) {
               Navigator.of(context).pop();
             }

@@ -1,4 +1,3 @@
-import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_event.dart';
 import 'package:flashcards/features/cards_list/ui/widgets/card_list_view_body.dart';
@@ -8,14 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardsListScreen extends StatelessWidget {
-  const CardsListScreen({super.key, required CollectionModel collectionModel})
-      : _collectionModel = collectionModel;
-  final CollectionModel _collectionModel;
+  const CardsListScreen({super.key});
+
   @override
-  Widget build(BuildContext context) {  
+  Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton:
-          CardsListsFloatingActionButton(setId: _collectionModel.setId!),
+      floatingActionButton: const CardsListsFloatingActionButton(),
       body: PopScope(
         canPop: false,
         onPopInvoked: (didPop) {
@@ -30,10 +27,10 @@ class CardsListScreen extends StatelessWidget {
             Navigator.of(context).pop();
           }
         },
-        child: Column(
+        child: const Column(
           children: [
-            CardsListAppBar(collectionModel: _collectionModel),
-           const CardListViewBody(),
+            CardsListAppBar(),
+            CardListViewBody(),
           ],
         ),
       ),

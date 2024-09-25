@@ -55,7 +55,7 @@ class SelectingAppBar extends StatelessWidget {
                 await cardListCubit.deleteCards(cardIds);
                 selectionBloc.selectedCardIdsList.clear();
                 selectionBloc.add(EndSelectingEvent());
-                await cardListCubit.fetchCards(collectionModel.setId!);
+                await cardListCubit.fetchCards();
               },
             ),
           ],
