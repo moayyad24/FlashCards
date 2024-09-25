@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +12,7 @@ class DefaultAppBar extends StatelessWidget {
   final CollectionModel _collectionModel;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return AppBar(
       title: Text(
         _collectionModel.title,
@@ -24,7 +25,10 @@ class DefaultAppBar extends StatelessWidget {
           itemBuilder: (BuildContext context) {
             return [
               PopupMenuItem<String>(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(Routes.editSetScreen,
+                      arguments: _collectionModel);
+                },
                 child: const Row(
                   children: [
                     Icon(Icons.edit),

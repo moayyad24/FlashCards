@@ -9,6 +9,7 @@ import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/selec
 import 'package:flashcards/features/cards_list/ui/add_new_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/cards_list_screen.dart';
 import 'package:flashcards/features/cards_list/ui/edit_card_screen.dart';
+import 'package:flashcards/features/cards_list/ui/edit_set_screen.dart';
 import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flashcards/features/sets/data/repo/sets_repo_impl.dart';
@@ -39,6 +40,8 @@ class AppRouter {
       case Routes.editCardScreen:
         return _buildEditCardScreenRoute(
             settings.arguments as Map<String, dynamic>);
+      case Routes.editSetScreen:
+        return _buildEditSetScreenRoute(settings.arguments as CollectionModel);
       default:
         return _buildDefaultRoute(settings.name!);
     }
@@ -118,6 +121,12 @@ class AppRouter {
           child: EditCardScreen(cardModel: cardModel),
         ),
       ),
+    );
+  }
+
+  Route _buildEditSetScreenRoute(CollectionModel setModel) {
+    return MaterialPageRoute(
+      builder: (_) => EditSetScreen(setModel: setModel),
     );
   }
 
