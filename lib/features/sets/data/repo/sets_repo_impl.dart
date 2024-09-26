@@ -1,6 +1,7 @@
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/sets/data/repo/sets_repo.dart';
+import 'package:flutter/material.dart';
 
 class SetsRepoImpl extends DbHelper implements SetsRepo {
   @override
@@ -47,5 +48,24 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     String setSql = 'DELETE FROM sets WHERE set_id = ?';
     int result = await delete(setSql, [setId]);
     return result;
+  }
+
+  @override
+  Future<int> updateFolder(folder) async {
+    String sql =
+        'UPDATE folders SET  folder_title = ?, folder_desc = ? WHERE folder_id = ?';
+    List<dynamic> arguments = [
+      folder.title,
+      folder.description,
+      folder.folderId,
+    ];
+    try {
+      int result = await update(sql, arguments);
+      return result;
+    } catch (e) {
+      // Handle the error (log it, rethrow, etc.)
+      debugPrint('Error updating folder: $e');
+      rethrow; // Rethrow the exception if you don't want to handle it here
+    }
   }
 }

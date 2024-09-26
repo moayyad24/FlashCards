@@ -8,11 +8,24 @@ class SetsCubit extends Cubit<SetsState> {
   final SetsRepo setsRepo;
   SetsCubit(this.setsRepo) : super(SetsInitial());
 
-  Future fetchAllSets(int folderId) async {
+  late CollectionModel folderModel;
+  List<CollectionModel> setsList = [];
+  initFolderModel(CollectionModel collection) {
+    folderModel = collection;
+  }
+
+  editFolderModel(CollectionModel collection) {
+    folderModel = collection;
+    emit(SetsFolderEdited());
+  }
+
+  Future fetchAllSets() async {
     emit(SetsLoading());
+
     try {
-      List<CollectionModel> setsList = await setsRepo.fetchAllSets(folderId);
-      emit(SetsSuccess(setsList: setsList));
+      setsList.clear();
+      setsList = await setsRepo.fetchAllSets(folderModel.folderId!);
+      emit(SetsSuccess());
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -21,7 +34,7 @@ class SetsCubit extends Cubit<SetsState> {
   Future insertAnewSet(CollectionModel setModel) async {
     try {
       int result = await setsRepo.insertAnewSet(setModel);
-      await fetchAllSets(setModel.folderId!);
+      await fetchAllSets();
       if (result > 0) {
         debugPrint('----------successfully inserted------------');
       } else {
@@ -37,7 +50,7 @@ class SetsCubit extends Cubit<SetsState> {
       int result = await setsRepo.deleteASet(setId);
       if (result > 0) {
         debugPrint('----------successfully deleted------------');
-        await fetchAllSets(folderId);
+        await fetchAllSets();
       } else {
         debugPrint('----------error while deleted------------');
       }

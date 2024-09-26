@@ -4,8 +4,8 @@ import 'package:flashcards/features/sets/ui/widgets/sets_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardsListView extends StatelessWidget {
-  const CardsListView({
+class SetsListView extends StatelessWidget {
+  const SetsListView({
     super.key,
   });
 
@@ -13,13 +13,13 @@ class CardsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<SetsCubit, SetsState>(
       builder: (context, state) {
-        if (state is SetsSuccess) {
+        if (state is SetsSuccess || state is SetsFolderEdited) {
           return Expanded(
               child: ListView.builder(
-                  itemCount: state.setsList.length,
+                  itemCount: context.read<SetsCubit>().setsList.length,
                   itemBuilder: (context, index) {
                     return SetsListTile(
-                      setModel: state.setsList[index],
+                      setModel: context.read<SetsCubit>().setsList[index],
                     );
                   }));
         } else {

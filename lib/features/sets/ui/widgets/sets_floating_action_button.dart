@@ -1,13 +1,11 @@
 import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetsFloatingActionButton extends StatelessWidget {
-  final CollectionModel folder;
-  const SetsFloatingActionButton({super.key, required this.folder});
+  const SetsFloatingActionButton({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +22,7 @@ class SetsFloatingActionButton extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context)
                       .pushNamed(Routes.addSetScreen, arguments: {
-                    'folderId': folder.folderId!,
+                    'folderId': context.read<SetsCubit>().folderModel.folderId!,
                     'setsCubit': BlocProvider.of<SetsCubit>(context),
                   });
                 },

@@ -7,4 +7,5 @@ class Routes {
   static const String editSetScreen = '/editSetScreen';
   static const String setsListScreen = '/setsListScreen';
   static const String addSetScreen = '/addSubSetScreen';
+  static const String editFolderScreen = '/addFolderScreen';
 }

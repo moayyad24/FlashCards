@@ -1,12 +1,14 @@
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/sets/ui/widgets/card_list_view.dart';
+import 'package:flashcards/core/helper/routes.dart';
+import 'package:flashcards/core/theme/colors.dart';
+import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
+import 'package:flashcards/features/sets/ui/widgets/sets_list_view.dart';
 import 'package:flashcards/features/sets/ui/widgets/sets_floating_action_button.dart';
 import 'package:flashcards/features/sets/ui/widgets/sets_list_screen_title.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetsListScreen extends StatelessWidget {
-  final CollectionModel folder;
-  const SetsListScreen({super.key, required this.folder});
+  const SetsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,18 +16,39 @@ class SetsListScreen extends StatelessWidget {
         child: Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert_rounded,
-              )),
+          PopupMenuButton<String>(
+            color: AppColors.grey,
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(Routes.editFolderScreen, arguments: {
+                      'folderModel': context.read<SetsCubit>().folderModel,
+                      'setsCubit': context.read<SetsCubit>(),
+                    });
+                  },
+                  child: const Row(
+                    children: [
+                      Icon(Icons.edit),
+                      SizedBox(width: 10),
+                      Text(
+                        'Edit abstract',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
         ],
       ),
-      floatingActionButton: SetsFloatingActionButton(folder: folder),
-      body: Column(
+      floatingActionButton: const SetsFloatingActionButton(),
+      body: const Column(
         children: [
-          SetsListScreenTitle(title: folder.title),
-          const CardsListView(),
+          SetsListScreenTitle(),
+          SetsListView(),
         ],
       ),
     ));

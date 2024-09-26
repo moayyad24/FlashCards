@@ -14,8 +14,10 @@ import 'package:flashcards/features/cards_list/ui/edit_set_screen.dart';
 import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flashcards/features/sets/data/repo/sets_repo_impl.dart';
+import 'package:flashcards/features/sets/manager/edit_folder_cubit/edit_folder_cubit.dart';
 import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flashcards/features/sets/ui/add_set_screen.dart';
+import 'package:flashcards/features/sets/ui/edit_folder_screen.dart';
 import 'package:flashcards/features/sets/ui/sets_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +45,9 @@ class AppRouter {
             settings.arguments as Map<String, dynamic>);
       case Routes.editSetScreen:
         return _buildEditSetScreenRoute(
+            settings.arguments as Map<String, dynamic>);
+      case Routes.editFolderScreen:
+        return _buildEditFolderScreenRoute(
             settings.arguments as Map<String, dynamic>);
       default:
         return _buildDefaultRoute(settings.name!);
@@ -83,9 +88,10 @@ class AppRouter {
   Route _buildSetsListScreenRoute(CollectionModel argument) {
     return MaterialPageRoute(
       builder: (_) => BlocProvider(
-        create: (_) =>
-            SetsCubit(SetsRepoImpl())..fetchAllSets(argument.folderId!),
-        child: SetsListScreen(folder: argument),
+        create: (_) => SetsCubit(SetsRepoImpl())
+          ..initFolderModel(argument)
+          ..fetchAllSets(),
+        child: const SetsListScreen(),
       ),
     );
   }
@@ -137,6 +143,20 @@ class AppRouter {
         child: BlocProvider(
           create: (context) => EditSetCubit(getIt.get<CardsRepoImpl>()),
           child: EditSetScreen(setModel: setModel),
+        ),
+      ),
+    );
+  }
+
+  Route _buildEditFolderScreenRoute(Map<String, dynamic> data) {
+    CollectionModel folderModel = data['folderModel'];
+    SetsCubit setsCubit = data['setsCubit'];
+    return MaterialPageRoute(
+      builder: (_) => BlocProvider.value(
+        value: setsCubit,
+        child: BlocProvider(
+          create: (context) => EditFolderCubit(getIt.get<SetsRepoImpl>()),
+          child: EditFolderScreen(folderModel: folderModel),
         ),
       ),
     );
