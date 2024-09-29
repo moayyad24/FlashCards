@@ -1,8 +1,10 @@
+import 'package:flashcards/core/helper/dependency_injection.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/widgets/app_text_field.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/edit_set_cubit/edit_set_cubit.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,15 +36,21 @@ class _EditSetScreenState extends State<EditSetScreen> {
       title: _titleController.text,
       description: _descController.text,
       setId: widget.setModel.setId,
+      folderId: widget.setModel.folderId,
     );
 
     var cardListCubit = context.read<CardListCubit>();
     var editSetCubit = context.read<EditSetCubit>();
     var homeCubit = context.read<HomeCubit>();
-
     cardListCubit.editSetModel(setModel);
     await editSetCubit.updateSet(setModel);
-    await homeCubit.homeFetchData();
+    if (setModel.folderId! > 0) {
+      var setsCubit = getIt<SetsCubit>();
+      await setsCubit.fetchAllSets();
+    } else {
+      await homeCubit.homeFetchData();
+    }
+
     if (context.mounted) {
       Navigator.of(context).pop();
     }

@@ -75,7 +75,7 @@ class AppRouter {
             create: (_) => SelectInListBloc(),
           ),
           BlocProvider(
-            create: (_) => CardListCubit(getIt.get<CardsRepoImpl>())
+            create: (_) => CardListCubit(getIt<CardsRepoImpl>())
               ..initSetModel(argument)
               ..fetchCards(),
           ),
@@ -88,7 +88,7 @@ class AppRouter {
   Route _buildSetsListScreenRoute(CollectionModel argument) {
     return MaterialPageRoute(
       builder: (_) => BlocProvider(
-        create: (_) => SetsCubit(SetsRepoImpl())
+        create: (_) => SetsCubit(getIt<SetsRepoImpl>())
           ..initFolderModel(argument)
           ..fetchAllSets(),
         child: const SetsListScreen(),
@@ -125,7 +125,7 @@ class AppRouter {
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
         child: BlocProvider(
-          create: (_) => EditCardCubit(getIt.get<CardsRepoImpl>())
+          create: (_) => EditCardCubit(getIt<CardsRepoImpl>())
             ..initializeController(cardModel),
           child: EditCardScreen(cardModel: cardModel),
         ),
@@ -141,7 +141,7 @@ class AppRouter {
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
         child: BlocProvider(
-          create: (context) => EditSetCubit(getIt.get<CardsRepoImpl>()),
+          create: (context) => EditSetCubit(getIt<CardsRepoImpl>()),
           child: EditSetScreen(setModel: setModel),
         ),
       ),
@@ -155,7 +155,7 @@ class AppRouter {
       builder: (_) => BlocProvider.value(
         value: setsCubit,
         child: BlocProvider(
-          create: (context) => EditFolderCubit(getIt.get<SetsRepoImpl>()),
+          create: (context) => EditFolderCubit(getIt<SetsRepoImpl>()),
           child: EditFolderScreen(folderModel: folderModel),
         ),
       ),

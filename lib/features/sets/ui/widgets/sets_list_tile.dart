@@ -1,3 +1,4 @@
+import 'package:flashcards/core/helper/dependency_injection.dart';
 import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
@@ -19,8 +20,9 @@ class SetsListTile extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           Routes.cardsListScreen,
-          arguments: setModel,
+          arguments:  setModel,
         );
+        getIt.registerSingleton<SetsCubit>(context.read<SetsCubit>());
       },
       onLongPress: () {
         _buildModalBottomSheet(context);
