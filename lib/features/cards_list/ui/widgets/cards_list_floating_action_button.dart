@@ -33,7 +33,9 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           height: 60,
           width: 60,
           child: FloatingActionButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(Routes.cardsTestScreen);
+            },
             heroTag: 'second',
             child: const Icon(Icons.play_arrow),
           ),

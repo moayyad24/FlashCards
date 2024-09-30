@@ -11,6 +11,7 @@ import 'package:flashcards/features/cards_list/ui/add_new_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/cards_list_screen.dart';
 import 'package:flashcards/features/cards_list/ui/edit_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/edit_set_screen.dart';
+import 'package:flashcards/features/cards_test/ui/cards_test_screen.dart';
 import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
 import 'package:flashcards/features/sets/data/repo/sets_repo_impl.dart';
@@ -23,7 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
-  Route generateRoute(RouteSettings settings) {
+  Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.homeScreen:
         return _buildHomeScreenRoute();
@@ -49,8 +50,10 @@ class AppRouter {
       case Routes.editFolderScreen:
         return _buildEditFolderScreenRoute(
             settings.arguments as Map<String, dynamic>);
+      case Routes.cardsTestScreen:
+        return _buildCardsTestScreenRoute();
       default:
-        return _buildDefaultRoute(settings.name!);
+        return null;
     }
   }
 
@@ -162,13 +165,9 @@ class AppRouter {
     );
   }
 
-  Route _buildDefaultRoute(String routeName) {
+  Route _buildCardsTestScreenRoute() {
     return MaterialPageRoute(
-      builder: (_) => Scaffold(
-        body: Center(
-          child: Text('No route defined for $routeName'),
-        ),
-      ),
+      builder: (_) => const CardsTestScreen(),
     );
   }
 }
