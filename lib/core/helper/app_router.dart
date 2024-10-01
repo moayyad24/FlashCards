@@ -51,7 +51,8 @@ class AppRouter {
         return _buildEditFolderScreenRoute(
             settings.arguments as Map<String, dynamic>);
       case Routes.cardsTestScreen:
-        return _buildCardsTestScreenRoute();
+        return _buildCardsTestScreenRoute(
+            settings.arguments as List<CardModel>);
       default:
         return null;
     }
@@ -165,9 +166,9 @@ class AppRouter {
     );
   }
 
-  Route _buildCardsTestScreenRoute() {
+  Route _buildCardsTestScreenRoute(List<CardModel> cardsList) {
     return MaterialPageRoute(
-      builder: (_) => const CardsTestScreen(),
+      builder: (_) => CardsTestScreen(cardsList: cardsList),
     );
   }
 }
