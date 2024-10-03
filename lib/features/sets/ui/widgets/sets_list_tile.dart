@@ -29,7 +29,7 @@ class SetsListTile extends StatelessWidget {
       },
       leading: const Icon(
         Icons.folder,
-        color: AppColors.sulu,
+        color: AppColors.pink,
       ),
       title: Text(setModel.title),
       titleTextStyle:

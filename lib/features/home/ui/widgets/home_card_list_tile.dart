@@ -62,7 +62,7 @@ class HomeCardListTile extends StatelessWidget {
         homeModel.type == CollectionType.sets
             ? Icons.folder
             : Icons.folder_copy,
-        color: AppColors.sulu,
+        color: AppColors.pink,
       ),
       title: Text(homeModel.title),
       titleTextStyle:
