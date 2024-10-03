@@ -17,26 +17,56 @@ class MyCard extends StatelessWidget {
   }
 
   Widget topCardWidget() {
-    return Text(
-      card.question,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.white.withOpacity(.85),
-      ),
-      textAlign: TextAlign.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          card.question,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 30),
+        Text(
+          card.supplementQuestion,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.white.withOpacity(.85),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 
   Widget bottomCardWidget() {
-    return Text(
-      card.answer,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-        color: Colors.white.withOpacity(.85),
-      ),
-      textAlign: TextAlign.center,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          card.answer,
+          style: const TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 30),
+        Text(
+          card.supplementAnswer,
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+            color: Colors.white.withOpacity(.85),
+          ),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }

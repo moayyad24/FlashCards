@@ -28,7 +28,7 @@ class _CardsTestBodyState extends State<CardsTestBody> {
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
           children: [
-            const SizedBox(height: 70),
+            const SizedBox(height: 40),
             MyCard(card: widget.cardsList[currentIndex]),
             const SizedBox(height: 30),
             IsCorrectAnswerAnimatedOpacity(
