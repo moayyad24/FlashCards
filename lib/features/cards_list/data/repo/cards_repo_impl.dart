@@ -86,4 +86,21 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
       rethrow; // Rethrow the exception if you don't want to handle it here
     }
   }
+
+  @override
+  Future<int> updateIsStudiedCard(int cardId, bool isStudied) async {
+    String sql = 'UPDATE cards SET card_is_studied = ? WHERE card_id = ?';
+    List<dynamic> arguments = [
+      isStudied ? 1 : 0,
+      cardId,
+    ];
+    try {
+      int result = await update(sql, arguments);
+      return result;
+    } catch (e) {
+      // Handle the error (log it, rethrow, etc.)
+      debugPrint('Error updating cards: $e');
+      rethrow; // Rethrow the exception if you don't want to handle it here
+    }
+  }
 }

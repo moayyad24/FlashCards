@@ -47,4 +47,14 @@ class CardListCubit extends Cubit<CardListState> {
     }
     return result;
   }
+
+  updateIsStudiedCard(int cardId, bool isStudied) async {
+    int result = await cardsRepo.updateIsStudiedCard(cardId, isStudied);
+    if (result > 0) {
+      debugPrint('----------successfully updated------------');
+    } else {
+      debugPrint('----------error while updating------------');
+    }
+    return result;
+  }
 }

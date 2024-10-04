@@ -27,11 +27,11 @@ class DbHelper {
         set_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         set_title TEXT NOT NULL,
         set_desc TEXT NOT NULL,
-        folder_id INTEGER NOT NULL DEFAULT 0,
+        folder_id INTEGER NOT NULL DEFAULT 0, --if folder_id is 0 then its not related to any folder
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (folder_id) REFERENCES folders(folder_id)
     );
-'''; //if folder_id is 0 then it not related to any folder
+''';
 
   final String _sqlTableCard = '''
     CREATE TABLE cards (
@@ -42,6 +42,7 @@ class DbHelper {
         card_s_answer TEXT,
         set_id INTEGER NOT NULL,  
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        card_is_studied INTEGER DEFAULT 0,  -- 0: false, 1: true
         FOREIGN KEY (set_id) REFERENCES sets(set_id)
     ); 
 ''';

@@ -5,15 +5,18 @@ import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_event.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_state.dart';
+import 'package:flashcards/features/cards_list/ui/widgets/check_box_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardListTile extends StatelessWidget {
   const CardListTile({
     super.key,
-    required CardModel cardModel,
-  }) : _cardModel = cardModel;
-  final CardModel _cardModel;
+    required this.cardModel,
+  });
+
+  final CardModel cardModel;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SelectInListBloc, SelectInListState>(
@@ -21,28 +24,31 @@ class CardListTile extends StatelessWidget {
         SelectInListBloc controller = context.read<SelectInListBloc>();
         return ListTile(
           onLongPress: () {
-            controller.add(AddToSelectedListEvent(cards: _cardModel.id!));
+            controller.add(AddToSelectedListEvent(cards: cardModel.id!));
           },
           onTap: () {
             if (state is StartSelectingState &&
                 controller.selectedCardIdsList.isNotEmpty) {
-              controller.add(AddToSelectedListEvent(cards: _cardModel.id!));
+              controller.add(AddToSelectedListEvent(cards: cardModel.id!));
             } else {
               Navigator.of(context).pushNamed(
                 Routes.editCardScreen,
                 arguments: {
-                  'cardModel': _cardModel,
+                  'cardModel': cardModel,
                   'cardListCubit': BlocProvider.of<CardListCubit>(context),
                 },
               );
             }
           },
-          selected: controller.selectedCardIdsList.contains(_cardModel.id!),
+          selected: controller.selectedCardIdsList.contains(cardModel.id!),
           selectedColor: AppColors.white,
           selectedTileColor: AppColors.greyLight.withOpacity(.6),
-          leading: const Icon(Icons.format_line_spacing),
-          title: Text(_cardModel.question),
-          subtitle: Text(_cardModel.answer),
+          leading: const Icon(Icons.reorder),
+          title: Text(cardModel.question),
+          subtitle: Text(cardModel.answer),
+          titleTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
+          subtitleTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
+          trailing: CheckboxWidget(cardModel: cardModel),
         );
       },
     );

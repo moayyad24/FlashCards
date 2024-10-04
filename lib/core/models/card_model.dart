@@ -4,6 +4,7 @@ class CardModel {
   final String supplementQuestion;
   final String answer;
   final String supplementAnswer;
+  final bool? isStudied;
   final int? setId;
   final String? createdAt;
 
@@ -13,6 +14,7 @@ class CardModel {
     required this.supplementQuestion,
     required this.answer,
     required this.supplementAnswer,
+    this.isStudied,
     this.setId,
     this.createdAt,
   });
@@ -22,8 +24,9 @@ class CardModel {
       question: sqlMap['card_question'],
       supplementQuestion: sqlMap['card_s_question'],
       answer: sqlMap['card_answer'],
-      setId: sqlMap['set_id'],
       supplementAnswer: sqlMap['card_s_answer'],
+      isStudied: sqlMap['card_is_studied'] == 1 ? true : false,
+      setId: sqlMap['set_id'],
     );
   }
 }
