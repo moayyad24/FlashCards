@@ -4,7 +4,7 @@ class CardModel {
   final String supplementQuestion;
   final String answer;
   final String supplementAnswer;
-  final bool? isStudied;
+  bool? isStudied;
   final int? setId;
   final String? createdAt;
 

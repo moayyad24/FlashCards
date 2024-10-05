@@ -15,12 +15,14 @@ class CardsTestBody extends StatefulWidget {
 
 class _CardsTestBodyState extends State<CardsTestBody> {
   List<CardModel> cardsList = [];
+  late CardListCubit cardListCubit;
   int currentIndex = 0;
   int isCorrectAnswer = 0;
   int numberOfCorrectAnswer = 0;
   @override
   void initState() {
     cardsList = context.read<CardListCubit>().cardList;
+    cardListCubit = context.read<CardListCubit>();
     super.initState();
   }
 
@@ -70,15 +72,20 @@ class _CardsTestBodyState extends State<CardsTestBody> {
   void _onDismissed(direction) async {
     if (isCorrectAnswer == 1) {
       numberOfCorrectAnswer++;
-      await context
-          .read<CardListCubit>()
-          .updateIsStudiedCard(cardsList[currentIndex].id!, true);
+      await cardListCubit.updateIsStudiedCard(
+          cardsList[currentIndex].id!, true);
+    } else if (isCorrectAnswer == 2) {
+      await cardListCubit.updateIsStudiedCard(
+          cardsList[currentIndex].id!, false);
     }
     if (currentIndex <= cardsList.length) {
       setState(() {
         isCorrectAnswer = 0;
         currentIndex++;
       });
+    }
+    if (currentIndex == cardsList.length) {
+      await cardListCubit.fetchCards();
     }
   }
 

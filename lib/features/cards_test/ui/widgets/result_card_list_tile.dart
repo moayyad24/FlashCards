@@ -1,4 +1,3 @@
-import 'package:flashcards/features/cards_list/ui/widgets/check_box_widget.dart';
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,10 @@ class ResultCardListTile extends StatelessWidget {
       subtitle: Text(cardModel.answer),
       titleTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
       subtitleTextStyle: const TextStyle(overflow: TextOverflow.ellipsis),
-      trailing: CheckboxWidget(cardModel: cardModel),
+      trailing: Checkbox(
+        value: cardModel.isStudied,
+        onChanged: (value) {},
+      ),
     );
   }
 }

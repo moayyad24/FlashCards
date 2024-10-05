@@ -22,7 +22,6 @@ class CardListCubit extends Cubit<CardListState> {
 
   fetchCards() async {
     emit(CardListLoading());
-    cardList.clear();
     cardList = await cardsRepo.fetchCards(setModel.setId!);
     emit(CardListSuccess());
   }

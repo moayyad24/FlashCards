@@ -13,26 +13,17 @@ class CheckboxWidget extends StatefulWidget {
 }
 
 class _CheckboxWidgetState extends State<CheckboxWidget> {
-  late bool isStudied;
-
-  @override
-  void initState() {
-    isStudied =
-        widget.cardModel.isStudied ?? false; // Changed to false as a default
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Checkbox(
-      value: isStudied,
+      value: widget.cardModel.isStudied,
       onChanged: (value) async {
         await context.read<CardListCubit>().updateIsStudiedCard(
               widget.cardModel.id!,
               value!,
             );
         setState(() {
-          isStudied = value;
+          widget.cardModel.isStudied = value;
         });
       },
     );
