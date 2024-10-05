@@ -1,18 +1,15 @@
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/custom_button.dart';
 import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/range_pointer.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/result_card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TestResult extends StatelessWidget {
-  final int numberOfCorrectAnswer;
-  final int numberOfQuestions;
   const TestResult({
     super.key,
-    required this.numberOfCorrectAnswer,
-    required this.numberOfQuestions,
   });
   String evaluatePerformance(int totalQuestions, int correctAnswers) {
     // Guard clause for invalid input
@@ -40,13 +37,17 @@ class TestResult extends StatelessWidget {
     return ListView(
       children: [
         MyRangePointer(
-          numberOfCorrectAnswer: numberOfCorrectAnswer,
-          numberOfQuestions: numberOfQuestions,
+          numberOfCorrectAnswer:
+              context.read<CardsTestCubit>().numberOfCorrectAnswer,
+          numberOfQuestions: context.read<CardsTestCubit>().cardsList.length,
         ),
         Align(
           alignment: Alignment.center,
           child: Text(
-            evaluatePerformance(numberOfQuestions, numberOfCorrectAnswer),
+            evaluatePerformance(
+              context.read<CardsTestCubit>().cardsList.length,
+              context.read<CardsTestCubit>().numberOfCorrectAnswer,
+            ),
             style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w500,
