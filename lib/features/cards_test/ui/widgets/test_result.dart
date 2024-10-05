@@ -74,9 +74,8 @@ class TestResult extends StatelessWidget {
             shrinkWrap: true,
             itemCount: context.read<CardListCubit>().cardList.length,
             itemBuilder: (context, index) {
-              var cardsList = context.read<CardListCubit>().cardList;
               return ResultCardListTile(
-                cardModel: cardsList[index],
+                cardModel: context.read<CardListCubit>().cardList[index],
               );
             }),
       ],

@@ -11,6 +11,7 @@ import 'package:flashcards/features/cards_list/ui/add_new_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/cards_list_screen.dart';
 import 'package:flashcards/features/cards_list/ui/edit_card_screen.dart';
 import 'package:flashcards/features/cards_list/ui/edit_set_screen.dart';
+import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flashcards/features/cards_test/ui/cards_test_screen.dart';
 import 'package:flashcards/features/home/ui/add_folder_set_screen.dart';
 import 'package:flashcards/features/home/ui/home_screen.dart';
@@ -169,7 +170,10 @@ class AppRouter {
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
-        child: CardsTestScreen(),
+        child: BlocProvider(
+          create: (context) => CardsTestCubit()..initState(cardListCubit),
+          child: const CardsTestScreen(),
+        ),
       ),
     );
   }
