@@ -11,14 +11,16 @@ class MyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SlimyCard(
       color: AppColors.cornflowerBlue,
+      topCardHeight: MediaQuery.sizeOf(context).height * 0.3,
+      bottomCardHeight: MediaQuery.sizeOf(context).height * 0.4,
       topCardWidget: topCardWidget(),
       bottomCardWidget: bottomCardWidget(),
     );
   }
 
   Widget topCardWidget() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return ListView(
+      padding: const EdgeInsets.symmetric(vertical: 10),
       children: [
         Text(
           card.question,
@@ -44,8 +46,8 @@ class MyCard extends StatelessWidget {
   }
 
   Widget bottomCardWidget() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return ListView(
+      padding: const EdgeInsets.only(top: 40, bottom: 10),
       children: [
         Text(
           card.answer,

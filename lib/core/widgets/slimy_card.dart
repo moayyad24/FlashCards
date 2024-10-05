@@ -171,7 +171,7 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
                       borderRadius: BorderRadius.circular(widget.borderRadius),
                     ),
                     alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: AnimatedOpacity(
                       duration: const Duration(milliseconds: 100),
                       opacity: (isSeparated) ? 1.0 : 0,
@@ -214,7 +214,7 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(widget.borderRadius),
                 ),
                 alignment: Alignment.center,
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: topCardWidget,
               ),
               Column(

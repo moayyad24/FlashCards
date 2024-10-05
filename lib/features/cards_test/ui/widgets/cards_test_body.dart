@@ -24,8 +24,12 @@ class CardsTestBody extends StatelessWidget {
                   key: ValueKey(cardsTestCubit.currentIndex),
                   onUpdate: cardsTestCubit.onUpdate,
                   onDismissed: cardsTestCubit.onDismissed,
-                  child: MyCard(
-                    card: cardsTestCubit.cardsList[cardsTestCubit.currentIndex],
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 40.0),
+                    child: MyCard(
+                      card:
+                          cardsTestCubit.cardsList[cardsTestCubit.currentIndex],
+                    ),
                   ),
                 ),
               );
