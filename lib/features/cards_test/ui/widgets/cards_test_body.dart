@@ -1,31 +1,38 @@
 import 'package:flashcards/core/models/card_model.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/is_correct_answer_animated_opacity.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/my_card.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/test_result.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardsTestBody extends StatefulWidget {
-  final List<CardModel> cardsList;
-  const CardsTestBody({super.key, required this.cardsList});
+  const CardsTestBody({super.key});
 
   @override
   State<CardsTestBody> createState() => _CardsTestBodyState();
 }
 
 class _CardsTestBodyState extends State<CardsTestBody> {
+  List<CardModel> cardsList = [];
   int currentIndex = 0;
   int isCorrectAnswer = 0;
   int numberOfCorrectAnswer = 0;
+  @override
+  void initState() {
+    cardsList = context.read<CardListCubit>().cardList;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedSwitcher(
       duration: const Duration(milliseconds: 200),
       transitionBuilder: _transitionBuilder,
-      child: (currentIndex >= widget.cardsList.length)
+      child: (currentIndex >= cardsList.length)
           ? TestResult(
               numberOfCorrectAnswer: numberOfCorrectAnswer,
-              numberOfQuestions: widget.cardsList.length,
+              numberOfQuestions: cardsList.length,
             )
           : Dismissible(
               key: ValueKey(currentIndex),
@@ -36,7 +43,7 @@ class _CardsTestBodyState extends State<CardsTestBody> {
                 shrinkWrap: true,
                 children: [
                   const SizedBox(height: 40),
-                  MyCard(card: widget.cardsList[currentIndex]),
+                  MyCard(card: cardsList[currentIndex]),
                   const SizedBox(height: 30),
                   IsCorrectAnswerAnimatedOpacity(
                     opacity: isCorrectAnswer > 0 ? 1.0 : 0.0,
@@ -60,11 +67,14 @@ class _CardsTestBodyState extends State<CardsTestBody> {
     );
   }
 
-  void _onDismissed(direction) {
+  void _onDismissed(direction) async {
     if (isCorrectAnswer == 1) {
       numberOfCorrectAnswer++;
+      await context
+          .read<CardListCubit>()
+          .updateIsStudiedCard(cardsList[currentIndex].id!, true);
     }
-    if (currentIndex <= widget.cardsList.length) {
+    if (currentIndex <= cardsList.length) {
       setState(() {
         isCorrectAnswer = 0;
         currentIndex++;

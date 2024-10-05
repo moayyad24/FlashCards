@@ -1,7 +1,10 @@
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/custom_button.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/range_pointer.dart';
+import 'package:flashcards/features/cards_test/ui/widgets/result_card_list_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TestResult extends StatelessWidget {
   final int numberOfCorrectAnswer;
@@ -34,18 +37,20 @@ class TestResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+    return ListView(
       children: [
         MyRangePointer(
           numberOfCorrectAnswer: numberOfCorrectAnswer,
           numberOfQuestions: numberOfQuestions,
         ),
-        Text(
-          evaluatePerformance(numberOfQuestions, numberOfCorrectAnswer),
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
+        Align(
+          alignment: Alignment.center,
+          child: Text(
+            evaluatePerformance(numberOfQuestions, numberOfCorrectAnswer),
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
         const SizedBox(height: 30),
@@ -63,7 +68,17 @@ class TestResult extends StatelessWidget {
               backgroundColor: AppColors.cornflowerBlue,
             ),
           ],
-        )
+        ),
+        ListView.builder(
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: context.read<CardListCubit>().cardList.length,
+            itemBuilder: (context, index) {
+              var cardsList = context.read<CardListCubit>().cardList;
+              return ResultCardListTile(
+                cardModel: cardsList[index],
+              );
+            }),
       ],
     );
   }

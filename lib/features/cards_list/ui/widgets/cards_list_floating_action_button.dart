@@ -36,7 +36,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
             onPressed: () {
               Navigator.of(context).pushNamed(
                 Routes.cardsTestScreen,
-                arguments: BlocProvider.of<CardListCubit>(context).cardList,
+                arguments: context.read<CardListCubit>(),
               );
             },
             heroTag: 'second',

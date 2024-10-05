@@ -51,8 +51,7 @@ class AppRouter {
         return _buildEditFolderScreenRoute(
             settings.arguments as Map<String, dynamic>);
       case Routes.cardsTestScreen:
-        return _buildCardsTestScreenRoute(
-            settings.arguments as List<CardModel>);
+        return _buildCardsTestScreenRoute(settings.arguments as CardListCubit);
       default:
         return null;
     }
@@ -166,9 +165,12 @@ class AppRouter {
     );
   }
 
-  Route _buildCardsTestScreenRoute(List<CardModel> cardsList) {
+  Route _buildCardsTestScreenRoute(CardListCubit cardListCubit) {
     return MaterialPageRoute(
-      builder: (_) => CardsTestScreen(cardsList: cardsList),
+      builder: (_) => BlocProvider.value(
+        value: cardListCubit,
+        child: CardsTestScreen(),
+      ),
     );
   }
 }
