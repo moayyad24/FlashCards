@@ -1,6 +1,11 @@
+import 'package:flashcards/core/helper/routes.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-AppBar cardsTestAppBar() {
+AppBar cardsTestAppBar(BuildContext context) {
+  CardsTestCubit cardsTestCubit = context.read<CardsTestCubit>();
   return AppBar(
     title: const Text(
       'Test',
@@ -8,12 +13,18 @@ AppBar cardsTestAppBar() {
     ),
     actions: [
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          (cardsTestCubit.currentIndex < cardsTestCubit.cardsList.length)
+              ? Navigator.of(context)
+                  .pushNamed(Routes.editCardScreen, arguments: {
+                  'cardModel': context
+                      .read<CardListCubit>()
+                      .cardList[cardsTestCubit.currentIndex],
+                  'cardListCubit': context.read<CardListCubit>(),
+                })
+              : null;
+        },
         icon: const Icon(Icons.edit),
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.arrow_upward_rounded),
       ),
       IconButton(
         onPressed: () {},

@@ -1,24 +1,46 @@
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/slimy_card.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
+import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyCard extends StatelessWidget {
-  final CardModel card;
-  const MyCard({super.key, required this.card});
+  const MyCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SlimyCard(
-      color: AppColors.cornflowerBlue,
-      topCardHeight: MediaQuery.sizeOf(context).height * 0.3,
-      bottomCardHeight: MediaQuery.sizeOf(context).height * 0.4,
-      topCardWidget: topCardWidget(),
-      bottomCardWidget: bottomCardWidget(),
+    return BlocBuilder<CardListCubit, CardListState>(
+      builder: (context, state) {
+        List<CardModel> cardsList = context.read<CardListCubit>().cardList;
+        var index = context.read<CardsTestCubit>().currentIndex;
+        if (state is CardListSuccess) {
+          return SlimyCard(
+            color: AppColors.cornflowerBlue,
+            topCardHeight: 250,
+            bottomCardHeight: 200,
+            topCardWidget: TopCardWidget(card: cardsList[index]),
+            bottomCardWidget: BottomCardWidget(card: cardsList[index]),
+          );
+        } else {
+          return const CircularProgressIndicator();
+        }
+      },
     );
   }
+}
 
-  Widget topCardWidget() {
+class TopCardWidget extends StatelessWidget {
+  final CardModel card;
+  const TopCardWidget({
+    super.key,
+    required this.card,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.symmetric(vertical: 10),
       children: [
@@ -44,8 +66,17 @@ class MyCard extends StatelessWidget {
       ],
     );
   }
+}
 
-  Widget bottomCardWidget() {
+class BottomCardWidget extends StatelessWidget {
+  final CardModel card;
+  const BottomCardWidget({
+    super.key,
+    required this.card,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return ListView(
       padding: const EdgeInsets.only(top: 40, bottom: 10),
       children: [

@@ -153,7 +153,7 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
       child: Stack(
         alignment: Alignment.topCenter,
         children: <Widget>[
-          Column(
+          ListView(
             children: <Widget>[
               AnimatedContainer(
                 duration: const Duration(milliseconds: 1800),
