@@ -1,5 +1,5 @@
-import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_event.dart';
-import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_state.dart';
+import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_event.dart';
+import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectInListBloc extends Bloc<SelectInListEvent, SelectInListState> {

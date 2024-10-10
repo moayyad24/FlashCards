@@ -1,8 +1,8 @@
 import 'package:flashcards/core/helper/dependency_injection.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/widgets/app_text_field.dart';
-import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/edit_set_cubit/edit_set_cubit.dart';
+import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:flashcards/features/cards/manager/edit_set_cubit/edit_set_cubit.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flutter/material.dart';

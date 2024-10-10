@@ -1,6 +1,6 @@
-import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_state.dart';
-import 'package:flashcards/features/cards_list/ui/widgets/card_list_tile.dart';
+import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_state.dart';
+import 'package:flashcards/features/cards/ui/widgets/card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
