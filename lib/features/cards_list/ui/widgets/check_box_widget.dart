@@ -1,4 +1,4 @@
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';

@@ -1,5 +1,5 @@
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:flashcards/features/cards_list/ui/widgets/card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,10 +14,10 @@ class CardListViewBody extends StatelessWidget {
         if (state is CardListSuccess || state is CardListSetEdited) {
           return Expanded(
             child: ListView.builder(
-                itemCount: context.read<CardListCubit>().cardList.length,
+                itemCount: context.read<CardListCubit>().cardsList.length,
                 itemBuilder: (context, index) {
                   return CardListTile(
-                    cardModel: context.read<CardListCubit>().cardList[index],
+                    cardModel: context.read<CardListCubit>().cardsList[index],
                   );
                 }),
           );

@@ -1,6 +1,6 @@
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/custom_button.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/range_pointer.dart';
 import 'package:flashcards/features/cards_test/ui/widgets/result_card_list_tile.dart';
@@ -73,10 +73,10 @@ class TestResult extends StatelessWidget {
         ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: context.read<CardListCubit>().cardList.length,
+            itemCount: context.read<CardListCubit>().cardsList.length,
             itemBuilder: (context, index) {
               return ResultCardListTile(
-                cardModel: context.read<CardListCubit>().cardList[index],
+                cardModel: context.read<CardListCubit>().cardsList[index],
               );
             }),
       ],

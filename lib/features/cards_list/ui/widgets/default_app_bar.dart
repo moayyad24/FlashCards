@@ -2,8 +2,8 @@ import 'package:flashcards/core/helper/routes.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 
 import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

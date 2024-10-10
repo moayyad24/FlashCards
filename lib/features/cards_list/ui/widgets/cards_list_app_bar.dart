@@ -1,4 +1,4 @@
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_state.dart';
 import 'package:flashcards/features/cards_list/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:flashcards/features/cards_list/ui/widgets/selecting_app_bar.dart';

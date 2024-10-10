@@ -1,8 +1,8 @@
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/slimy_card.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,7 @@ class MyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CardListCubit, CardListState>(
       builder: (context, state) {
-        List<CardModel> cardsList = context.read<CardListCubit>().cardList;
+        List<CardModel> cardsList = context.read<CardListCubit>().cardsList;
         var index = context.read<CardsTestCubit>().currentIndex;
         if (state is CardListSuccess) {
           return SlimyCard(

@@ -1,5 +1,5 @@
 import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_cubit.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +19,7 @@ AppBar cardsTestAppBar(BuildContext context) {
                   .pushNamed(Routes.editCardScreen, arguments: {
                   'cardModel': context
                       .read<CardListCubit>()
-                      .cardList[cardsTestCubit.currentIndex],
+                      .cardsList[cardsTestCubit.currentIndex],
                   'cardListCubit': context.read<CardListCubit>(),
                 })
               : null;

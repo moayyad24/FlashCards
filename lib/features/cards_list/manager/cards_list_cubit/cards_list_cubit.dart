@@ -1,7 +1,7 @@
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/cards_list/data/repo/cards_repo.dart';
-import 'package:flashcards/features/cards_list/manager/card_list_cubit/card_list_state.dart';
+import 'package:flashcards/features/cards_list/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,7 +10,7 @@ class CardListCubit extends Cubit<CardListState> {
   CardListCubit(this.cardsRepo) : super(CardListInitial());
 
   late CollectionModel setModel;
-  List<CardModel> cardList = [];
+  List<CardModel> cardsList = [];
   initSetModel(CollectionModel collection) {
     setModel = collection;
   }
@@ -22,7 +22,7 @@ class CardListCubit extends Cubit<CardListState> {
 
   fetchCards() async {
     emit(CardListLoading());
-    cardList = await cardsRepo.fetchCards(setModel.setId!);
+    cardsList = await cardsRepo.fetchCards(setModel.setId!);
     emit(CardListSuccess());
   }
 
