@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CardListCubit extends Cubit<CardListState> {
-  CardsRepo cardsRepo;
+  final CardsRepo cardsRepo;
   CardListCubit(this.cardsRepo) : super(CardListInitial());
 
   late CollectionModel setModel;
