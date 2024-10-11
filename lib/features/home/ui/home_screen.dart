@@ -1,3 +1,4 @@
+import 'package:flashcards/features/home/ui/widgets/home_app_bar.dart';
 import 'package:flashcards/features/home/ui/widgets/home_list_view.dart';
 import 'package:flashcards/features/home/ui/widgets/home_title.dart';
 import 'package:flashcards/features/home/ui/widgets/my_floating_action_button.dart';
@@ -8,12 +9,12 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      floatingActionButton: MyFloatingActionButton(),
-      body: SafeArea(
+    return Scaffold(
+      appBar: homeAppBar(context),
+      floatingActionButton: const MyFloatingActionButton(),
+      body: const SafeArea(
           child: Column(
         children: [
-          SizedBox(height: 30),
           HomeTitle(),
           HomeListView(),
         ],

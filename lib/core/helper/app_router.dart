@@ -21,6 +21,7 @@ import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flashcards/features/sets/ui/add_set_screen.dart';
 import 'package:flashcards/features/sets/ui/edit_folder_screen.dart';
 import 'package:flashcards/features/sets/ui/sets_list_screen.dart';
+import 'package:flashcards/features/settings/ui/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,6 +54,8 @@ class AppRouter {
             settings.arguments as Map<String, dynamic>);
       case Routes.cardsTestScreen:
         return _buildCardsTestScreenRoute(settings.arguments as CardListCubit);
+      case Routes.settingsScreen:
+        return _buildSettingsScreenRoute();
       default:
         return null;
     }
@@ -175,6 +178,12 @@ class AppRouter {
           child: const CardsTestScreen(),
         ),
       ),
+    );
+  }
+
+  Route? _buildSettingsScreenRoute() {
+    return MaterialPageRoute(
+      builder: (_) => const SettingsScreen(),
     );
   }
 }
