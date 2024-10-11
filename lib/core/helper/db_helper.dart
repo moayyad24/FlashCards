@@ -47,6 +47,14 @@ class DbHelper {
     ); 
 ''';
 
+  final String _sqlTableSettings = '''
+    CREATE TABLE settings (
+        randomization INTEGER DEFAULT 0,  -- 0: false, 1: true
+        prioritizing INTEGER DEFAULT 0,  -- 0: false, 1: true
+        question_amount INTEGER DEFAULT 10
+    );
+''';
+
   Future<Database?> instance() async {
     String databasePath = await getDatabasesPath();
     String path = join(databasePath, 'flash_cards.db');
@@ -55,6 +63,7 @@ class DbHelper {
       await db.execute(_sqlTableFolders);
       await db.execute(_sqlTableSets);
       await db.execute(_sqlTableCard);
+      await db.execute(_sqlTableSettings);
       debugPrint('Text Database has been created');
     });
 
