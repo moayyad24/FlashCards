@@ -49,6 +49,7 @@ class DbHelper {
 
   final String _sqlTableSettings = '''
     CREATE TABLE settings (
+        settings_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         randomization INTEGER DEFAULT 0,  -- 0: false, 1: true
         prioritizing INTEGER DEFAULT 0,  -- 0: false, 1: true
         question_amount INTEGER DEFAULT 10
@@ -64,6 +65,8 @@ class DbHelper {
       await db.execute(_sqlTableSets);
       await db.execute(_sqlTableCard);
       await db.execute(_sqlTableSettings);
+      await db.rawInsert(
+          'INSERT INTO settings (settings_id, randomization, prioritizing, question_amount) VALUES (1, 0, 0, 10)');
       debugPrint('Text Database has been created');
     });
 

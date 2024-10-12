@@ -1,6 +1,6 @@
 import 'package:flashcards/features/settings/ui/widgets/question_amount_per_test.dart';
 import 'package:flashcards/features/settings/ui/widgets/settings_section_title.dart';
-import 'package:flashcards/features/settings/ui/widgets/settings_list_tile.dart';
+import 'package:flashcards/features/settings/ui/widgets/study_setting.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -9,29 +9,21 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(
+          title: const Text(
+        'Settings',
+        style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+      )),
       body: const SafeArea(
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 20),
-              SettingsSectionTitle(title: 'Study setting'),
-              SettingsListTile(
-                title: 'Randomization',
-                subtitle: 'Randomize cards in a test',
-                value: false,
-              ),
-              SettingsListTile(
-                title: 'Prioritizing',
-                subtitle: 'Prioritize non-reviewed over re-reviewed questions',
-                value: false,
-              ),
+              StudySetting(),
               QuestionAmountPerTest(),
               SettingsSectionTitle(title: 'Progress'),
-              ListTile(
-                title: Text('Reset progress'),
-              ),
+              ListTile(title: Text('Reset progress')),
             ],
           ),
         ),
@@ -39,4 +31,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-

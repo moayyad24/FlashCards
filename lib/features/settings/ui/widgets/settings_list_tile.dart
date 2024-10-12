@@ -1,15 +1,19 @@
 import 'package:flashcards/core/theme/colors.dart';
+import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SettingsListTile extends StatefulWidget {
   final String title;
   final String subtitle;
   final bool value;
+  final Future<int> Function(bool) updateValue;
   const SettingsListTile({
     super.key,
     required this.title,
     required this.subtitle,
     required this.value,
+    required this.updateValue,
   });
 
   @override
@@ -33,10 +37,15 @@ class _SettingsListTileState extends State<SettingsListTile> {
       trailing: Switch(
         value: isActive,
         inactiveTrackColor: AppColors.grey,
-        onChanged: (value) {
-          setState(() {
-            isActive = value;
-          });
+        onChanged: (value) async {
+          SettingsCubit cubit = context.read<SettingsCubit>();
+          int result = await widget.updateValue(value);
+          if (result > 0) {
+            await cubit.fetchSettings();
+            setState(() {
+              isActive = value;
+            });
+          }
         },
       ),
     );
