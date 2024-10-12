@@ -8,7 +8,7 @@ class SettingsCubit extends Cubit<SettingsState> {
   final SettingsRepo settingsRepo;
   SettingsCubit(this.settingsRepo) : super(SettingsInitial());
 
-  SettingsModel? settingsModel;
+  late SettingsModel settingsModel;
 
   fetchSettings() async {
     emit(SettingsLoading());
@@ -40,6 +40,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     int result = await settingsRepo.updateQuestionAmount(numOfQuestions);
     if (result > 0) {
       debugPrint('----------successfully updated------------');
+      fetchSettings();
     } else {
       debugPrint('----------error while updating------------');
     }

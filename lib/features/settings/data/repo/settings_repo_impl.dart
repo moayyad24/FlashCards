@@ -5,13 +5,13 @@ import 'package:flutter/foundation.dart';
 
 class SettingsRepoImpl extends DbHelper implements SettingsRepo {
   @override
-  Future<SettingsModel?> fetchSettings() async {
+  Future<SettingsModel> fetchSettings() async {
     List<SettingsModel> settingsList = [];
     var dataList = await inquiry('SELECT * FROM settings');
     for (var e in dataList) {
       settingsList.add(SettingsModel.fromSql(e));
     }
-    return settingsList.isNotEmpty ? settingsList[0] : null;
+    return settingsList[0];
   }
 
   @override

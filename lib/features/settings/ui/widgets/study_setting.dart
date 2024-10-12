@@ -16,8 +16,7 @@ class StudySetting extends StatelessWidget {
         SettingsListTile(
           title: 'Randomization',
           subtitle: 'Randomize cards in a test',
-          value: context.read<SettingsCubit>().settingsModel?.randomization ??
-              false,
+          value: context.read<SettingsCubit>().settingsModel.randomization,
           updateValue: (value) async {
             return await context
                 .read<SettingsCubit>()
@@ -27,8 +26,7 @@ class StudySetting extends StatelessWidget {
         SettingsListTile(
           title: 'Prioritizing',
           subtitle: 'Prioritize non-reviewed over re-reviewed questions',
-          value: context.read<SettingsCubit>().settingsModel?.prioritizing ??
-              false,
+          value: context.read<SettingsCubit>().settingsModel.prioritizing,
           updateValue: (value) async {
             return await context
                 .read<SettingsCubit>()
