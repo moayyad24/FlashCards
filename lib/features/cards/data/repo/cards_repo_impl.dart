@@ -51,9 +51,8 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
       int result = await update(sql, arguments);
       return result;
     } catch (e) {
-      // Handle the error (log it, rethrow, etc.)
       debugPrint('Error updating cards: $e');
-      rethrow; // Rethrow the exception if you don't want to handle it here
+      rethrow;
     }
   }
 
@@ -81,9 +80,8 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
       int result = await update(sql, arguments);
       return result;
     } catch (e) {
-      // Handle the error (log it, rethrow, etc.)
-      debugPrint('Error updating cards: $e');
-      rethrow; // Rethrow the exception if you don't want to handle it here
+      debugPrint('Error updating set: $e');
+      rethrow;
     }
   }
 
@@ -98,9 +96,24 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
       int result = await update(sql, arguments);
       return result;
     } catch (e) {
-      // Handle the error (log it, rethrow, etc.)
+      debugPrint('Error updating isStudied: $e');
+      rethrow;
+    }
+  }
+
+  @override
+  Future<int> updateForgottenCardNumber(int cardId, int numberOfForget) async {
+    String sql = 'UPDATE cards SET card_forgotten_num = ? WHERE card_id = ?';
+    List<dynamic> arguments = [
+      numberOfForget,
+      cardId,
+    ];
+    try {
+      int result = await update(sql, arguments);
+      return result;
+    } catch (e) {
       debugPrint('Error updating cards: $e');
-      rethrow; // Rethrow the exception if you don't want to handle it here
+      rethrow;
     }
   }
 }

@@ -56,4 +56,15 @@ class CardListCubit extends Cubit<CardListState> {
     }
     return result;
   }
+
+  updateForgottenCardNumber(int cardId, int numberOfForget) async {
+    int result =
+        await cardsRepo.updateForgottenCardNumber(cardId, numberOfForget);
+    if (result > 0) {
+      debugPrint('----------successfully updated------------');
+    } else {
+      debugPrint('----------error while updating------------');
+    }
+    return result;
+  }
 }

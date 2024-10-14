@@ -8,4 +8,5 @@ abstract class CardsRepo {
   Future<int> deleteCards(List<int> cardsIds);
   Future<int> updateSet(CollectionModel setModel);
   Future<int> updateIsStudiedCard(int cardId, bool isStudied);
+  Future<int> updateForgottenCardNumber(int cardId, int numberOfForget);
 }

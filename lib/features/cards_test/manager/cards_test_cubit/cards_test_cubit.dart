@@ -44,20 +44,28 @@ class CardsTestCubit extends Cubit<CardsTestState> {
 
   Future<void> checkIfItsCorrectAnswer() async {
     final cardId = cardsList[currentIndex].id!;
+    int numberOfForget = cardsList[currentIndex].numberOfForget!;
 
     switch (isCorrectAnswer) {
       case 1:
         numberOfCorrectAnswer++;
         await markCardAsStudied(cardId, true);
+        await incrementForgettingNumber(cardId, 0);
         break;
       case 2:
         await markCardAsStudied(cardId, false);
+        numberOfForget++;
+        await incrementForgettingNumber(cardId, numberOfForget);
         break;
     }
   }
 
   Future<void> markCardAsStudied(int cardId, bool isStudied) async {
     await cardsListCubit.updateIsStudiedCard(cardId, isStudied);
+  }
+
+  Future<void> incrementForgettingNumber(int cardId, int numberOfForget) async {
+    await cardsListCubit.updateForgottenCardNumber(cardId, numberOfForget);
   }
 
   void incrementTheCurrentIndex() {

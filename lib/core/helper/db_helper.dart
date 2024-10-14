@@ -43,6 +43,7 @@ class DbHelper {
         set_id INTEGER NOT NULL,  
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         card_is_studied INTEGER DEFAULT 0,  -- 0: false, 1: true
+        card_forgotten_num INTEGER DEFAULT 0, -- this will help making a forgetting curve to the card
         FOREIGN KEY (set_id) REFERENCES sets(set_id)
     ); 
 ''';
