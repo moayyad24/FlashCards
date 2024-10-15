@@ -18,9 +18,9 @@ AppBar cardsTestAppBar(BuildContext context) {
               ? Navigator.of(context)
                   .pushNamed(Routes.editCardScreen, arguments: {
                   'cardModel': context
-                      .read<CardListCubit>()
-                      .cardsList[cardsTestCubit.currentIndex],
-                  'cardListCubit': context.read<CardListCubit>(),
+                      .read<CardsListCubit>()
+                      .filteredCardsList[cardsTestCubit.currentIndex],
+                  'cardListCubit': context.read<CardsListCubit>(),
                 })
               : null;
         },

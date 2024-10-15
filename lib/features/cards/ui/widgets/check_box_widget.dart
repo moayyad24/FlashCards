@@ -18,7 +18,7 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
     return Checkbox(
       value: widget.cardModel.isStudied,
       onChanged: (value) async {
-        await context.read<CardListCubit>().updateIsStudiedCard(
+        await context.read<CardsListCubit>().updateIsStudiedCard(
               widget.cardModel.id!,
               value!,
             );

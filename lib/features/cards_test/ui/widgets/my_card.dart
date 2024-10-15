@@ -12,9 +12,10 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardListCubit, CardListState>(
+    return BlocBuilder<CardsListCubit, CardListState>(
       builder: (context, state) {
-        List<CardModel> cardsList = context.read<CardListCubit>().cardsList;
+        List<CardModel> cardsList =
+            context.read<CardsListCubit>().filteredCardsList;
         var index = context.read<CardsTestCubit>().currentIndex;
         if (state is CardListSuccess) {
           return SlimyCard(

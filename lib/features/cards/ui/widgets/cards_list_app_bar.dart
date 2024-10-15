@@ -15,10 +15,10 @@ class CardsListAppBar extends StatelessWidget {
         builder: (context, state) {
       return state is StartSelectingState
           ? SelectingAppBar(
-              collectionModel: context.read<CardListCubit>().setModel,
+              collectionModel: context.read<CardsListCubit>().setModel,
             )
           : DefaultAppBar(
-              collectionModel: context.read<CardListCubit>().setModel,
+              collectionModel: context.read<CardsListCubit>().setModel,
             );
     });
   }

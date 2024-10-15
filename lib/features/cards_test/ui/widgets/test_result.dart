@@ -73,10 +73,11 @@ class TestResult extends StatelessWidget {
         ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
             shrinkWrap: true,
-            itemCount: context.read<CardListCubit>().cardsList.length,
+            itemCount: context.read<CardsListCubit>().filteredCardsList.length,
             itemBuilder: (context, index) {
               return ResultCardListTile(
-                cardModel: context.read<CardListCubit>().cardsList[index],
+                cardModel:
+                    context.read<CardsListCubit>().filteredCardsList[index],
               );
             }),
       ],

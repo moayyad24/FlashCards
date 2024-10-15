@@ -8,13 +8,13 @@ class CardsTestCubit extends Cubit<CardsTestState> {
   CardsTestCubit() : super(CardsTestInitial());
 
   late List<CardModel> cardsList;
-  late CardListCubit cardsListCubit;
+  late CardsListCubit cardsListCubit;
   int currentIndex = 0;
   int isCorrectAnswer = 0;
   int numberOfCorrectAnswer = 0;
-  void initState(CardListCubit cardListCubit) {
-    cardsListCubit = cardListCubit;
-    cardsList = cardsListCubit.cardsList;
+  void initState(CardsListCubit cards) {
+    cardsListCubit = cards;
+    cardsList = cardsListCubit.filteredCardsList;
   }
 
   void onDismissed(direction) async {
@@ -44,8 +44,7 @@ class CardsTestCubit extends Cubit<CardsTestState> {
 
   Future<void> checkIfItsCorrectAnswer() async {
     final cardId = cardsList[currentIndex].id!;
-    int numberOfForget = cardsList[currentIndex].numberOfForget!;
-
+    int numberOfForget = cardsList[currentIndex].numberOfForgets!;
     switch (isCorrectAnswer) {
       case 1:
         numberOfCorrectAnswer++;
@@ -78,8 +77,8 @@ class CardsTestCubit extends Cubit<CardsTestState> {
 
   Future<void> refreshTheCardsList() async {
     if (currentIndex == cardsList.length) {
+      await cardsListCubit.refreshCardsList();
       emit(CardsTestFinish());
-      await cardsListCubit.fetchCards();
     }
   }
 

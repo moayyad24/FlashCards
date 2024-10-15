@@ -16,7 +16,7 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
       IconButton(
         onPressed: () async {
           EditCardCubit editCardCubit = context.read<EditCardCubit>();
-          CardListCubit cardListCubit = context.read<CardListCubit>();
+          CardsListCubit cardListCubit = context.read<CardsListCubit>();
           if (editCardCubit.formKey.currentState?.validate() ?? false) {
             CardModel cards = CardModel(
               id: cardModel.id,

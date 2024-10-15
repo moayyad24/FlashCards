@@ -2,17 +2,21 @@ import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/features/cards/data/repo/cards_repo.dart';
 import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_state.dart';
+import 'package:flashcards/features/settings/data/model/settings_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CardListCubit extends Cubit<CardListState> {
+class CardsListCubit extends Cubit<CardListState> {
   final CardsRepo cardsRepo;
-  CardListCubit(this.cardsRepo) : super(CardListInitial());
+  CardsListCubit(this.cardsRepo) : super(CardListInitial());
 
   late CollectionModel setModel;
+  late SettingsModel settingsModel;
   List<CardModel> cardsList = [];
-  initSetModel(CollectionModel collection) {
-    setModel = collection;
+  List<CardModel> filteredCardsList = [];
+  initSetModel(Map<String, dynamic> data) {
+    setModel = data['collectionModel'] as CollectionModel;
+    settingsModel = data['settingsModel'] as SettingsModel;
   }
 
   editSetModel(CollectionModel collection) {
@@ -20,13 +24,25 @@ class CardListCubit extends Cubit<CardListState> {
     emit(CardListSetEdited());
   }
 
-  fetchCards() async {
+  Future fetchCards() async {
     emit(CardListLoading());
     cardsList = await cardsRepo.fetchCards(setModel.setId!);
     emit(CardListSuccess());
   }
 
-  insertAnewCard(CardModel cards) async {
+  Future filterCardsBySettings() async {
+    filteredCardsList =
+        await cardsRepo.filterCardsBySettings(setModel.setId!, settingsModel);
+  }
+
+  Future refreshCardsList() async {
+    await Future.wait([
+      filterCardsBySettings(),
+      fetchCards(),
+    ]);
+  }
+
+  Future insertAnewCard(CardModel cards) async {
     int result = await cardsRepo.insertAnewCard(cards);
     if (result > 0) {
       debugPrint('----------successfully inserted------------');
@@ -37,7 +53,7 @@ class CardListCubit extends Cubit<CardListState> {
     return result;
   }
 
-  deleteCards(List<int> cardsIds) async {
+  Future deleteCards(List<int> cardsIds) async {
     int result = await cardsRepo.deleteCards(cardsIds);
     if (result > 0) {
       debugPrint('----------successfully deleted------------');
@@ -47,7 +63,7 @@ class CardListCubit extends Cubit<CardListState> {
     return result;
   }
 
-  updateIsStudiedCard(int cardId, bool isStudied) async {
+  Future updateIsStudiedCard(int cardId, bool isStudied) async {
     int result = await cardsRepo.updateIsStudiedCard(cardId, isStudied);
     if (result > 0) {
       debugPrint('----------successfully updated------------');
@@ -57,7 +73,7 @@ class CardListCubit extends Cubit<CardListState> {
     return result;
   }
 
-  updateForgottenCardNumber(int cardId, int numberOfForget) async {
+  Future updateForgottenCardNumber(int cardId, int numberOfForget) async {
     int result =
         await cardsRepo.updateForgottenCardNumber(cardId, numberOfForget);
     if (result > 0) {

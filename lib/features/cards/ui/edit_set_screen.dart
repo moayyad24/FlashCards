@@ -39,7 +39,7 @@ class _EditSetScreenState extends State<EditSetScreen> {
       folderId: widget.setModel.folderId,
     );
 
-    var cardListCubit = context.read<CardListCubit>();
+    var cardListCubit = context.read<CardsListCubit>();
     var editSetCubit = context.read<EditSetCubit>();
     var homeCubit = context.read<HomeCubit>();
     cardListCubit.editSetModel(setModel);

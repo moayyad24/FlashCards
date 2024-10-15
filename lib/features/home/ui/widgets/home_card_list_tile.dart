@@ -4,6 +4,7 @@ import 'package:flashcards/core/models/collection_model.dart';
 import 'package:flashcards/core/theme/colors.dart';
 import 'package:flashcards/core/widgets/app_dialog.dart';
 import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -74,8 +75,10 @@ class HomeCardListTile extends StatelessWidget {
   }
 
   void _navigateToCardListScreen(BuildContext context) {
-    Navigator.of(context)
-        .pushNamed(Routes.cardsListScreen, arguments: homeModel);
+    Navigator.of(context).pushNamed(Routes.cardsListScreen, arguments: {
+      'collectionModel': homeModel,
+      'settingsModel': context.read<SettingsCubit>().settingsModel,
+    });
   }
 
   void _navigateToSetsListScreen(BuildContext context) {

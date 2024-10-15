@@ -34,7 +34,7 @@ class AppRouter {
         return _buildAddFolderSetScreenRoute(settings.arguments as int);
       case Routes.cardsListScreen:
         return _buildCardsListScreenRoute(
-            settings.arguments as CollectionModel);
+            settings.arguments as Map<String, dynamic>);
       case Routes.setsListScreen:
         return _buildSetsListScreenRoute(settings.arguments as CollectionModel);
       case Routes.addSetScreen:
@@ -53,7 +53,7 @@ class AppRouter {
         return _buildEditFolderScreenRoute(
             settings.arguments as Map<String, dynamic>);
       case Routes.cardsTestScreen:
-        return _buildCardsTestScreenRoute(settings.arguments as CardListCubit);
+        return _buildCardsTestScreenRoute(settings.arguments as CardsListCubit);
       case Routes.settingsScreen:
         return _buildSettingsScreenRoute();
       default:
@@ -74,7 +74,7 @@ class AppRouter {
     );
   }
 
-  Route _buildCardsListScreenRoute(CollectionModel argument) {
+  Route _buildCardsListScreenRoute(Map<String, dynamic> data) {
     return MaterialPageRoute(
       builder: (_) => MultiBlocProvider(
         providers: [
@@ -82,8 +82,8 @@ class AppRouter {
             create: (_) => SelectInListBloc(),
           ),
           BlocProvider(
-            create: (_) => CardListCubit(getIt<CardsRepoImpl>())
-              ..initSetModel(argument)
+            create: (_) => CardsListCubit(getIt<CardsRepoImpl>())
+              ..initSetModel(data)
               ..fetchCards(),
           ),
         ],
@@ -116,7 +116,7 @@ class AppRouter {
 
   Route _buildAddNewCardScreenRoute(Map<String, dynamic> data) {
     int setId = data['setId'];
-    CardListCubit cardListCubit = data['cardListCubit'];
+    CardsListCubit cardListCubit = data['cardListCubit'];
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
@@ -127,7 +127,7 @@ class AppRouter {
 
   Route _buildEditCardScreenRoute(Map<String, dynamic> data) {
     CardModel cardModel = data['cardModel'];
-    CardListCubit cardListCubit = data['cardListCubit'];
+    CardsListCubit cardListCubit = data['cardListCubit'];
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
         value: cardListCubit,
@@ -142,7 +142,7 @@ class AppRouter {
 
   Route _buildEditSetScreenRoute(Map<String, dynamic> data) {
     CollectionModel setModel = data['setModel'];
-    CardListCubit cardListCubit = data['cardListCubit'];
+    CardsListCubit cardListCubit = data['cardListCubit'];
 
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
@@ -169,7 +169,7 @@ class AppRouter {
     );
   }
 
-  Route _buildCardsTestScreenRoute(CardListCubit cardListCubit) {
+  Route _buildCardsTestScreenRoute(CardsListCubit cardListCubit) {
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
         value: cardListCubit,

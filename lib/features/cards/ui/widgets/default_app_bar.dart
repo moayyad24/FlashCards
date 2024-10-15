@@ -13,10 +13,10 @@ class DefaultAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: BlocBuilder<CardListCubit, CardListState>(
+      title: BlocBuilder<CardsListCubit, CardListState>(
         builder: (context, state) {
           return Text(
-            context.read<CardListCubit>().setModel.title,
+            context.read<CardsListCubit>().setModel.title,
             style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
           );
         },
@@ -31,8 +31,8 @@ class DefaultAppBar extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .pushNamed(Routes.editSetScreen, arguments: {
-                    'setModel': context.read<CardListCubit>().setModel,
-                    'cardListCubit': BlocProvider.of<CardListCubit>(context),
+                    'setModel': context.read<CardsListCubit>().setModel,
+                    'cardListCubit': BlocProvider.of<CardsListCubit>(context),
                   });
                 },
                 child: const Row(

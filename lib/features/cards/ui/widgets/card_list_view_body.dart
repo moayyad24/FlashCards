@@ -9,15 +9,15 @@ class CardListViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardListCubit, CardListState>(
+    return BlocBuilder<CardsListCubit, CardListState>(
       builder: (context, state) {
         if (state is CardListSuccess || state is CardListSetEdited) {
           return Expanded(
             child: ListView.builder(
-                itemCount: context.read<CardListCubit>().cardsList.length,
+                itemCount: context.read<CardsListCubit>().cardsList.length,
                 itemBuilder: (context, index) {
                   return CardListTile(
-                    cardModel: context.read<CardListCubit>().cardsList[index],
+                    cardModel: context.read<CardsListCubit>().cardsList[index],
                   );
                 }),
           );

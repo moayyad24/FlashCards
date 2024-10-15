@@ -29,7 +29,8 @@ AppBar addCardAppBar(
                 answer: answerController.text,
                 supplementAnswer: supplementAnswerController.text,
                 setId: setId);
-            await BlocProvider.of<CardListCubit>(context).insertAnewCard(cards);
+            await BlocProvider.of<CardsListCubit>(context)
+                .insertAnewCard(cards);
             if (context.mounted) {
               Navigator.pop(context);
             }

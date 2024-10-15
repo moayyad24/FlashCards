@@ -19,8 +19,9 @@ class CardsListsFloatingActionButton extends StatelessWidget {
             onPressed: () {
               Navigator.of(context)
                   .pushNamed(Routes.addNewCardScreen, arguments: {
-                'setId': BlocProvider.of<CardListCubit>(context).setModel.setId,
-                'cardListCubit': BlocProvider.of<CardListCubit>(context)
+                'setId':
+                    BlocProvider.of<CardsListCubit>(context).setModel.setId,
+                'cardListCubit': BlocProvider.of<CardsListCubit>(context)
               });
             },
             heroTag: 'first',
@@ -33,11 +34,14 @@ class CardsListsFloatingActionButton extends StatelessWidget {
           height: 60,
           width: 60,
           child: FloatingActionButton(
-            onPressed: () {
-              Navigator.of(context).pushNamed(
-                Routes.cardsTestScreen,
-                arguments: context.read<CardListCubit>(),
-              );
+            onPressed: () async {
+              await context.read<CardsListCubit>().filterCardsBySettings();
+              if (context.mounted) {
+                Navigator.of(context).pushNamed(
+                  Routes.cardsTestScreen,
+                  arguments: context.read<CardsListCubit>(),
+                );
+              }
             },
             heroTag: 'second',
             child: const Icon(Icons.play_arrow),

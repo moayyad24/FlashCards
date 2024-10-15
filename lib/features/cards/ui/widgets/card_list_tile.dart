@@ -35,7 +35,7 @@ class CardListTile extends StatelessWidget {
                 Routes.editCardScreen,
                 arguments: {
                   'cardModel': cardModel,
-                  'cardListCubit': BlocProvider.of<CardListCubit>(context),
+                  'cardListCubit': BlocProvider.of<CardsListCubit>(context),
                 },
               );
             }

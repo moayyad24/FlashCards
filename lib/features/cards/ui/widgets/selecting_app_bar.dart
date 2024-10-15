@@ -49,7 +49,7 @@ class SelectingAppBar extends StatelessWidget {
             TextButton(
               child: const Text('Yes'),
               onPressed: () async {
-                var cardListCubit = BlocProvider.of<CardListCubit>(context);
+                var cardListCubit = BlocProvider.of<CardsListCubit>(context);
                 var selectionBloc = BlocProvider.of<SelectInListBloc>(context);
                 Navigator.of(context).pop();
                 await cardListCubit.deleteCards(cardIds);
