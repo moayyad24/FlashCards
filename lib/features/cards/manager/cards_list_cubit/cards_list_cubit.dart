@@ -36,10 +36,9 @@ class CardsListCubit extends Cubit<CardListState> {
   }
 
   Future refreshCardsList() async {
-    await Future.wait([
-      filterCardsBySettings(),
-      fetchCards(),
-    ]);
+    // if its not empty means that the refreshing come from cards_test
+    filteredCardsList.isNotEmpty ? await filterCardsBySettings() : null;
+    await fetchCards();
   }
 
   Future insertAnewCard(CardModel cards) async {

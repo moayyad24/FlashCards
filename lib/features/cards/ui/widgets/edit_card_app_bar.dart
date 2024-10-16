@@ -27,7 +27,7 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
               supplementAnswer: editCardCubit.supplementAnswerController.text,
             );
             await editCardCubit.updateCard(cards);
-            await cardListCubit.fetchCards();
+            await cardListCubit.refreshCardsList();
             if (context.mounted) {
               Navigator.of(context).pop();
             }
