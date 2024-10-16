@@ -77,6 +77,7 @@ class CardsTestCubit extends Cubit<CardsTestState> {
 
   Future<void> refreshTheCardsList() async {
     if (currentIndex == cardsList.length) {
+      currentIndex = 0;
       await cardsListCubit.refreshCardsList();
       emit(CardsTestFinish());
     }
@@ -90,7 +91,11 @@ class CardsTestCubit extends Cubit<CardsTestState> {
         begin: const Offset(0, 1),
         end: const Offset(0, 0),
       ).animate(curvedAnimation),
-      child: child,
+      child: SizedBox(
+        height: double.infinity,
+        width: double.infinity,
+        child: child,
+      ),
     );
   }
 }
