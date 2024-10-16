@@ -59,12 +59,16 @@ class TestResult extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pop(context);
+              },
               title: 'Back',
               backgroundColor: AppColors.grey,
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<CardsTestCubit>().refreshTheCardsListAfterTest();
+              },
               title: 'Continue',
               backgroundColor: AppColors.cornflowerBlue,
             ),

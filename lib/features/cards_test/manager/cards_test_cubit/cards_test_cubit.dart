@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flashcards/core/models/card_model.dart';
 import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_state.dart';
@@ -81,6 +83,13 @@ class CardsTestCubit extends Cubit<CardsTestState> {
       await cardsListCubit.refreshCardsList();
       emit(CardsTestFinish());
     }
+  }
+
+  Future<void> refreshTheCardsListAfterTest() async {
+    currentIndex = 0;
+    numberOfCorrectAnswer = 0;
+    await cardsListCubit.refreshCardsList();
+    emit(CardsTestTakeAnewTest());
   }
 
   Widget transitionBuilder(Widget child, Animation<double> animation) {
