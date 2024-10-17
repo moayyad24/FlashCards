@@ -40,7 +40,7 @@ class FlashCards extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'FlashCards',
+        title: 'Cardy',
         darkTheme: AppTheme.appTheme,
         themeMode: ThemeMode.dark,
         debugShowCheckedModeBanner: false,

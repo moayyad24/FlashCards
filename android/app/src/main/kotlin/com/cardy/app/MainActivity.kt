@@ -1,4 +1,4 @@
-package com.example.flashcards
+package com.cardy.app
 
 import io.flutter.embedding.android.FlutterActivity
 
