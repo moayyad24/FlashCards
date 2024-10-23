@@ -10,13 +10,13 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   late SettingsModel settingsModel;
 
-  fetchSettings() async {
+  Future<void> fetchSettings() async {
     emit(SettingsLoading());
     settingsModel = await settingsRepo.fetchSettings();
     emit(SettingsSuccess());
   }
 
-  updateRandomization(bool isRandomization) async {
+  Future<int> updateRandomization(bool isRandomization) async {
     int result = await settingsRepo.updateRandomization(isRandomization);
     if (result > 0) {
       debugPrint('----------successfully updated------------');
@@ -26,7 +26,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     return result;
   }
 
-  updatePrioritizing(bool isPrioritizing) async {
+  Future<int> updatePrioritizing(bool isPrioritizing) async {
     int result = await settingsRepo.updatePrioritizing(isPrioritizing);
     if (result > 0) {
       debugPrint('----------successfully updated------------');
@@ -36,7 +36,7 @@ class SettingsCubit extends Cubit<SettingsState> {
     return result;
   }
 
-  updateQuestionAmount(int numOfQuestions) async {
+  Future<int> updateQuestionAmount(int numOfQuestions) async {
     int result = await settingsRepo.updateQuestionAmount(numOfQuestions);
     if (result > 0) {
       debugPrint('----------successfully updated------------');
@@ -45,5 +45,13 @@ class SettingsCubit extends Cubit<SettingsState> {
       debugPrint('----------error while updating------------');
     }
     return result;
+  }
+
+  Future<void> backupDatabase() async {
+    await settingsRepo.backupDatabase();
+  }
+
+  Future<void> restoreDatabase() async {
+    await settingsRepo.restoreDatabase();
   }
 }
