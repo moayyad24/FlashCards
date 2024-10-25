@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:flashcards/core/theme/colors.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
@@ -113,6 +115,14 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
           await copyDirectory(Directory(backupsPath), Directory(databasePath));
           debugPrint('Database backed up to: $databasePath');
         } else {
+          Fluttertoast.showToast(
+              msg: "Make sure you have a backup",
+              toastLength: Toast.LENGTH_LONG,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: AppColors.grey,
+              textColor: AppColors.white,
+              fontSize: 16.0);
           debugPrint('No backup found.');
         }
       } catch (e) {
