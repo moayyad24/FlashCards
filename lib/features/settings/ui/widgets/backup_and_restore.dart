@@ -1,3 +1,4 @@
+import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flashcards/core/theme/colors.dart';
@@ -35,8 +36,12 @@ class BackupAndRestore extends StatelessWidget {
           trailing: const Icon(Icons.backup_outlined),
         ),
         ListTile(
-          onTap: () {
-            context.read<SettingsCubit>().restoreDatabase();
+          onTap: () async {
+            await context.read<SettingsCubit>().restoreDatabase();
+            if (context.mounted) {
+              context.read<SettingsCubit>().fetchSettings();
+              context.read<HomeCubit>().homeFetchData();
+            }
           },
           title: const Text('Restore'),
           subtitle: const Text('Restore your cards from your local storage'),
