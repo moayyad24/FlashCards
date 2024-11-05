@@ -8,7 +8,17 @@ class BackupAndRestore extends StatelessWidget {
   const BackupAndRestore({
     super.key,
   });
-
+  final String note = '''
+1. Open your file manager app on your phone (look for “Files,” “My Files,” etc.).
+2. Go to your internal storage (this may be labeled "Internal Storage" or "Phone Storage").
+3. Find the folder named “Cardy.”
+4. Send the “Cardy” folder to your second phone.
+5. On your second phone, open the file manager app.
+6. Go to its internal storage.
+7. Paste the “Cardy” folder there.
+8. Open the app on your second phone.
+9. Go to settings and tap the “Restore” button.
+10. Follow any additional prompts to finish restoring your data.''';
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,7 +41,21 @@ class BackupAndRestore extends StatelessWidget {
           title: const Text('Restore'),
           subtitle: const Text('Restore your cards from your local storage'),
           subtitleTextStyle: const TextStyle(color: AppColors.greyLight),
-          trailing: const Icon(Icons.settings_backup_restore_rounded),
+          trailing: GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (_) {
+                  return AlertDialog(
+                    title: const Text(
+                        'How to Restore Your Data from Another Phone:'),
+                    content: Text(note),
+                  );
+                },
+              );
+            },
+            child: const Icon(Icons.help_outline),
+          ),
         ),
       ],
     );

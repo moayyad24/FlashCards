@@ -95,6 +95,14 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
 
       try {
         await copyDirectory(Directory(databasePath), Directory(backupsPath));
+        Fluttertoast.showToast(
+            msg: "Successfully backed up to: /storage/emulated/0/Cardy/Backups",
+            toastLength: Toast.LENGTH_LONG,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIosWeb: 1,
+            backgroundColor: AppColors.grey,
+            textColor: AppColors.white,
+            fontSize: 16.0);
         debugPrint('Database backed up to: $backupsPath');
       } catch (e) {
         debugPrint('Error backing up database: $e');
