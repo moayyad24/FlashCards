@@ -1,11 +1,10 @@
 import 'dart:io';
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flashcards/core/helper/db_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flashcards/core/widgets/show_app_toast.dart';
 import 'package:flashcards/features/settings/data/repo/settings_repo.dart';
 import 'package:flashcards/features/settings/data/model/settings_model.dart';
 
@@ -95,14 +94,7 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
 
       try {
         await copyDirectory(Directory(databasePath), Directory(backupsPath));
-        Fluttertoast.showToast(
-            msg: "Successfully backed up to: /storage/emulated/0/Cardy/Backups",
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            backgroundColor: AppColors.grey,
-            textColor: AppColors.white,
-            fontSize: 16.0);
+        await showAppToast("Backed up to: /storage/emulated/0/Cardy/Backups");
         debugPrint('Database backed up to: $backupsPath');
       } catch (e) {
         debugPrint('Error backing up database: $e');
@@ -121,16 +113,10 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
       try {
         if (await Directory(backupsPath).exists()) {
           await copyDirectory(Directory(backupsPath), Directory(databasePath));
+          await showAppToast("Successfully restored");
           debugPrint('Database backed up to: $databasePath');
         } else {
-          Fluttertoast.showToast(
-              msg: "Make sure you have a backup",
-              toastLength: Toast.LENGTH_LONG,
-              gravity: ToastGravity.BOTTOM,
-              timeInSecForIosWeb: 1,
-              backgroundColor: AppColors.grey,
-              textColor: AppColors.white,
-              fontSize: 16.0);
+          await showAppToast("Make sure you have a backup");
           debugPrint('No backup found.');
         }
       } catch (e) {
