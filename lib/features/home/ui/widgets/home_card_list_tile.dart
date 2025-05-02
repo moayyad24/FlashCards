@@ -1,10 +1,10 @@
-import 'package:flashcards/core/helper/collection_type.dart';
-import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/core/widgets/app_dialog.dart';
-import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
+import 'package:cardy/core/helper/collection_type.dart';
+import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/widgets/app_dialog.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

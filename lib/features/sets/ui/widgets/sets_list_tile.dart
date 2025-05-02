@@ -1,9 +1,9 @@
-import 'package:flashcards/core/helper/dependency_injection.dart';
-import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/core/widgets/app_dialog.dart';
-import 'package:flashcards/features/sets/manager/sets_cubit/sets_cubit.dart';
+import 'package:cardy/core/helper/dependency_injection.dart';
+import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/widgets/app_dialog.dart';
+import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

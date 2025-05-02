@@ -1,4 +1,4 @@
-import 'package:flashcards/core/theme/colors.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future showAppToast(String message) async {

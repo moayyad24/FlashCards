@@ -1,6 +1,6 @@
-import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
-import 'package:flashcards/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
+import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

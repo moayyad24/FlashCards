@@ -1,6 +1,6 @@
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
-import 'package:flashcards/features/settings/ui/widgets/settings_section_title.dart';
-import 'package:flashcards/features/settings/ui/widgets/settings_list_tile.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
+import 'package:cardy/features/settings/ui/widgets/settings_section_title.dart';
+import 'package:cardy/features/settings/ui/widgets/settings_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

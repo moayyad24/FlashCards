@@ -1,9 +1,9 @@
-import 'package:flashcards/core/helper/routes.dart';
-import 'package:flashcards/core/models/collection_model.dart';
+import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/core/models/collection_model.dart';
 
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
-import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_state.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

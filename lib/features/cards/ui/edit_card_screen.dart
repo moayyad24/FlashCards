@@ -1,7 +1,7 @@
-import 'package:flashcards/core/widgets/app_text_field.dart';
-import 'package:flashcards/core/models/card_model.dart';
-import 'package:flashcards/features/cards/manager/edit_card_cubit/edit_card_cubit.dart';
-import 'package:flashcards/features/cards/ui/widgets/edit_card_app_bar.dart';
+import 'package:cardy/core/widgets/app_text_field.dart';
+import 'package:cardy/core/models/card_model.dart';
+import 'package:cardy/features/cards/manager/edit_card_cubit/edit_card_cubit.dart';
+import 'package:cardy/features/cards/ui/widgets/edit_card_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

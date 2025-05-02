@@ -1,6 +1,6 @@
-import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
-import 'package:flashcards/features/home/manager/home_cubit/home_state.dart';
-import 'package:flashcards/features/home/ui/widgets/home_card_list_tile.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_state.dart';
+import 'package:cardy/features/home/ui/widgets/home_card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

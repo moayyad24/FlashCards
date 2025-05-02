@@ -1,4 +1,4 @@
-import 'package:flashcards/core/models/collection_model.dart';
+import 'package:cardy/core/models/collection_model.dart';
 
 abstract class HomeRepo {
   Future<List<CollectionModel>> fetchHomeData();

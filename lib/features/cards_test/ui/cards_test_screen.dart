@@ -1,5 +1,5 @@
-import 'package:flashcards/features/cards_test/ui/widgets/cards_test_app_bar.dart';
-import 'package:flashcards/features/cards_test/ui/widgets/cards_test_body.dart';
+import 'package:cardy/features/cards_test/ui/widgets/cards_test_app_bar.dart';
+import 'package:cardy/features/cards_test/ui/widgets/cards_test_body.dart';
 import 'package:flutter/material.dart';
 
 class CardsTestScreen extends StatelessWidget {

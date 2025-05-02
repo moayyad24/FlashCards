@@ -1,6 +1,6 @@
-🎴#flashcards
+🎴#cardy
 
-A powerful flashcard app that allows you to easily manage your flashcards and organize them into personalized groups.
+A powerful flashcard app that allows you to easily manage your cardy and organize them into personalized groups.
 Keep important concepts fresh in your mind and ensure you never forget them.
 
 

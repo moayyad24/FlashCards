@@ -2,11 +2,11 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flashcards/core/helper/db_helper.dart';
+import 'package:cardy/core/helper/db_helper.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:flashcards/core/widgets/show_app_toast.dart';
-import 'package:flashcards/features/settings/data/repo/settings_repo.dart';
-import 'package:flashcards/features/settings/data/model/settings_model.dart';
+import 'package:cardy/core/widgets/show_app_toast.dart';
+import 'package:cardy/features/settings/data/repo/settings_repo.dart';
+import 'package:cardy/features/settings/data/model/settings_model.dart';
 
 class SettingsRepoImpl extends DbHelper implements SettingsRepo {
   String backupsPath = Directory('/storage/emulated/0/Cardy/Backups').path;

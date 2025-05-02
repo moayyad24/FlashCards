@@ -1,4 +1,4 @@
-import 'package:flashcards/features/settings/data/model/settings_model.dart';
+import 'package:cardy/features/settings/data/model/settings_model.dart';
 
 abstract class SettingsRepo {
   Future<SettingsModel> fetchSettings();

@@ -1,4 +1,4 @@
-import 'package:flashcards/core/theme/colors.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 

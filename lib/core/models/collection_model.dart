@@ -1,4 +1,4 @@
-import 'package:flashcards/core/helper/collection_type.dart';
+import 'package:cardy/core/helper/collection_type.dart';
 
 class CollectionModel {
   final String title;

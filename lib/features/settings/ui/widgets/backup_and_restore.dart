@@ -1,9 +1,9 @@
-import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/settings/ui/widgets/settings_section_title.dart';
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/features/settings/ui/widgets/settings_section_title.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
 
 class BackupAndRestore extends StatelessWidget {
   const BackupAndRestore({

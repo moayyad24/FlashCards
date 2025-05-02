@@ -1,4 +1,4 @@
-import 'package:flashcards/core/helper/routes.dart';
+import 'package:cardy/core/helper/routes.dart';
 import 'package:flutter/material.dart';
 
 class HomeBottomSheet extends StatelessWidget {

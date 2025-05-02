@@ -1,7 +1,7 @@
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
-import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_bloc.dart';
-import 'package:flashcards/features/cards/manager/select_in_list_bloc/select_in_list_event.dart';
+import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
+import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_bloc.dart';
+import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
-import 'package:flashcards/features/settings/ui/widgets/question_amount_per_test.dart';
-import 'package:flashcards/features/settings/ui/widgets/backup_and_restore.dart';
-import 'package:flashcards/features/settings/ui/widgets/study_setting.dart';
+import 'package:cardy/features/settings/ui/widgets/question_amount_per_test.dart';
+import 'package:cardy/features/settings/ui/widgets/backup_and_restore.dart';
+import 'package:cardy/features/settings/ui/widgets/study_setting.dart';
 import 'package:flutter/material.dart';
 
 class SettingsScreen extends StatelessWidget {

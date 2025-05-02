@@ -1,5 +1,5 @@
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/home/ui/widgets/home_bottom_sheet.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/features/home/ui/widgets/home_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
 class MyFloatingActionButton extends StatelessWidget {

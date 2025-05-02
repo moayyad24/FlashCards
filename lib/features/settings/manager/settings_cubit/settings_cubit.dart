@@ -1,6 +1,6 @@
-import 'package:flashcards/features/settings/data/model/settings_model.dart';
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_state.dart';
-import 'package:flashcards/features/settings/data/repo/settings_repo.dart';
+import 'package:cardy/features/settings/data/model/settings_model.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_state.dart';
+import 'package:cardy/features/settings/data/repo/settings_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/foundation.dart';
 

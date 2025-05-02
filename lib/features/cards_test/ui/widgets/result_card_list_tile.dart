@@ -1,4 +1,4 @@
-import 'package:flashcards/core/models/card_model.dart';
+import 'package:cardy/core/models/card_model.dart';
 import 'package:flutter/material.dart';
 
 class ResultCardListTile extends StatelessWidget {

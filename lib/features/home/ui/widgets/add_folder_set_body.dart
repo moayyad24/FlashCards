@@ -1,4 +1,4 @@
-import 'package:flashcards/core/widgets/app_text_field.dart';
+import 'package:cardy/core/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 
 class AddFolderSetBody extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:flashcards/core/theme/colors.dart';
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_cubit.dart';
-import 'package:flashcards/features/settings/manager/settings_cubit/settings_state.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
+import 'package:cardy/features/settings/manager/settings_cubit/settings_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

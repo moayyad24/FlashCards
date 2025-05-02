@@ -1,5 +1,5 @@
-import 'package:flashcards/features/home/ui/widgets/add_folder_set_body.dart';
-import 'package:flashcards/features/sets/ui/widgets/add_set_floating_action_button.dart';
+import 'package:cardy/features/home/ui/widgets/add_folder_set_body.dart';
+import 'package:cardy/features/sets/ui/widgets/add_set_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 class AddSetScreen extends StatefulWidget {

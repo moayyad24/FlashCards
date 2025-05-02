@@ -1,6 +1,6 @@
-import 'package:flashcards/core/helper/collection_type.dart';
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:cardy/core/helper/collection_type.dart';
+import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

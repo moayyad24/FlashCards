@@ -1,6 +1,6 @@
-import 'package:flashcards/core/helper/db_helper.dart';
-import 'package:flashcards/core/models/collection_model.dart';
-import 'package:flashcards/features/sets/data/repo/sets_repo.dart';
+import 'package:cardy/core/helper/db_helper.dart';
+import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/sets/data/repo/sets_repo.dart';
 import 'package:flutter/material.dart';
 
 class SetsRepoImpl extends DbHelper implements SetsRepo {
