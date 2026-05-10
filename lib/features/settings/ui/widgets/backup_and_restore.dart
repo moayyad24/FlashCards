@@ -32,7 +32,7 @@ class BackupAndRestore extends StatelessWidget {
           },
           title: const Text('Backup'),
           subtitle: const Text('Backup your cards to your local storage'),
-          subtitleTextStyle: const TextStyle(color: AppColors.greyLight),
+          subtitleTextStyle: const TextStyle(color: AppColors.greyLightE1E2EC),
           trailing: const Icon(Icons.backup_outlined),
         ),
         ListTile(
@@ -45,7 +45,7 @@ class BackupAndRestore extends StatelessWidget {
           },
           title: const Text('Restore'),
           subtitle: const Text('Restore your cards from your local storage'),
-          subtitleTextStyle: const TextStyle(color: AppColors.greyLight),
+          subtitleTextStyle: const TextStyle(color: AppColors.greyLightE1E2EC),
           trailing: GestureDetector(
             onTap: () {
               showDialog(

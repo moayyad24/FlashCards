@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cardy - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#5516be",
+                        "surface": "#10131a",
+                        "primary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#c2c6d6",
+                        "on-primary-fixed": "#001a42",
+                        "inverse-on-surface": "#2e3038",
+                        "tertiary-container": "#df7412",
+                        "on-surface": "#e1e2ec",
+                        "secondary-container": "#571bc1",
+                        "on-primary-fixed-variant": "#004395",
+                        "surface-bright": "#363941",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#311400",
+                        "surface-container-lowest": "#0b0e15",
+                        "surface-container-high": "#272a31",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "background": "#10131a",
+                        "tertiary-fixed-dim": "#ffb786",
+                        "secondary-fixed": "#e9ddff",
+                        "error": "#ffb4ab",
+                        "on-secondary-container": "#c4abff",
+                        "primary-container": "#4d8eff",
+                        "inverse-surface": "#e1e2ec",
+                        "on-primary": "#002e6a",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#ffdcc6",
+                        "on-background": "#e1e2ec",
+                        "surface-container-low": "#191b23",
+                        "on-tertiary": "#502400",
+                        "on-secondary-fixed": "#23005c",
+                        "tertiary": "#ffb786",
+                        "on-tertiary-container": "#461f00",
+                        "surface-container": "#1d2027",
+                        "secondary": "#d0bcff",
+                        "outline-variant": "#424754",
+                        "on-tertiary-fixed-variant": "#723600",
+                        "surface-container-highest": "#32353c",
+                        "surface-dim": "#10131a",
+                        "inverse-primary": "#005ac2",
+                        "surface-tint": "#adc6ff",
+                        "on-secondary": "#3c0091",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary-container": "#00285d",
+                        "primary": "#adc6ff",
+                        "outline": "#8c909f",
+                        "surface-variant": "#32353c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "touch-target-min": "44px",
+                        "stack-gap-lg": "24px",
+                        "stack-gap-md": "16px",
+                        "stack-gap-sm": "8px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "title-lg": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-caps": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(39, 42, 49, 0.7); /* surface-container-high with opacity */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .accent-gradient {
+            background: linear-gradient(135deg, #4d8eff 0%, #571bc1 100%);
+        }
+        .text-gradient {
+            background: linear-gradient(135deg, #adc6ff 0%, #d0bcff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        /* Hide scrollbar for horizontal scrolling but keep functionality */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-xl shadow-sm border-b border-white/10 flex justify-between items-center px-container-margin h-16 transition-transform duration-200">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center w-10 h-10 rounded-full active:scale-95 transition-transform duration-200">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="menu">menu</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-bold tracking-tight text-primary dark:text-primary-fixed-dim">Cardy</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center w-10 h-10 rounded-full active:scale-95 transition-transform duration-200 bg-surface-container-high border border-white/10">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="search">search</span>
+</button>
+<button class="hover:opacity-80 transition-opacity flex items-center justify-center w-10 h-10 rounded-full active:scale-95 transition-transform duration-200 overflow-hidden border border-white/10">
+<img alt="User Avatar" class="w-full h-full object-cover" data-alt="A small circular avatar image showing a stylized modern profile picture, blending seamlessly with the dark glassmorphic UI aesthetic. High-quality and crisp, fitting a premium productivity app context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAunBXcfsQU5-nbWKoTFlWJwI4H7cXQdWDaxIPED4t0MVnChiZ8aQ8XOjFIeOh1-7FHcTlurFQU7qBW7Ifu4OOgo6reDR7oyUZ09_2uOkXJ_vC0BFHdvVxh5OpXyVwC6SqFnT27a0BDMtH0UPsbnO_WPoswdnay4j89nUxJ8dsEv69ijRRJVMpCaJTzhCg4_xrMUeH36OxymTZKGO_CXgaJBM4Z1y-zd9KvtCPmFZxJiZbBmyZPiqmcJeBd3iTwK0_YGTsdf4Y8nmo"/>
+</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 px-container-margin max-w-7xl mx-auto space-y-stack-lg">
+<!-- Recently Studied -->
+<section>
+<h2 class="font-title-lg text-title-lg text-on-surface mb-stack-md flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+                Recently Studied
+            </h2>
+<div class="flex overflow-x-auto gap-4 no-scrollbar pb-4 snap-x">
+<!-- Card 1 -->
+<div class="glass-panel rounded-xl p-4 min-w-[280px] flex-shrink-0 snap-start flex flex-col justify-between relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<span class="inline-block px-2 py-1 rounded-full bg-primary-container/20 text-primary font-label-caps text-label-caps mb-2 border border-primary/20">Languages</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Advanced Japanese</h3>
+</div>
+<div class="w-12 h-12 relative">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="62.8" stroke-linecap="round" stroke-width="8"></circle> <!-- 75% -->
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-primary">75%</div>
+</div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md relative z-10">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="style">style</span> 120 Cards</span>
+<span class="flex items-center gap-1 text-tertiary"><span class="material-symbols-outlined text-[16px]" data-icon="local_fire_department">local_fire_department</span> 5 Day Streak</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-panel rounded-xl p-4 min-w-[280px] flex-shrink-0 snap-start flex flex-col justify-between relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<span class="inline-block px-2 py-1 rounded-full bg-secondary-container/20 text-secondary font-label-caps text-label-caps mb-2 border border-secondary/20">Science</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">Organic Chemistry</h3>
+</div>
+<div class="w-12 h-12 relative">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-secondary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="150.72" stroke-linecap="round" stroke-width="8"></circle> <!-- 40% -->
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-secondary">40%</div>
+</div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md relative z-10">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="style">style</span> 85 Cards</span>
+<span class="text-on-surface-variant text-xs">Last: 2h ago</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-panel rounded-xl p-4 min-w-[280px] flex-shrink-0 snap-start flex flex-col justify-between relative overflow-hidden group cursor-pointer">
+<div class="absolute inset-0 bg-tertiary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+<div class="flex justify-between items-start mb-4 relative z-10">
+<div>
+<span class="inline-block px-2 py-1 rounded-full bg-tertiary-container/20 text-tertiary font-label-caps text-label-caps mb-2 border border-tertiary/20">History</span>
+<h3 class="font-title-lg text-title-lg text-on-surface">European Rulers</h3>
+</div>
+<div class="w-12 h-12 relative">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-tertiary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="25.12" stroke-linecap="round" stroke-width="8"></circle> <!-- 90% -->
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-tertiary">90%</div>
+</div>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant font-body-md relative z-10">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]" data-icon="style">style</span> 210 Cards</span>
+<span class="text-on-surface-variant text-xs">Last: Yesterday</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Bundles (Large Cards) -->
+<section>
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" data-icon="folder_special">folder_special</span>
+                    Bundles
+                </h2>
+<button class="text-primary font-body-md hover:underline">View All</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Bundle 1 -->
+<div class="relative rounded-2xl overflow-hidden group cursor-pointer min-h-[160px]">
+<!-- Gradient Background -->
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-high to-surface-container-highest opacity-90 z-0"></div>
+<div class="absolute inset-0 accent-gradient opacity-10 group-hover:opacity-20 transition-opacity z-0"></div>
+<div class="relative z-10 p-6 flex flex-col h-full justify-between glass-panel border-0 border-l-4 border-l-primary h-full">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Med School Prep</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2">Comprehensive anatomy, pharmacology, and pathology sets bundled for board exams.</p>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mt-6 flex justify-between items-end">
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps rounded-md border border-white/5">8 Sets</span>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps rounded-md border border-white/5">1200 Cards</span>
+</div>
+<div class="w-14 h-14 relative">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-lowest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="125.6" stroke-linecap="round" stroke-width="8"></circle> <!-- 50% -->
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-primary font-bold">50%</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bundle 2 -->
+<div class="relative rounded-2xl overflow-hidden group cursor-pointer min-h-[160px]">
+<div class="absolute inset-0 bg-gradient-to-br from-surface-container-high to-surface-container-highest opacity-90 z-0"></div>
+<div class="absolute inset-0 bg-gradient-to-br from-secondary-container to-on-secondary-fixed-variant opacity-10 group-hover:opacity-20 transition-opacity z-0"></div>
+<div class="relative z-10 p-6 flex flex-col h-full justify-between glass-panel border-0 border-l-4 border-l-secondary h-full">
+<div class="flex justify-between items-start">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-1">Web Dev Masterclass</h3>
+<p class="font-body-md text-on-surface-variant line-clamp-2">Frontend frameworks, backend basics, and deployment strategies.</p>
+</div>
+<button class="text-on-surface-variant hover:text-secondary transition-colors">
+<span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="mt-6 flex justify-between items-end">
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps rounded-md border border-white/5">5 Sets</span>
+<span class="px-2 py-1 bg-surface-container text-on-surface-variant font-label-caps text-label-caps rounded-md border border-white/5">450 Cards</span>
+</div>
+<div class="w-14 h-14 relative">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-lowest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="8"></circle>
+<circle class="text-secondary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="200.96" stroke-linecap="round" stroke-width="8"></circle> <!-- 20% -->
+</svg>
+<div class="absolute inset-0 flex items-center justify-center font-label-caps text-label-caps text-secondary font-bold">20%</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Individual Sets (List Layout) -->
+<section class="pb-10">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-title-lg text-title-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary" data-icon="view_list">view_list</span>
+                    Individual Sets
+                </h2>
+<div class="flex gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-md bg-surface-container-high text-primary"><span class="material-symbols-outlined text-[20px]" data-icon="filter_list">filter_list</span></button>
+</div>
+</div>
+<div class="space-y-3">
+<!-- List Item 1 -->
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+</div>
+<div>
+<h4 class="font-title-lg text-[16px] text-on-surface mb-0.5">Spanish Verbs</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant flex items-center gap-2">
+<span>50 Cards</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-primary flex items-center text-[10px]"><span class="material-symbols-outlined text-[12px] mr-0.5" data-icon="schedule">schedule</span> Due Today</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 relative hidden sm:block">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-lowest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="12"></circle>
+<circle class="text-primary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="100.48" stroke-linecap="round" stroke-width="12"></circle> <!-- 60% -->
+</svg>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container/20 flex items-center justify-center text-secondary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="functions">functions</span>
+</div>
+<div>
+<h4 class="font-title-lg text-[16px] text-on-surface mb-0.5">Calculus Formulas</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant flex items-center gap-2">
+<span>35 Cards</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>Last studied 3d ago</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 relative hidden sm:block">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-lowest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="12"></circle>
+<circle class="text-secondary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle> <!-- 100% -->
+</svg>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+</div>
+<!-- List Item 3 -->
+<div class="glass-panel p-4 rounded-xl flex items-center justify-between group cursor-pointer hover:bg-surface-container-highest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-tertiary-container/20 flex items-center justify-center text-tertiary flex-shrink-0">
+<span class="material-symbols-outlined" data-icon="public">public</span>
+</div>
+<div>
+<h4 class="font-title-lg text-[16px] text-on-surface mb-0.5">World Capitals</h4>
+<p class="font-body-md text-[12px] text-on-surface-variant flex items-center gap-2">
+<span>195 Cards</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="text-tertiary flex items-center text-[10px]">New</span>
+</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 relative hidden sm:block">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-lowest stroke-current" cx="50" cy="50" fill="transparent" r="40" stroke-width="12"></circle>
+<circle class="text-tertiary stroke-current progress-ring__circle" cx="50" cy="50" fill="transparent" r="40" stroke-dasharray="251.2" stroke-dashoffset="251.2" stroke-linecap="round" stroke-width="12"></circle> <!-- 0% -->
+</svg>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<button class="w-full mt-4 py-3 rounded-xl border border-white/10 text-on-surface-variant font-title-lg text-[14px] hover:bg-surface-container-high transition-colors flex justify-center items-center gap-2">
+                Show More <span class="material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
+</button>
+</section>
+</main>
+<!-- Floating Action Button -->
+<button class="fixed right-6 bottom-28 md:bottom-10 w-14 h-14 rounded-2xl accent-gradient text-white flex items-center justify-center shadow-[0_8px_24px_rgba(77,142,255,0.3)] hover:shadow-[0_12px_28px_rgba(77,142,255,0.4)] active:scale-95 transition-all duration-200 z-40 border border-white/20">
+<span class="material-symbols-outlined text-[28px]" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-4 pb-safe bg-surface-container/70 dark:bg-surface-container/70 backdrop-blur-2xl shadow-[0_-8px_24px_rgba(0,0,0,0.5)] border-t border-white/10 rounded-t-xl md:hidden">
+<button class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim bg-primary-container/20 rounded-xl px-4 py-1 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="home" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-label-caps">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="style">style</span>
+<span class="font-label-caps text-label-caps">Library</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="leaderboard">leaderboard</span>
+<span class="font-label-caps text-label-caps">Stats</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant opacity-60 hover:text-primary dark:hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1" data-icon="settings">settings</span>
+<span class="font-label-caps text-label-caps">Settings</span>
+</button>
+</nav>
+</body></html>

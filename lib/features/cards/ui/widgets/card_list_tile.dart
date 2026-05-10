@@ -42,7 +42,7 @@ class CardListTile extends StatelessWidget {
           },
           selected: controller.selectedCardIdsList.contains(cardModel.id!),
           selectedColor: AppColors.white,
-          selectedTileColor: AppColors.greyLight.withOpacity(.6),
+          selectedTileColor: AppColors.greyLightE1E2EC.withOpacity(.6),
           leading: const Icon(Icons.reorder),
           title: Text(cardModel.question),
           subtitle: Text(cardModel.answer),

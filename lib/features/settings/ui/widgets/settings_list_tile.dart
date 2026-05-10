@@ -33,10 +33,10 @@ class _SettingsListTileState extends State<SettingsListTile> {
     return ListTile(
       title: Text(widget.title),
       subtitle: Text(widget.subtitle),
-      subtitleTextStyle: const TextStyle(color: AppColors.greyLight),
+      subtitleTextStyle: const TextStyle(color: AppColors.greyLightE1E2EC),
       trailing: Switch(
         value: isActive,
-        inactiveTrackColor: AppColors.grey,
+        inactiveTrackColor: AppColors.grey20232A,
         onChanged: (value) async {
           SettingsCubit cubit = context.read<SettingsCubit>();
           int result = await widget.updateValue(value);

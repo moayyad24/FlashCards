@@ -26,7 +26,7 @@ class MyRangePointer extends StatelessWidget {
           radiusFactor: 0.8,
           axisLineStyle: const AxisLineStyle(
             thicknessUnit: GaugeSizeUnit.factor,
-            color: AppColors.grey,
+            color: AppColors.grey20232A,
             thickness: 0.15,
           ),
           annotations: <GaugeAnnotation>[
@@ -35,7 +35,7 @@ class MyRangePointer extends StatelessWidget {
               widget: Text(
                 'Score: $numberOfCorrectAnswer/$numberOfQuestions',
                 style: const TextStyle(
-                  color: AppColors.greyLight,
+                  color: AppColors.grey20232A,
                   fontSize: 24,
                   fontWeight: FontWeight.w500,
                 ),
@@ -50,7 +50,7 @@ class MyRangePointer extends StatelessWidget {
               animationDuration: 1200,
               sizeUnit: GaugeSizeUnit.factor,
               gradient: const SweepGradient(
-                colors: <Color>[AppColors.cornflowerBlue, AppColors.pink],
+                colors: <Color>[AppColors.cornflowerBlue, AppColors.orangeFFB786],
                 stops: <double>[0.25, 0.75],
               ),
               color: const Color(0xFF00A8B5),

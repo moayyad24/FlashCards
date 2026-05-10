@@ -8,9 +8,13 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      floatingActionButton: MyFloatingActionButton(),
-      body: SafeArea(
+    return Scaffold(
+      appBar: AppBar(
+          title: const Text(
+        'Cardy',
+      )),
+      floatingActionButton: const MyFloatingActionButton(),
+      body: const SafeArea(
           child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -24,7 +24,7 @@ class DefaultAppBar extends StatelessWidget {
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
         PopupMenuButton<String>(
-          color: AppColors.grey,
+          color: AppColors.greyLightE1E2EC,
           itemBuilder: (BuildContext context) {
             return [
               PopupMenuItem<String>(

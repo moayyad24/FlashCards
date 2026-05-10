@@ -63,7 +63,7 @@ class TestResult extends StatelessWidget {
                 Navigator.pop(context);
               },
               title: 'Back',
-              backgroundColor: AppColors.grey,
+              backgroundColor: AppColors.grey20232A,
             ),
             CustomButton(
               onPressed: () {

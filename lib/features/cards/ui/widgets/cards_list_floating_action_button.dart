@@ -25,7 +25,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
               });
             },
             heroTag: 'first',
-            backgroundColor: AppColors.greyLight,
+            backgroundColor: AppColors.greyLightE1E2EC,
             child: const Icon(Icons.add),
           ),
         ),

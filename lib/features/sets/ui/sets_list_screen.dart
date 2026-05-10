@@ -17,7 +17,7 @@ class SetsListScreen extends StatelessWidget {
       appBar: AppBar(
         actions: [
           PopupMenuButton<String>(
-            color: AppColors.grey,
+            color: AppColors.grey20232A,
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem<String>(

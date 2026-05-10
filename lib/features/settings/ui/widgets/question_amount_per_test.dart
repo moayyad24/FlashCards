@@ -27,7 +27,7 @@ class QuestionAmountPerTest extends StatelessWidget {
               '${context.read<SettingsCubit>().settingsModel.questionsAmount} questions');
         },
       ),
-      subtitleTextStyle: const TextStyle(color: AppColors.greyLight),
+      subtitleTextStyle: const TextStyle(color: AppColors.greyLightE1E2EC),
     );
   }
 }
