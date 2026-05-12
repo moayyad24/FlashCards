@@ -7,11 +7,42 @@ class MyFloatingActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
+    return InkWell(
+      // Ensure the splash effect follows the rounded square shape
+      borderRadius: BorderRadius.circular(18),
+      onTap: () {
         _buildModalBottomSheet(context);
       },
-      child: const Icon(Icons.add),
+      child: Container(
+        width: 60,
+        height: 60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(18),
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF4F79F4),
+              Color(0xFF562BCA),
+            ],
+          ),
+          // Add the glowing shadow effect seen in the image
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFF5D38DD).withAlpha(100),
+              blurRadius: 18,
+              offset: const Offset(0, 7),
+            ),
+          ],
+        ),
+        child: const Center(
+          child: Icon(
+            Icons.add,
+            color: AppColors.white,
+            size: 30,
+          ),
+        ),
+      ),
     );
   }
 

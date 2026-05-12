@@ -1,57 +1,52 @@
-import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-class HomeAppBar extends StatelessWidget {
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          HomeTitle(),
-          HomeActionButton(),
-        ],
+    return AppBar(
+      title: const Text(
+        'Cardy',
+        style: TextStyle(
+          fontSize: 32,
+          fontWeight: FontWeight.bold,
+          color: AppColors.blueADC6FF,
+        ),
       ),
-    );
-  }
-}
-
-class HomeTitle extends StatelessWidget {
-  const HomeTitle({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Cardy',
-          style: TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+      actions: [
+        IconButton(
+          onPressed: () {
+            // Now you have access to context
+            // Navigator.pushNamed(context, '/search');
+          },
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.grey282B36,
+            side: BorderSide(
+              color: AppColors.border8C909F.withAlpha(90),
+            ),
+          ),
+          icon: const Icon(Icons.search, color: AppColors.greyLightE1E2EC),
         ),
-        Text(
-          'Pick a set to practice',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+        const SizedBox(width: 8),
+        IconButton(
+          onPressed: () {
+            // Now you have access to context
+          },
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.grey282B36,
+            side: BorderSide(
+              color: AppColors.border8C909F.withAlpha(90),
+            ),
+          ),
+          icon: const Icon(Icons.settings, color: AppColors.greyLightE1E2EC),
         ),
+        const SizedBox(width: 15),
       ],
     );
   }
-}
-
-class HomeActionButton extends StatelessWidget {
-  const HomeActionButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed(Routes.settingsScreen);
-      },
-      icon: const Icon(Icons.settings),
-    );
-  }
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
