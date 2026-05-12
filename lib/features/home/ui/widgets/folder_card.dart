@@ -1,8 +1,8 @@
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
-class BundleCard extends StatelessWidget {
-  const BundleCard({super.key});
+class FolderCard extends StatelessWidget {
+  const FolderCard({super.key});
 
   @override
   Widget build(BuildContext context) {

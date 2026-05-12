@@ -1,29 +1,36 @@
 import 'package:cardy/core/helper/db_helper.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/home/data/model/home_model.dart';
+import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/home/data/repo/home_repo.dart';
 
 class HomeRepoImpl extends DbHelper implements HomeRepo {
   @override
-  Future<List<CollectionModel>> fetchHomeData() async {
-    List<CollectionModel> homeDataList = [];
-    String sql = '''
-         SELECT *
-         FROM (
-             SELECT folder_id AS id, folder_title AS title, folder_desc AS description, NULL AS set_id, created_at
-             FROM folders
-             UNION ALL
-             SELECT folder_id AS id, set_title AS title, set_desc AS description, set_id AS set_id, created_at
-             FROM sets
-             WHERE folder_id = 0  -- This line ensures only sets with folder_id = 0 are selected
-         ) AS combined
-         ORDER BY created_at DESC;
-          ''';
+  Future<HomeModel> fetchHomeData() async {
+    // Fetch all folders
+    String foldersSql = '''
+      SELECT f.folder_id, f.folder_title, f.folder_desc, f.created_at,
+        (SELECT COUNT(*) FROM sets s WHERE s.folder_id = f.folder_id) as numOfSets,
+        (SELECT COUNT(*) FROM cards c WHERE c.set_id IN (SELECT set_id FROM sets s2 WHERE s2.folder_id = f.folder_id)) as numOfCards
+      FROM folders f
+      ORDER BY f.created_at DESC;
+    ''';
+    var foldersData = await inquiry(foldersSql);
+    List<FolderModel> folders =
+        foldersData.map((e) => FolderModel.fromSql(e)).toList();
 
-    var dataMap = await inquiry(sql);
-    for (var e in dataMap) {
-      homeDataList.add(CollectionModel.fromSql(e));
-    }
-    return homeDataList;
+    // Fetch all sets that are not in any folder (folder_id = 0)
+    String setsSql = '''
+      SELECT s.set_id, s.set_title, s.set_desc, s.folder_id, s.created_at,
+        (SELECT COUNT(*) FROM cards c WHERE c.set_id = s.set_id) as numOfCards
+      FROM sets s
+      WHERE s.folder_id = 0
+      ORDER BY s.created_at DESC;
+    ''';
+    var setsData = await inquiry(setsSql);
+    List<SetModel> sets = setsData.map((e) => SetModel.fromSql(e)).toList();
+
+    return HomeModel(folders: folders, sets: sets);
   }
 
   @override

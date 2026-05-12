@@ -8,7 +8,6 @@ class MyFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // Ensure the splash effect follows the rounded square shape
       borderRadius: BorderRadius.circular(18),
       onTap: () {
         _buildModalBottomSheet(context);

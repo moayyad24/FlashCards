@@ -1,4 +1,4 @@
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/home/data/model/home_model.dart';
 
 abstract class HomeState {}
 
@@ -7,7 +7,7 @@ class HomeInitial extends HomeState {}
 class HomeFetchLoading extends HomeState {}
 
 class HomeFetchSuccess extends HomeState {
-  final List<CollectionModel> homeDataList;
+  final HomeModel homeData;
 
-  HomeFetchSuccess({required this.homeDataList});
+  HomeFetchSuccess({required this.homeData});
 }

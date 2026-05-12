@@ -1,4 +1,4 @@
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/features/home/data/model/home_model.dart';
 import 'package:cardy/features/home/data/repo/home_repo.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_state.dart';
 import 'package:flutter/foundation.dart';
@@ -10,8 +10,8 @@ class HomeCubit extends Cubit<HomeState> {
   homeFetchData() async {
     emit(HomeFetchLoading());
     try {
-      List<CollectionModel> homeDataList = await homeRepo.fetchHomeData();
-      emit(HomeFetchSuccess(homeDataList: homeDataList));
+      HomeModel homeDataList = await homeRepo.fetchHomeData();
+      emit(HomeFetchSuccess(homeData: homeDataList));
     } catch (e) {
       debugPrint(e.toString());
     }
