@@ -4,7 +4,7 @@ import 'package:cardy/features/home/ui/widgets/folder_card_list.dart';
 import 'package:cardy/features/home/ui/widgets/home_app_bar.dart';
 import 'package:cardy/features/home/ui/widgets/list_title.dart';
 import 'package:cardy/features/home/ui/widgets/my_floating_action_button.dart';
-import 'package:cardy/features/home/ui/widgets/set_card.dart';
+import 'package:cardy/features/home/ui/widgets/sets_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,7 +41,9 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.table_rows_outlined,
                     onViewAllPressed: () {},
                   ),
-                  const SetCard(),
+                  SetsList(
+                    sets: state.homeData.sets,
+                  )
                 ],
               );
             } else {

@@ -1,8 +1,8 @@
 import 'package:cardy/core/helper/dependency_injection.dart';
 import 'package:cardy/core/helper/routes.dart';
-import 'package:cardy/core/models/collection_model.dart';
 import 'package:cardy/core/models/card_model.dart';
 import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/cards/data/repo/cards_repo_impl.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/edit_card_cubit/edit_card_cubit.dart';
@@ -142,7 +142,7 @@ class AppRouter {
   }
 
   Route _buildEditSetScreenRoute(Map<String, dynamic> data) {
-    CollectionModel setModel = data['setModel'];
+    SetModel setModel = data['setModel'];
     CardsListCubit cardListCubit = data['cardListCubit'];
 
     return MaterialPageRoute(

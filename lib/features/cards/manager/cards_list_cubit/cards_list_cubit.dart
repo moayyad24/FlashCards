@@ -1,5 +1,5 @@
 import 'package:cardy/core/models/card_model.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/cards/data/repo/cards_repo.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:cardy/features/settings/data/model/settings_model.dart';
@@ -10,29 +10,29 @@ class CardsListCubit extends Cubit<CardListState> {
   final CardsRepo cardsRepo;
   CardsListCubit(this.cardsRepo) : super(CardListInitial());
 
-  late CollectionModel setModel;
+  late SetModel setModel;
   late SettingsModel settingsModel;
   List<CardModel> cardsList = [];
   List<CardModel> filteredCardsList = [];
   initSetModel(Map<String, dynamic> data) {
-    setModel = data['collectionModel'] as CollectionModel;
+    setModel = data['setModel'] as SetModel;
     settingsModel = data['settingsModel'] as SettingsModel;
   }
 
-  editSetModel(CollectionModel collection) {
+  editSetModel(SetModel collection) {
     setModel = collection;
     emit(CardListSetEdited());
   }
 
   Future fetchCards() async {
     emit(CardListLoading());
-    cardsList = await cardsRepo.fetchCards(setModel.setId!);
+    cardsList = await cardsRepo.fetchCards(setModel.id);
     emit(CardListSuccess());
   }
 
   Future filterCardsBySettings() async {
     filteredCardsList =
-        await cardsRepo.filterCardsBySettings(setModel.setId!, settingsModel);
+        await cardsRepo.filterCardsBySettings(setModel.id, settingsModel);
   }
 
   Future refreshCardsList() async {

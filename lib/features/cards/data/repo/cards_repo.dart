@@ -1,14 +1,15 @@
 import 'package:cardy/core/models/card_model.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/settings/data/model/settings_model.dart';
 
 abstract class CardsRepo {
   Future<List<CardModel>> fetchCards(int setId);
-  Future<List<CardModel>> filterCardsBySettings(int setId,SettingsModel settingsModel);
+  Future<List<CardModel>> filterCardsBySettings(
+      int setId, SettingsModel settingsModel);
   Future<int> insertAnewCard(CardModel cardModel);
   Future<int> updateCard(CardModel card);
   Future<int> deleteCards(List<int> cardsIds);
-  Future<int> updateSet(CollectionModel setModel);
+  Future<int> updateSet(SetModel setModel);
   Future<int> updateIsStudiedCard(int cardId, bool isStudied);
   Future<int> updateForgottenCardNumber(int cardId, int numberOfForget);
 }

@@ -12,7 +12,7 @@ class SetModel {
       required this.description,
       required this.folderId,
       required this.numOfCards,
-      required this.createdAt});
+       this.createdAt});
 
   factory SetModel.fromSql(Map<String, dynamic> map) {
     return SetModel(

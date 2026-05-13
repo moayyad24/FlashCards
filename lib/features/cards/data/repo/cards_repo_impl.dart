@@ -73,7 +73,7 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
-      setModel.setId,
+      setModel.id,
     ];
     try {
       int result = await update(sql, arguments);

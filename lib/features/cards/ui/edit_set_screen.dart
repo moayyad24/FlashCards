@@ -1,5 +1,5 @@
 import 'package:cardy/core/helper/dependency_injection.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/core/widgets/app_text_field.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/edit_set_cubit/edit_set_cubit.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditSetScreen extends StatefulWidget {
-  final CollectionModel setModel;
+  final SetModel setModel;
   const EditSetScreen({super.key, required this.setModel});
 
   @override
@@ -32,11 +32,12 @@ class _EditSetScreenState extends State<EditSetScreen> {
   }
 
   Future<void> onConfirm(BuildContext context) async {
-    CollectionModel setModel = CollectionModel(
+    SetModel setModel = SetModel(
+      id: widget.setModel.id,
       title: _titleController.text,
       description: _descController.text,
-      setId: widget.setModel.setId,
       folderId: widget.setModel.folderId,
+      numOfCards: widget.setModel.numOfCards,
     );
 
     var cardListCubit = context.read<CardsListCubit>();
@@ -44,7 +45,7 @@ class _EditSetScreenState extends State<EditSetScreen> {
     var homeCubit = context.read<HomeCubit>();
     cardListCubit.editSetModel(setModel);
     await editSetCubit.updateSet(setModel);
-    if (setModel.folderId! > 0) {
+    if (setModel.folderId > 0) {
       var setsCubit = getIt<SetsCubit>();
       await setsCubit.fetchAllSets();
     } else {

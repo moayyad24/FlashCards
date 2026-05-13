@@ -19,8 +19,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
             onPressed: () {
               Navigator.of(context)
                   .pushNamed(Routes.addNewCardScreen, arguments: {
-                'setId':
-                    BlocProvider.of<CardsListCubit>(context).setModel.setId,
+                'setId': BlocProvider.of<CardsListCubit>(context).setModel.id,
                 'cardListCubit': BlocProvider.of<CardsListCubit>(context)
               });
             },

@@ -1,6 +1,5 @@
 import 'package:cardy/core/helper/routes.dart';
-import 'package:cardy/core/models/collection_model.dart';
-
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_state.dart';
@@ -8,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DefaultAppBar extends StatelessWidget {
-  const DefaultAppBar({super.key, required CollectionModel collectionModel});
+  final SetModel setModel;
+  const DefaultAppBar({super.key, required this.setModel});
 
   @override
   Widget build(BuildContext context) {
