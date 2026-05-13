@@ -1,27 +1,30 @@
 import 'package:cardy/core/helper/db_helper.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/sets/data/repo/sets_repo.dart';
 import 'package:flutter/material.dart';
 
 class SetsRepoImpl extends DbHelper implements SetsRepo {
   @override
-  Future<List<CollectionModel>> fetchAllSets(folderId) async {
-    List<CollectionModel> setsList = [];
+  Future<List<SetModel>> fetchAllSets(folderId) async {
+    List<SetModel> setsList = [];
     String sql = '''
-  SELECT 
-    set_title AS title, 
-    set_id AS set_id, 
-    set_desc AS description, 
-    folder_id AS id, 
-    created_at AS created_at 
-  FROM 
-    sets 
-  WHERE 
+  SELECT
+    set_id,
+    set_title,
+    set_desc,
+    folder_id,
+    (
+      SELECT COUNT(*) FROM cards WHERE cards.set_id = sets.set_id
+    ) as num_of_cards,
+    created_at
+  FROM
+    sets
+  WHERE
     folder_id = $folderId
 ''';
     var dataMap = await inquiry(sql);
     for (var e in dataMap) {
-      setsList.add(CollectionModel.fromSql(e));
+      setsList.add(SetModel.fromSql(e));
     }
     return setsList;
   }
@@ -57,7 +60,7 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     List<dynamic> arguments = [
       folder.title,
       folder.description,
-      folder.folderId,
+      folder.id,
     ];
     try {
       int result = await update(sql, arguments);

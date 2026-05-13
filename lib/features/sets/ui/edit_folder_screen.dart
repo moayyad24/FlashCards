@@ -1,4 +1,4 @@
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/folder_model.dart';
 import 'package:cardy/core/widgets/app_text_field.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:cardy/features/sets/manager/edit_folder_cubit/edit_folder_cubit.dart';
@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditFolderScreen extends StatefulWidget {
-  final CollectionModel folderModel;
+  final FolderModel folderModel;
   const EditFolderScreen({super.key, required this.folderModel});
 
   @override
@@ -30,10 +30,12 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
   }
 
   Future<void> onConfirm(BuildContext context) async {
-    CollectionModel folderModel = CollectionModel(
+    FolderModel folderModel = FolderModel(
+      id: widget.folderModel.id,
       title: _titleController.text,
       description: _descController.text,
-      folderId: widget.folderModel.folderId,
+      numOfSets: widget.folderModel.numOfSets,
+      numOfCards: widget.folderModel.numOfCards,
     );
     var setsCubit = context.read<SetsCubit>();
     var editSetCubit = context.read<EditFolderCubit>();

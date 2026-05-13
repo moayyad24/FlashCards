@@ -20,7 +20,7 @@ class SetModel {
         title: map['set_title'],
         description: map['set_desc'],
         folderId: map['folder_id'],
-        numOfCards: map['numOfCards'],
+        numOfCards: map['num_of_cards'],
         createdAt: map['created_at']);
   }
 }

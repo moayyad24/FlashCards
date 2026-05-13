@@ -1,4 +1,6 @@
 import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/sets/data/repo/sets_repo.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_state.dart';
 import 'package:flutter/foundation.dart';
@@ -8,14 +10,14 @@ class SetsCubit extends Cubit<SetsState> {
   final SetsRepo setsRepo;
   SetsCubit(this.setsRepo) : super(SetsInitial());
 
-  late CollectionModel folderModel;
-  List<CollectionModel> setsList = [];
-  initFolderModel(CollectionModel collection) {
-    folderModel = collection;
+  late FolderModel folderModel;
+  List<SetModel> setsList = [];
+  initFolderModel(FolderModel folder) {
+    folderModel = folder;
   }
 
-  editFolderModel(CollectionModel collection) {
-    folderModel = collection;
+  editFolderModel(FolderModel folder) {
+    folderModel = folder;
     emit(SetsFolderEdited());
   }
 
@@ -24,7 +26,7 @@ class SetsCubit extends Cubit<SetsState> {
 
     try {
       setsList.clear();
-      setsList = await setsRepo.fetchAllSets(folderModel.folderId!);
+      setsList = await setsRepo.fetchAllSets(folderModel.id);
       emit(SetsSuccess());
     } catch (e) {
       debugPrint(e.toString());

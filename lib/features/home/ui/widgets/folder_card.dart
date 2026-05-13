@@ -1,81 +1,90 @@
+import 'package:cardy/core/helper/routes.dart';
+import 'package:cardy/core/models/folder_model.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 
 class FolderCard extends StatelessWidget {
-  const FolderCard({super.key});
+  final FolderModel folder;
+  const FolderCard({super.key, required this.folder});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: AppColors.grey282B36,
-        borderRadius: BorderRadius.circular(20),
-        // Adding a subtle border/shadow to match the card depth
-        border: const Border(
-            left: BorderSide(
-          color: AppColors.cornflowerBlue,
-          width: 5,
-        )),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // --- Header Row ---
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Med School Prep",
-                style: TextStyle(
-                  color: AppColors.greyLightE1E2EC,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: () {
+        _navigateToSetsListScreen(context);
+      },
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: AppColors.grey282B36,
+          borderRadius: BorderRadius.circular(20),
+          // Adding a subtle border/shadow to match the card depth
+          border: const Border(
+              left: BorderSide(
+            color: AppColors.cornflowerBlue,
+            width: 5,
+          )),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // --- Header Row ---
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  folder.title,
+                  style: const TextStyle(
+                    color: AppColors.greyLightE1E2EC,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-              ),
-              Icon(
-                Icons.more_vert,
-                color: AppColors.greyC2C6D6,
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 8),
-
-          // --- Description Text ---
-          const Text(
-            "Comprehensive anatomy, pharmacology, and pathology set...",
-            style: TextStyle(
-              color: AppColors.greyC2C6D6,
-              fontSize: 18,
-              height: 1.4,
+                const Icon(
+                  Icons.more_vert,
+                  color: AppColors.greyC2C6D6,
+                ),
+              ],
             ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
 
-          const SizedBox(height: 24),
+            const SizedBox(height: 8),
 
-          // --- Footer Row ---
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              // Badges
-              Row(
-                children: [
-                  _buildBadge("8 Sets"),
-                  const SizedBox(width: 10),
-                  _buildBadge("1200 Cards"),
-                ],
+            // --- Description Text ---
+            Text(
+              folder.description,
+              style: const TextStyle(
+                color: AppColors.greyC2C6D6,
+                fontSize: 18,
+                height: 1.4,
               ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
 
-              // Progress Circle
-              _buildProgressCircle(percentage: 50),
-            ],
-          ),
-        ],
+            const SizedBox(height: 24),
+
+            // --- Footer Row ---
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                // Badges
+                Row(
+                  children: [
+                    _buildBadge("${folder.numOfSets} Sets"),
+                    const SizedBox(width: 10),
+                    _buildBadge("${folder.numOfCards} Cards"),
+                  ],
+                ),
+
+                // Progress Circle
+                _buildProgressCircle(percentage: 50),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -131,5 +140,9 @@ class FolderCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void _navigateToSetsListScreen(BuildContext context) {
+    Navigator.of(context).pushNamed(Routes.setsListScreen, arguments: folder);
   }
 }

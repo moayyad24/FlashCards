@@ -1,6 +1,6 @@
 import 'package:cardy/core/helper/dependency_injection.dart';
 import 'package:cardy/core/helper/routes.dart';
-import 'package:cardy/core/models/collection_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/core/widgets/app_dialog.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SetsListTile extends StatelessWidget {
-  final CollectionModel setModel;
+  final SetModel setModel;
   const SetsListTile({
     super.key,
     required this.setModel,
@@ -20,7 +20,7 @@ class SetsListTile extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pushNamed(
           Routes.cardsListScreen,
-          arguments:  setModel,
+          arguments: setModel,
         );
         getIt.registerSingleton<SetsCubit>(context.read<SetsCubit>());
       },
@@ -56,7 +56,7 @@ class SetsListTile extends StatelessWidget {
                 onPressed: () async {
                   Navigator.pop(context);
                   await BlocProvider.of<SetsCubit>(context)
-                      .deleteASet(setModel.setId!, setModel.folderId!);
+                      .deleteASet(setModel.id, setModel.folderId);
                 },
               );
             },

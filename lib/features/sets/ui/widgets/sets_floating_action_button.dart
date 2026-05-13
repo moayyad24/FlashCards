@@ -22,7 +22,7 @@ class SetsFloatingActionButton extends StatelessWidget {
                   Navigator.of(context).pop();
                   Navigator.of(context)
                       .pushNamed(Routes.addSetScreen, arguments: {
-                    'folderId': context.read<SetsCubit>().folderModel.folderId!,
+                    'folderId': context.read<SetsCubit>().folderModel.id,
                     'setsCubit': BlocProvider.of<SetsCubit>(context),
                   });
                 },

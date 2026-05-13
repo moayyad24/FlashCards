@@ -10,8 +10,8 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
     // Fetch all folders
     String foldersSql = '''
       SELECT f.folder_id, f.folder_title, f.folder_desc, f.created_at,
-        (SELECT COUNT(*) FROM sets s WHERE s.folder_id = f.folder_id) as numOfSets,
-        (SELECT COUNT(*) FROM cards c WHERE c.set_id IN (SELECT set_id FROM sets s2 WHERE s2.folder_id = f.folder_id)) as numOfCards
+        (SELECT COUNT(*) FROM sets s WHERE s.folder_id = f.folder_id) as num_of_sets,
+        (SELECT COUNT(*) FROM cards c WHERE c.set_id IN (SELECT set_id FROM sets s2 WHERE s2.folder_id = f.folder_id)) as num_of_cards
       FROM folders f
       ORDER BY f.created_at DESC;
     ''';
@@ -22,7 +22,7 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
     // Fetch all sets that are not in any folder (folder_id = 0)
     String setsSql = '''
       SELECT s.set_id, s.set_title, s.set_desc, s.folder_id, s.created_at,
-        (SELECT COUNT(*) FROM cards c WHERE c.set_id = s.set_id) as numOfCards
+        (SELECT COUNT(*) FROM cards c WHERE c.set_id = s.set_id) as num_of_cards
       FROM sets s
       WHERE s.folder_id = 0
       ORDER BY s.created_at DESC;

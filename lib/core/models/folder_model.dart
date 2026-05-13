@@ -12,15 +12,15 @@ class FolderModel {
       required this.description,
       required this.numOfSets,
       required this.numOfCards,
-      required this.createdAt});
+      this.createdAt});
 
   factory FolderModel.fromSql(Map<String, dynamic> map) {
     return FolderModel(
         id: map['folder_id'],
         title: map['folder_title'],
         description: map['folder_desc'],
-        numOfSets: map['numOfSets'],
-        numOfCards: map['numOfCards'],
+        numOfSets: map['num_of_sets'],
+        numOfCards: map['num_of_cards'],
         createdAt: map['created_at']);
   }
 }

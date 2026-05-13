@@ -10,9 +10,12 @@ class FolderCardList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: folders.length,
+      physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (context, index) {
-        return const FolderCard();
+        return FolderCard(
+          folder: folders[index],
+        );
       },
       separatorBuilder: (context, index) => const SizedBox(
         height: 15,

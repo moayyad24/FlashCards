@@ -2,6 +2,7 @@ import 'package:cardy/core/helper/dependency_injection.dart';
 import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/models/collection_model.dart';
 import 'package:cardy/core/models/card_model.dart';
+import 'package:cardy/core/models/folder_model.dart';
 import 'package:cardy/features/cards/data/repo/cards_repo_impl.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/edit_card_cubit/edit_card_cubit.dart';
@@ -36,7 +37,7 @@ class AppRouter {
         return _buildCardsListScreenRoute(
             settings.arguments as Map<String, dynamic>);
       case Routes.setsListScreen:
-        return _buildSetsListScreenRoute(settings.arguments as CollectionModel);
+        return _buildSetsListScreenRoute(settings.arguments as FolderModel);
       case Routes.addSetScreen:
         return _buildAddSetScreenRoute(
             settings.arguments as Map<String, dynamic>);
@@ -92,7 +93,7 @@ class AppRouter {
     );
   }
 
-  Route _buildSetsListScreenRoute(CollectionModel argument) {
+  Route _buildSetsListScreenRoute(FolderModel argument) {
     return MaterialPageRoute(
       builder: (_) => BlocProvider(
         create: (_) => SetsCubit(getIt<SetsRepoImpl>())
@@ -156,7 +157,7 @@ class AppRouter {
   }
 
   Route _buildEditFolderScreenRoute(Map<String, dynamic> data) {
-    CollectionModel folderModel = data['folderModel'];
+    FolderModel folderModel = data['folderModel'];
     SetsCubit setsCubit = data['setsCubit'];
     return MaterialPageRoute(
       builder: (_) => BlocProvider.value(
