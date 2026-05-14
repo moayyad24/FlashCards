@@ -1,6 +1,7 @@
-
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ListTitle extends StatelessWidget {
   final String title;
@@ -21,26 +22,19 @@ class ListTitle extends StatelessWidget {
           icon,
           color: AppColors.orangeFFB786,
         ),
-        const SizedBox(
-          width: 10,
-        ),
+        10.horizontalSpace,
         Text(
           title,
-          style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.w700,
-              color: AppColors.greyLightE1E2EC),
+          style: AppTextStyles.bold20,
         ),
         const Spacer(),
         TextButton(
-            onPressed: onViewAllPressed,
-            child: const Text(
-              'View All',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-            ))
+          onPressed: onViewAllPressed,
+          child: Text(
+            'View All',
+            style: AppTextStyles.bold16.copyWith(color: AppColors.blueADC6FF),
+          ),
+        )
       ],
     );
   }

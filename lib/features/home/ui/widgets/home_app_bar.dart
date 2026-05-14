@@ -1,5 +1,7 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({super.key});
@@ -7,11 +9,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: const Text(
+      title: Text(
         'Cardy',
-        style: TextStyle(
-          fontSize: 32,
-          fontWeight: FontWeight.bold,
+        style: AppTextStyles.bold32.copyWith(
           color: AppColors.blueADC6FF,
         ),
       ),
@@ -29,7 +29,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           icon: const Icon(Icons.search, color: AppColors.greyLightE1E2EC),
         ),
-        const SizedBox(width: 8),
+        8.horizontalSpace,
         IconButton(
           onPressed: () {
             // Now you have access to context
@@ -42,7 +42,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
           ),
           icon: const Icon(Icons.settings, color: AppColors.greyLightE1E2EC),
         ),
-        const SizedBox(width: 15),
+        15.horizontalSpace,
       ],
     );
   }

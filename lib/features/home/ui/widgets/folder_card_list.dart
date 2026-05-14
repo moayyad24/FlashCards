@@ -1,6 +1,7 @@
 import 'package:cardy/core/models/folder_model.dart';
 import 'package:cardy/features/home/ui/widgets/folder_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FolderCardList extends StatelessWidget {
   final List<FolderModel> folders;
@@ -17,8 +18,8 @@ class FolderCardList extends StatelessWidget {
           folder: folders[index],
         );
       },
-      separatorBuilder: (context, index) => const SizedBox(
-        height: 15,
+      separatorBuilder: (context, index) => SizedBox(
+        height: 15.h,
       ),
     );
   }

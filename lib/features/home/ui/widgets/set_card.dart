@@ -1,9 +1,11 @@
 import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/models/set_model.dart';
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SetCard extends StatelessWidget {
   final SetModel setModel;
@@ -17,7 +19,7 @@ class SetCard extends StatelessWidget {
         _navigateToCardListScreen(context);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14).r,
         decoration: BoxDecoration(
           color: AppColors.grey282B36,
           borderRadius: BorderRadius.circular(20),
@@ -29,8 +31,8 @@ class SetCard extends StatelessWidget {
           children: [
             // 1. Icon Circle
             Container(
-              width: 44,
-              height: 44,
+              width: 44.w,
+              height: 44.w,
               decoration: BoxDecoration(
                 color: AppColors.orangeFFB786.withAlpha(150),
                 shape: BoxShape.circle,
@@ -47,7 +49,7 @@ class SetCard extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(width: 16),
+            16.horizontalSpace,
 
             // 2. Text Information Column
             Expanded(
@@ -56,38 +58,32 @@ class SetCard extends StatelessWidget {
                 children: [
                   Text(
                     setModel.title,
-                    style: const TextStyle(
-                      color: AppColors.greyLightE1E2EC,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
+                    style: AppTextStyles.bold18,
                   ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
                       Text(
                         setModel.numOfCards.toString(),
-                        style: const TextStyle(
+                        style: AppTextStyles.regular14.copyWith(
                           color: AppColors.greyC2C6D6,
-                          fontSize: 14,
                         ),
                       ),
                       const SizedBox(width: 8),
                       // The Little Round Bullet
                       Container(
-                        width: 4,
-                        height: 4,
+                        width: 6,
+                        height: 6,
                         decoration: const BoxDecoration(
                           color: Color(0xFF44484F),
                           shape: BoxShape.circle,
                         ),
                       ),
                       const SizedBox(width: 8),
-                      const Text(
+                      Text(
                         'Last studied 3d ago',
-                        style: TextStyle(
+                        style: AppTextStyles.regular14.copyWith(
                           color: AppColors.greyC2C6D6,
-                          fontSize: 14,
                         ),
                       ),
                     ],
@@ -97,10 +93,10 @@ class SetCard extends StatelessWidget {
             ),
 
             // 3. Play Arrow Icon
-            const Icon(
+            Icon(
               Icons.play_arrow_rounded,
               color: AppColors.greyLightE1E2EC,
-              size: 28,
+              size: 28.w,
             ),
           ],
         ),

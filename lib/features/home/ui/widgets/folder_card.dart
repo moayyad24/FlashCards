@@ -1,7 +1,9 @@
 import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FolderCard extends StatelessWidget {
   final FolderModel folder;
@@ -15,11 +17,10 @@ class FolderCard extends StatelessWidget {
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20).r,
         decoration: BoxDecoration(
           color: AppColors.grey282B36,
           borderRadius: BorderRadius.circular(20),
-          // Adding a subtle border/shadow to match the card depth
           border: const Border(
               left: BorderSide(
             color: AppColors.cornflowerBlue,
@@ -36,11 +37,7 @@ class FolderCard extends StatelessWidget {
               children: [
                 Text(
                   folder.title,
-                  style: const TextStyle(
-                    color: AppColors.greyLightE1E2EC,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTextStyles.bold20,
                 ),
                 const Icon(
                   Icons.more_vert,
@@ -49,21 +46,18 @@ class FolderCard extends StatelessWidget {
               ],
             ),
 
-            const SizedBox(height: 8),
+            8.verticalSpace,
 
             // --- Description Text ---
             Text(
               folder.description,
-              style: const TextStyle(
-                color: AppColors.greyC2C6D6,
-                fontSize: 18,
-                height: 1.4,
-              ),
+              style: AppTextStyles.regular16
+                  .copyWith(color: AppColors.greyC2C6D6, height: 1.4),
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),
 
-            const SizedBox(height: 24),
+            20.verticalSpace,
 
             // --- Footer Row ---
             Row(
@@ -74,7 +68,7 @@ class FolderCard extends StatelessWidget {
                 Row(
                   children: [
                     _buildBadge("${folder.numOfSets} Sets"),
-                    const SizedBox(width: 10),
+                    10.horizontalSpace,
                     _buildBadge("${folder.numOfCards} Cards"),
                   ],
                 ),
@@ -92,18 +86,14 @@ class FolderCard extends StatelessWidget {
   // Helper widget to build the rounded badge tags
   Widget _buildBadge(String text) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6).r,
       decoration: BoxDecoration(
         color: AppColors.grey20232A,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          color: AppColors.greyLightE1E2EC,
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-        ),
+        style: AppTextStyles.medium12,
       ),
     );
   }
@@ -111,31 +101,24 @@ class FolderCard extends StatelessWidget {
   // Helper widget to build the circular progress indicator with text
   Widget _buildProgressCircle({required int percentage}) {
     return SizedBox(
-      width: 52,
-      height: 52,
+      width: 52.w,
+      height: 52.w,
       child: Stack(
         alignment: Alignment.center,
         children: [
           // The Circular Progress Bar
-          SizedBox(
-            width: 52,
-            height: 52,
-            child: CircularProgressIndicator(
-              value: percentage / 100,
-              strokeWidth: 5,
-              color: AppColors.blueADC6FF,
-              backgroundColor: AppColors.darkblue10131A,
-              strokeCap: StrokeCap.round,
-            ),
+          CircularProgressIndicator(
+            value: percentage / 100,
+            strokeWidth: 5,
+            color: AppColors.blueADC6FF,
+            backgroundColor: AppColors.darkblue10131A,
+            strokeCap: StrokeCap.round,
+            constraints: const BoxConstraints(minWidth: 52, minHeight: 52),
           ),
           // The Percentage Text
           Text(
             "$percentage%",
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 13,
-              fontWeight: FontWeight.bold,
-            ),
+            style: AppTextStyles.bold12,
           ),
         ],
       ),

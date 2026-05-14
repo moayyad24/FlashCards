@@ -7,15 +7,26 @@ import 'package:cardy/features/home/data/repo/home_repo_impl.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:cardy/features/settings/data/repo/settings_repo_impl.dart';
 import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
-  setupGetIt();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = SimpleBlocObserver();
-  runApp(Cardy(
-    appRouter: AppRouter(),
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+  await ScreenUtil.ensureScreenSize();
+  setupGetIt();
+  runApp(DevicePreview(
+    enabled: false,
+    builder: (context) => Cardy(
+      appRouter: AppRouter(),
+    ),
   ));
 }
 
@@ -27,24 +38,36 @@ class Cardy extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
         const SystemUiOverlayStyle(systemNavigationBarColor: AppColors.black));
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          lazy: false,
-          create: (context) =>
-              SettingsCubit(getIt.get<SettingsRepoImpl>())..fetchSettings(),
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      splitScreenMode: true,
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            lazy: false,
+            create: (context) =>
+                SettingsCubit(getIt.get<SettingsRepoImpl>())..fetchSettings(),
+          ),
+          BlocProvider(
+            create: (context) =>
+                HomeCubit(getIt.get<HomeRepoImpl>())..homeFetchData(),
+          ),
+        ],
+        child: MaterialApp(
+          title: 'Cardy',
+          darkTheme: AppTheme.appTheme,
+          themeMode: ThemeMode.dark,
+          debugShowCheckedModeBanner: false,
+          onGenerateRoute: appRouter.generateRoute,
+          builder: (context, widget) {
+            return MediaQuery(
+              data: MediaQuery.of(context).copyWith(
+                textScaler: const TextScaler.linear(1),
+              ),
+              child: widget!,
+            );
+          },
         ),
-        BlocProvider(
-          create: (context) =>
-              HomeCubit(getIt.get<HomeRepoImpl>())..homeFetchData(),
-        ),
-      ],
-      child: MaterialApp(
-        title: 'Cardy',
-        darkTheme: AppTheme.appTheme,
-        themeMode: ThemeMode.dark,
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: appRouter.generateRoute,
       ),
     );
   }

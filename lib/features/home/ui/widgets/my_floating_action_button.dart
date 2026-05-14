@@ -1,6 +1,7 @@
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/home/ui/widgets/home_bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyFloatingActionButton extends StatelessWidget {
   const MyFloatingActionButton({super.key});
@@ -13,8 +14,8 @@ class MyFloatingActionButton extends StatelessWidget {
         _buildModalBottomSheet(context);
       },
       child: Container(
-        width: 60,
-        height: 60,
+        width: 60.w,
+        height: 60.w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(18),
           gradient: const LinearGradient(
