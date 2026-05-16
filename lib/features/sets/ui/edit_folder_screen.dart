@@ -4,10 +4,10 @@ import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/core/widgets/custom_input_field.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
-import 'package:cardy/features/home/ui/widgets/visual_identity_card.dart';
+import 'package:cardy/core/widgets/visual_identity_card.dart';
 import 'package:cardy/features/sets/manager/edit_folder_cubit/edit_folder_cubit.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
-import 'package:cardy/features/sets/ui/widgets/edit_bottom_bar.dart';
+import 'package:cardy/core/widgets/edit_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -24,7 +24,7 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
   late TextEditingController _titleController;
   late TextEditingController _descController;
   final CollectionType _selectedType = CollectionType.folder;
-  Color _selectedColor = const Color(0xFFADC6FF);
+  late Color _selectedColor;
   @override
   void initState() {
     _formKey = GlobalKey<FormState>();
@@ -73,37 +73,39 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
         padding: const EdgeInsets.all(10.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            children: [
-              CustomInputField(
-                label: 'Title',
-                hintText: 'e.g. English Phrases',
-                controller: _titleController,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter a title';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 20),
-              CustomInputField(
-                label: 'Description',
-                hintText: "Explain what's inside this study set...",
-                maxLines: 4,
-                textInputAction: TextInputAction.done,
-                controller: _descController,
-              ),
-              const SizedBox(height: 20),
-              VisualIdentityCard(
-                onIdentityChanged: (color, icon) {
-                  setState(() {
-                    _selectedColor = color;
-                  });
-                },
-                selectedType: _selectedType,
-              ),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                CustomInputField(
+                  label: 'Title',
+                  hintText: 'e.g. English Phrases',
+                  controller: _titleController,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter a title';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                CustomInputField(
+                  label: 'Description',
+                  hintText: "Explain what's inside this study set...",
+                  maxLines: 4,
+                  textInputAction: TextInputAction.done,
+                  controller: _descController,
+                ),
+                const SizedBox(height: 20),
+                VisualIdentityCard(
+                  onIdentityChanged: (color, icon) {
+                    setState(() {
+                      _selectedColor = color;
+                    });
+                  },
+                  selectedType: _selectedType,
+                ),
+              ],
+            ),
           ),
         ),
       ),

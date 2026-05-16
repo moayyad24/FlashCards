@@ -69,10 +69,13 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
 
   @override
   Future<int> updateSet(setModel) async {
-    String sql = 'UPDATE sets SET set_title = ?, set_desc = ? WHERE set_id = ?';
+    String sql =
+        'UPDATE sets SET set_title = ?, set_desc = ?, set_color = ?, set_icon = ? WHERE set_id = ?';
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
+      setModel.color.value.toRadixString(16).padLeft(8, '0'),
+      setModel.icon,
       setModel.id,
     ];
     try {

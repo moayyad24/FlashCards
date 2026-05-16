@@ -1,7 +1,7 @@
 import 'package:cardy/core/helper/collection_type.dart';
 import 'package:cardy/core/widgets/custom_input_field.dart';
 import 'package:cardy/features/home/ui/widgets/choose_toggle_button.dart';
-import 'package:cardy/features/home/ui/widgets/visual_identity_card.dart';
+import 'package:cardy/core/widgets/visual_identity_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
