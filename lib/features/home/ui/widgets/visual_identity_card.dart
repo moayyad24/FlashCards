@@ -1,3 +1,4 @@
+import 'package:cardy/core/helper/collection_type.dart';
 import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class VisualIdentityCard extends StatefulWidget {
   final Function(Color, IconData) onIdentityChanged;
-
+  final CollectionType _selectedType;
   const VisualIdentityCard({
     super.key,
     required this.onIdentityChanged,
-  });
+    required CollectionType selectedType,
+  }) : _selectedType = selectedType;
 
   @override
   State<VisualIdentityCard> createState() => _VisualIdentityCardState();
@@ -167,51 +169,57 @@ class _VisualIdentityCardState extends State<VisualIdentityCard> {
               )
             ],
           ),
-          const SizedBox(height: 18),
 
           // Icon Picker Button
-          GestureDetector(
-            onTap: _pickIcon,
-            behavior: HitTestBehavior.opaque,
-            child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 16, vertical: 18).r,
-              decoration: BoxDecoration(
-                color: fieldBackground,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: borderColor, width: 1.2),
-              ),
-              child: Row(
-                children: [
-                  // Animated Dynamic Icon (Tinted to match current selected color slot)
-                  AnimatedColorAsWidget(
-                    color: _currentValuesColor,
-                    duration: const Duration(milliseconds: 200),
-                    builder: (context, color) => Icon(
-                      _selectedIcon,
-                      color: color,
-                      size: 24.w,
+          if (widget._selectedType == CollectionType.sets)
+            Column(
+              children: [
+                const SizedBox(height: 18),
+                GestureDetector(
+                  onTap: _pickIcon,
+                  behavior: HitTestBehavior.opaque,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 18)
+                            .r,
+                    decoration: BoxDecoration(
+                      color: fieldBackground,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: borderColor, width: 1.2),
+                    ),
+                    child: Row(
+                      children: [
+                        // Animated Dynamic Icon (Tinted to match current selected color slot)
+                        AnimatedColorAsWidget(
+                          color: _currentValuesColor,
+                          duration: const Duration(milliseconds: 200),
+                          builder: (context, color) => Icon(
+                            _selectedIcon,
+                            color: color,
+                            size: 24.w,
+                          ),
+                        ),
+                        const SizedBox(width: 14),
+
+                        // Label
+                        Text(
+                          'Select Icon',
+                          style: AppTextStyles.medium16,
+                        ),
+                        const Spacer(),
+
+                        // Trailing Chevron
+                        Icon(
+                          Icons.chevron_right_rounded,
+                          color: const Color(0xFF64748B),
+                          size: 22.w,
+                        ),
+                      ],
                     ),
                   ),
-                  const SizedBox(width: 14),
-
-                  // Label
-                  Text(
-                    'Select Icon',
-                    style: AppTextStyles.medium16,
-                  ),
-                  const Spacer(),
-
-                  // Trailing Chevron
-                  Icon(
-                    Icons.chevron_right_rounded,
-                    color: const Color(0xFF64748B),
-                    size: 22.w,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
         ],
       ),
     );

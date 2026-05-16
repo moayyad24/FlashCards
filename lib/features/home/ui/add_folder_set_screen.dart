@@ -49,6 +49,7 @@ class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
                 : CollectionType.folder;
           });
         },
+        selectedType: _selectedType,
         onIdentityChanged: (color, icon) {
           setState(() {
             _selectedColor = color;

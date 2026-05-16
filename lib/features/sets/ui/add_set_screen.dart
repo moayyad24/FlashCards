@@ -1,3 +1,4 @@
+import 'package:cardy/core/helper/collection_type.dart';
 import 'package:cardy/features/home/ui/widgets/add_folder_set_body.dart';
 import 'package:cardy/features/sets/ui/widgets/add_set_floating_action_button.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class _AddSetScreenState extends State<AddSetScreen> {
           descController: _descController),
       body: AddFolderSetBody(
           formKey: _formKey,
+          selectedType: CollectionType.sets,
           titleController: _titleController,
           descController: _descController),
     );

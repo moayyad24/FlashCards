@@ -9,6 +9,7 @@ class CustomInputField extends StatelessWidget {
   final TextEditingController? controller;
   final int maxLines;
   final TextInputAction textInputAction;
+  final String? Function(String?)? validator;
 
   const CustomInputField({
     super.key,
@@ -17,6 +18,7 @@ class CustomInputField extends StatelessWidget {
     this.controller,
     this.maxLines = 1,
     this.textInputAction = TextInputAction.next,
+    this.validator,
   });
 
   @override
@@ -25,6 +27,7 @@ class CustomInputField extends StatelessWidget {
     const Color hintColor = AppColors.border8C909F;
     const Color textColor = AppColors.greyLightE1E2EC;
     const Color borderColor = AppColors.border424754;
+    const Color errorBorderColor = AppColors.orangeFFB786;
     const Color focusBorderColor = AppColors.blueADC6FF;
 
     return Column(
@@ -39,10 +42,11 @@ class CustomInputField extends StatelessWidget {
         const SizedBox(height: 10),
 
         // Text Field Input Container
-        TextField(
+        TextFormField(
           controller: controller,
           maxLines: maxLines,
           textInputAction: textInputAction,
+          validator: validator,
           style: TextStyle(
             color: textColor,
             fontSize: 14.sp,
@@ -74,6 +78,13 @@ class CustomInputField extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(
                 color: focusBorderColor,
+                width: 1.5,
+              ),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(
+                color: errorBorderColor,
                 width: 1.5,
               ),
             ),
