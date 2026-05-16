@@ -2,6 +2,8 @@ import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/widgets/app_dialog.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,6 +19,34 @@ class SetCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         _navigateToCardListScreen(context);
+      },
+      onLongPress: () {
+        showModalBottomSheet(
+          context: context,
+          backgroundColor: AppColors.black,
+          isScrollControlled: true,
+          builder: (_) {
+            return SizedBox(
+              child: ListTile(
+                onTap: () {
+                  Navigator.pop(context);
+                  appDialog(
+                    context: context,
+                    title: 'Delete this set?',
+                    onPressed: () {
+                      BlocProvider.of<HomeCubit>(context)
+                          .deleteSet(setModel.id);
+
+                      Navigator.pop(context);
+                    },
+                  );
+                },
+                leading: const Icon(Icons.delete),
+                title: const Text('Delete'),
+              ), // Set height of Bottom Sheet
+            );
+          },
+        );
       },
       borderRadius: BorderRadius.circular(20),
       child: Container(
