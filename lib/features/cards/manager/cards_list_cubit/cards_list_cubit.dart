@@ -14,6 +14,24 @@ class CardsListCubit extends Cubit<CardListState> {
   late SettingsModel settingsModel;
   List<CardModel> cardsList = [];
   List<CardModel> filteredCardsList = [];
+  String _searchQuery = '';
+
+  String get searchQuery => _searchQuery;
+
+  List<CardModel> get visibleCardsList {
+    final baseList = cardsList;
+    final query = _searchQuery.trim().toLowerCase();
+    if (query.isEmpty) {
+      return baseList;
+    }
+    return baseList.where((card) {
+      return card.question.toLowerCase().contains(query) ||
+          card.supplementQuestion.toLowerCase().contains(query) ||
+          card.answer.toLowerCase().contains(query) ||
+          card.supplementAnswer.toLowerCase().contains(query);
+    }).toList();
+  }
+
   initSetModel(Map<String, dynamic> data) {
     setModel = data['setModel'] as SetModel;
     settingsModel = data['settingsModel'] as SettingsModel;
@@ -39,6 +57,22 @@ class CardsListCubit extends Cubit<CardListState> {
     // if its not empty means that the refreshing come from cards_test
     filteredCardsList.isNotEmpty ? await filterCardsBySettings() : null;
     await fetchCards();
+  }
+
+  void updateSearchQuery(String query) {
+    if (_searchQuery == query) {
+      return;
+    }
+    _searchQuery = query;
+    emit(CardListSearchUpdated());
+  }
+
+  void clearSearch() {
+    if (_searchQuery.isEmpty) {
+      return;
+    }
+    _searchQuery = '';
+    emit(CardListSearchUpdated());
   }
 
   Future insertAnewCard(CardModel cards) async {

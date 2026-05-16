@@ -6,12 +6,14 @@ class CustomSearchBar extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String>? onChanged;
   final String hintText;
+  final Widget? suffixIcon;
 
   const CustomSearchBar({
     super.key,
     this.controller,
     this.onChanged,
     this.hintText = 'Search cards...',
+    this.suffixIcon,
   });
 
   @override
@@ -31,6 +33,7 @@ class CustomSearchBar extends StatelessWidget {
           hintStyle: AppTextStyles.medium16,
           prefixIcon:
               const Icon(Icons.search, color: AppColors.greyLightE1E2EC),
+          suffixIcon: suffixIcon,
           filled: true,
           fillColor: AppColors.grey272A31,
           contentPadding:

@@ -1,3 +1,4 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:cardy/features/cards/ui/widgets/card_list_tile.dart';
@@ -11,19 +12,30 @@ class CardListViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CardsListCubit, CardListState>(
       builder: (context, state) {
-        if (state is CardListSuccess || state is CardListSetEdited) {
+        if (state is CardListSuccess ||
+            state is CardListSetEdited ||
+            state is CardListSearchUpdated) {
+          final cubit = context.read<CardsListCubit>();
+          final visibleCards = cubit.visibleCardsList;
           return Expanded(
-            child: ListView.builder(
-              itemCount: context.read<CardsListCubit>().cardsList.length,
-              itemBuilder: (context, index) {
-                return _AnimatedCardItem(
-                  index: index,
-                  child: CardListTile(
-                    cardModel: context.read<CardsListCubit>().cardsList[index],
+            child: visibleCards.isEmpty
+                ? Center(
+                    child: Text(
+                      'No cards found',
+                      style: AppTextStyles.medium16,
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: visibleCards.length,
+                    itemBuilder: (context, index) {
+                      return _AnimatedCardItem(
+                        index: index,
+                        child: CardListTile(
+                          cardModel: visibleCards[index],
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
           );
         } else {
           return const Center(child: CircularProgressIndicator());

@@ -12,8 +12,7 @@ class SetsListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
       appBar: AppBar(
         actions: [
           PopupMenuButton<String>(
@@ -58,6 +57,6 @@ class SetsListScreen extends StatelessWidget {
           SetsListView(),
         ],
       ),
-    ));
+    );
   }
 }

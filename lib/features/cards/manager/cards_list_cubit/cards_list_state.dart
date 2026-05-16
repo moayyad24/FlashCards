@@ -7,3 +7,5 @@ class CardListLoading extends CardListState {}
 class CardListSuccess extends CardListState {}
 
 class CardListSetEdited extends CardListState {}
+
+class CardListSearchUpdated extends CardListState {}
