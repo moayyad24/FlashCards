@@ -3,6 +3,7 @@ import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardsListsFloatingActionButton extends StatelessWidget {
   const CardsListsFloatingActionButton({super.key});
@@ -13,8 +14,8 @@ class CardsListsFloatingActionButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         SizedBox(
-          height: 50,
-          width: 50,
+          height: 50.w,
+          width: 50.w,
           child: FloatingActionButton(
             onPressed: () {
               Navigator.of(context)
@@ -30,8 +31,8 @@ class CardsListsFloatingActionButton extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         SizedBox(
-          height: 60,
-          width: 60,
+          height: 60.w,
+          width: 60.w,
           child: FloatingActionButton(
             onPressed: () async {
               await context.read<CardsListCubit>().filterCardsBySettings();
@@ -43,7 +44,10 @@ class CardsListsFloatingActionButton extends StatelessWidget {
               }
             },
             heroTag: 'second',
-            child: const Icon(Icons.play_arrow),
+            child: const Icon(
+              Icons.play_arrow_rounded,
+              color: AppColors.grey282B36,
+            ),
           ),
         ),
       ],

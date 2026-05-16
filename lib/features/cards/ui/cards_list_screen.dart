@@ -17,7 +17,7 @@ class CardsListScreen extends StatelessWidget {
       floatingActionButton: const CardsListsFloatingActionButton(),
       body: PopScope(
         canPop: false,
-        onPopInvoked: (didPop) {
+        onPopInvokedWithResult: (didPop, t) {
           var selectionController = context.read<SelectInListBloc>();
           if (didPop) {
             return;
