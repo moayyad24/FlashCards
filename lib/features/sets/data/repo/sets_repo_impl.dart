@@ -58,10 +58,11 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
   @override
   Future<int> updateFolder(folder) async {
     String sql =
-        'UPDATE folders SET  folder_title = ?, folder_desc = ? WHERE folder_id = ?';
+        'UPDATE folders SET  folder_title = ?, folder_desc = ?, folder_color = ? WHERE folder_id = ?';
     List<dynamic> arguments = [
       folder.title,
       folder.description,
+      folder.color.value.toRadixString(16).padLeft(8, '0'),
       folder.id,
     ];
     try {

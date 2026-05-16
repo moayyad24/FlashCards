@@ -1,8 +1,13 @@
+import 'package:cardy/core/helper/collection_type.dart';
 import 'package:cardy/core/models/folder_model.dart';
-import 'package:cardy/core/widgets/app_text_field.dart';
+import 'package:cardy/core/theme/app_text_styles.dart';
+import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/widgets/custom_input_field.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
+import 'package:cardy/features/home/ui/widgets/visual_identity_card.dart';
 import 'package:cardy/features/sets/manager/edit_folder_cubit/edit_folder_cubit.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
+import 'package:cardy/features/sets/ui/widgets/edit_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +23,8 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
   late GlobalKey<FormState> _formKey;
   late TextEditingController _titleController;
   late TextEditingController _descController;
-
+  final CollectionType _selectedType = CollectionType.folder;
+  Color _selectedColor = const Color(0xFFADC6FF);
   @override
   void initState() {
     _formKey = GlobalKey<FormState>();
@@ -26,15 +32,20 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
     _descController = TextEditingController();
     _titleController.text = widget.folderModel.title;
     _descController.text = widget.folderModel.description;
+    _selectedColor = widget.folderModel.color;
     super.initState();
   }
 
-  Future<void> onConfirm(BuildContext context) async {
+  Future<void> _onConfirm(BuildContext context) async {
+    if (!(_formKey.currentState?.validate() ?? false)) {
+      return;
+    }
+
     FolderModel folderModel = FolderModel(
       id: widget.folderModel.id,
       title: _titleController.text,
       description: _descController.text,
-      color: widget.folderModel.color,
+      color: _selectedColor,
       numOfSets: widget.folderModel.numOfSets,
       numOfCards: widget.folderModel.numOfCards,
     );
@@ -53,15 +64,10 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create a new set'),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              await onConfirm(context);
-            },
-            icon: const Icon(Icons.check),
-          ),
-        ],
+        title: Text(
+          'Edit Folder',
+          style: AppTextStyles.bold22.copyWith(color: AppColors.blueADC6FF),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -69,30 +75,42 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
           key: _formKey,
           child: Column(
             children: [
-              AppTextField(
+              CustomInputField(
+                label: 'Title',
+                hintText: 'e.g. English Phrases',
                 controller: _titleController,
-                hintText: 'Title',
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
+                  if (value == null || value.trim().isEmpty) {
                     return 'Please enter a title';
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
-              AppTextField(
+              CustomInputField(
+                label: 'Description',
+                hintText: "Explain what's inside this study set...",
+                maxLines: 4,
+                textInputAction: TextInputAction.done,
                 controller: _descController,
-                hintText: 'Description',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
+              ),
+              const SizedBox(height: 20),
+              VisualIdentityCard(
+                onIdentityChanged: (color, icon) {
+                  setState(() {
+                    _selectedColor = color;
+                  });
                 },
+                selectedType: _selectedType,
               ),
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: EditBottomBar(
+        onPressed: () async {
+          await _onConfirm(context);
+        },
       ),
     );
   }
