@@ -1,6 +1,8 @@
 import 'package:cardy/features/home/data/model/home_model.dart';
 import 'package:cardy/features/home/data/repo/home_repo.dart';
 import 'package:cardy/features/home/manager/home_cubit/home_state.dart';
+import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/models/set_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,7 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  insertAnewSet(setModel) async {
+  Future<void> insertAnewSet(SetModel setModel) async {
     try {
       await homeRepo.insertAnewSet(setModel);
       await homeFetchData();
@@ -26,7 +28,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  insertAnewFolder(folderModel) async {
+  Future<void> insertAnewFolder(FolderModel folderModel) async {
     try {
       await homeRepo.insertAnewFolder(folderModel);
       await homeFetchData();

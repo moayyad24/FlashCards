@@ -18,6 +18,7 @@ class SetCard extends StatelessWidget {
       onTap: () {
         _navigateToCardListScreen(context);
       },
+      borderRadius: BorderRadius.circular(20),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14).r,
         decoration: BoxDecoration(
@@ -34,18 +35,11 @@ class SetCard extends StatelessWidget {
               width: 44.w,
               height: 44.w,
               decoration: BoxDecoration(
-                color: AppColors.orangeFFB786.withAlpha(150),
+                color: setModel.color.withAlpha(150),
                 shape: BoxShape.circle,
               ),
-              child: const Center(
-                child: Text(
-                  "Σ",
-                  style: TextStyle(
-                    color: AppColors.greyLightE1E2EC,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              child: Center(
+                child: _buildSetIcon(),
               ),
             ),
 
@@ -109,5 +103,15 @@ class SetCard extends StatelessWidget {
       'setModel': setModel,
       'settingsModel': context.read<SettingsCubit>().settingsModel,
     });
+  }
+
+  Widget _buildSetIcon() {
+    final int? codePoint = int.tryParse(setModel.icon);
+
+    return Icon(
+      IconData(codePoint ?? 0xe2a3, fontFamily: 'MaterialIcons'),
+      color: AppColors.greyLightE1E2EC,
+      size: 22.w,
+    );
   }
 }

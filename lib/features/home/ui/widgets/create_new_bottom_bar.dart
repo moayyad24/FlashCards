@@ -1,10 +1,39 @@
 import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/helper/collection_type.dart';
+import 'package:cardy/core/models/folder_model.dart';
+import 'package:cardy/core/models/set_model.dart';
+import 'package:cardy/features/home/manager/home_cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CreateNewBottomBar extends StatelessWidget {
-  const CreateNewBottomBar({super.key});
+  const CreateNewBottomBar({
+    super.key,
+    required GlobalKey<FormState> formKey,
+    required TextEditingController titleController,
+    required TextEditingController descController,
+    required CollectionType selectedType,
+    required Color selectedColor,
+    required IconData selectedIcon,
+  })  : _formKey = formKey,
+        _titleController = titleController,
+        _descController = descController,
+        _selectedType = selectedType,
+        _selectedColor = selectedColor,
+        _selectedIcon = selectedIcon;
+
+  final GlobalKey<FormState> _formKey;
+  final TextEditingController _titleController;
+  final TextEditingController _descController;
+  final CollectionType _selectedType;
+  final Color _selectedColor;
+  final IconData _selectedIcon;
+
+  String _iconToDb(IconData icon) {
+    return icon.codePoint.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +47,37 @@ class CreateNewBottomBar extends StatelessWidget {
         child: SizedBox(
           height: 56,
           child: ElevatedButton(
-            onPressed: () {
-              print('Create Set tapped!');
+            onPressed: () async {
+              if (!(_formKey.currentState?.validate() ?? false)) {
+                return;
+              }
+
+              if (_selectedType == CollectionType.sets) {
+                final newSet = SetModel(
+                  id: 0,
+                  title: _titleController.text,
+                  description: _descController.text,
+                  color: _selectedColor,
+                  icon: _iconToDb(_selectedIcon),
+                  folderId: 0,
+                  numOfCards: 0,
+                );
+                await context.read<HomeCubit>().insertAnewSet(newSet);
+              } else {
+                final newFolder = FolderModel(
+                  id: 0,
+                  title: _titleController.text,
+                  description: _descController.text,
+                  color: _selectedColor,
+                  numOfSets: 0,
+                  numOfCards: 0,
+                );
+                await context.read<HomeCubit>().insertAnewFolder(newFolder);
+              }
+
+              if (context.mounted) {
+                Navigator.of(context).pop();
+              }
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: AppColors.blueADC6FF,
@@ -38,7 +96,9 @@ class CreateNewBottomBar extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Create Set',
+                  _selectedType == CollectionType.sets
+                      ? 'Create Set'
+                      : 'Create Folder',
                   style: AppTextStyles.medium16
                       .copyWith(color: AppColors.purple2B2148),
                 ),

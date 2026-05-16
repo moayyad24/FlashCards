@@ -34,7 +34,7 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
       id: widget.folderModel.id,
       title: _titleController.text,
       description: _descController.text,
-      color: '',
+      color: widget.folderModel.color,
       numOfSets: widget.folderModel.numOfSets,
       numOfCards: widget.folderModel.numOfCards,
     );

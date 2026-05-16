@@ -1,8 +1,10 @@
+import 'package:flutter/animation.dart';
+
 class SetModel {
   final int id;
   final String title;
   final String description;
-  final String color;
+  final Color color;
   final String icon;
   final int folderId;
   final int numOfCards;
@@ -23,7 +25,7 @@ class SetModel {
         id: map['set_id'],
         title: map['set_title'],
         description: map['set_desc'],
-        color: map['set_color'],
+        color: Color(int.parse(map['set_color'], radix: 16)),
         icon: map['set_icon'],
         folderId: map['folder_id'],
         numOfCards: map['num_of_cards'],

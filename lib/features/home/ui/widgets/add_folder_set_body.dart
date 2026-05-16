@@ -10,6 +10,8 @@ class AddFolderSetBody extends StatelessWidget {
     required GlobalKey<FormState> formKey,
     required TextEditingController titleController,
     required TextEditingController descController,
+    this.onOptionChanged,
+    this.onIdentityChanged,
   })  : _formKey = formKey,
         _titleController = titleController,
         _descController = descController;
@@ -17,6 +19,8 @@ class AddFolderSetBody extends StatelessWidget {
   final GlobalKey<FormState> _formKey;
   final TextEditingController _titleController;
   final TextEditingController _descController;
+  final ValueChanged<ToggleOption>? onOptionChanged;
+  final void Function(Color color, IconData icon)? onIdentityChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -28,31 +32,26 @@ class AddFolderSetBody extends StatelessWidget {
           child: Column(
             children: [
               ChooseToggleButton(
-                onOptionChanged: (selectedOption) {
-                  if (selectedOption == ToggleOption.sets) {
-                    print("User selected: New Set");
-                  } else {
-                    print("User selected: New Bundle");
-                  }
-                },
+                onOptionChanged: onOptionChanged ?? (_) {},
               ),
               30.verticalSpace,
-              const CustomInputField(
+              CustomInputField(
                 label: 'Title',
                 hintText: 'e.g. English Phrases',
+                controller: _titleController,
               ),
               const SizedBox(height: 20),
-              const CustomInputField(
+              CustomInputField(
                 label: 'Description (Optional)',
                 hintText: "Explain what's inside this study set...",
                 maxLines: 4,
                 textInputAction: TextInputAction.done,
+                controller: _descController,
               ),
               const SizedBox(height: 20),
-              VisualIdentityCard(onIdentityChanged: (c, i) {
-                print(c);
-                print(i);
-              })
+              VisualIdentityCard(
+                onIdentityChanged: onIdentityChanged ?? (_, __) {},
+              )
             ],
           ),
         ),

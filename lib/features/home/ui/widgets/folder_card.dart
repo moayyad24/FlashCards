@@ -21,9 +21,9 @@ class FolderCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.grey282B36,
           borderRadius: BorderRadius.circular(20),
-          border: const Border(
+          border: Border(
               left: BorderSide(
-            color: AppColors.cornflowerBlue,
+            color: folder.color,
             width: 5,
           )),
         ),
@@ -110,7 +110,7 @@ class FolderCard extends StatelessWidget {
           CircularProgressIndicator(
             value: percentage / 100,
             strokeWidth: 5,
-            color: AppColors.blueADC6FF,
+            color: folder.color,
             backgroundColor: AppColors.darkblue10131A,
             strokeCap: StrokeCap.round,
             constraints: const BoxConstraints(minWidth: 52, minHeight: 52),
