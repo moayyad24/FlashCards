@@ -1,4 +1,3 @@
-import 'package:cardy/core/models/collection_model.dart';
 import 'package:cardy/core/models/folder_model.dart';
 import 'package:cardy/core/models/set_model.dart';
 import 'package:cardy/features/sets/data/repo/sets_repo.dart';
@@ -33,7 +32,7 @@ class SetsCubit extends Cubit<SetsState> {
     }
   }
 
-  Future insertAnewSet(CollectionModel setModel) async {
+  Future insertAnewSet(SetModel setModel) async {
     try {
       int result = await setsRepo.insertAnewSet(setModel);
       await fetchAllSets();

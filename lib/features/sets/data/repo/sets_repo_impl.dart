@@ -34,12 +34,14 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
   @override
   Future<int> insertAnewSet(setModel) async {
     String sql = '''
-    INSERT INTO sets(set_title, set_desc, folder_id)
-    VALUES (?, ?, ?)
+    INSERT INTO sets(set_title, set_desc, set_color, set_icon, folder_id)
+    VALUES (?, ?, ?, ?, ?)
    ''';
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
+      setModel.color.value.toRadixString(16).padLeft(8, '0'),
+      setModel.icon,
       setModel.folderId,
     ];
     int result = await insert(sql, arguments);

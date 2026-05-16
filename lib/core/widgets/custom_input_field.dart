@@ -88,6 +88,13 @@ class CustomInputField extends StatelessWidget {
                 width: 1.5,
               ),
             ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(16),
+              borderSide: const BorderSide(
+                color: borderColor,
+                width: 1.5,
+              ),
+            ),
           ),
         ),
       ],

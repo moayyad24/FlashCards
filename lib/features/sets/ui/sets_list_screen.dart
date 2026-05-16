@@ -1,8 +1,8 @@
 import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/theme/colors.dart';
+import 'package:cardy/core/widgets/my_floating_action_button.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:cardy/features/sets/ui/widgets/sets_list_view.dart';
-import 'package:cardy/features/sets/ui/widgets/sets_floating_action_button.dart';
 import 'package:cardy/features/sets/ui/widgets/sets_list_screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +44,14 @@ class SetsListScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: const SetsFloatingActionButton(),
+      floatingActionButton: MyFloatingActionButton(
+        onTap: () {
+          Navigator.of(context).pushNamed(Routes.addSetScreen, arguments: {
+            'folderId': context.read<SetsCubit>().folderModel.id,
+            'setsCubit': BlocProvider.of<SetsCubit>(context),
+          });
+        },
+      ),
       body: const Column(
         children: [
           SetsListScreenTitle(),

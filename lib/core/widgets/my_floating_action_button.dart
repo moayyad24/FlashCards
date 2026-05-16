@@ -1,18 +1,16 @@
-import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyFloatingActionButton extends StatelessWidget {
-  const MyFloatingActionButton({super.key});
+  final void Function()? onTap;
+  const MyFloatingActionButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(18),
-      onTap: () {
-        Navigator.pushNamed(context, Routes.addFolderSetScreen);
-      },
+      onTap: onTap,
       child: Container(
         width: 60.w,
         height: 60.w,

@@ -105,7 +105,7 @@ class SetCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'Last studied 3d ago',
+                        setModel.description,
                         style: AppTextStyles.regular14.copyWith(
                           color: AppColors.greyC2C6D6,
                         ),
