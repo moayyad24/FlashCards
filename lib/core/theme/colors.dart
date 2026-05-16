@@ -13,5 +13,7 @@ class AppColors {
   static const Color orangeFFB786 = Color(0xFFFFB786);
   static const Color purple2B2148 = Color(0xFF2B2148);
   static const Color cornflowerBlue = Color(0xff7862F8);
+  static const Color border424754 = Color(0xFF424754);
   static const Color border8C909F = Color(0xFF8C909F);
+  static const Color border1C1F26 = Color(0xFF1C1F26);
 }

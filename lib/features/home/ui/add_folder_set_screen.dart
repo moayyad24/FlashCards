@@ -1,5 +1,7 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/home/ui/widgets/add_folder_set_body.dart';
-import 'package:cardy/features/home/ui/widgets/add_folder_set_floating_action_button.dart';
+import 'package:cardy/features/home/ui/widgets/create_new_bottom_bar.dart';
 import 'package:flutter/material.dart';
 
 class AddFolderSetScreen extends StatefulWidget {
@@ -26,16 +28,16 @@ class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Create a new set'),
+        title: Text(
+          'Create New',
+          style: AppTextStyles.bold28.copyWith(color: AppColors.blueADC6FF),
+        ),
       ),
-      floatingActionButton: AddFolderSetFloatingActionButton(
-          formKey: _formKey,
-          titleController: _titleController,
-          descController: _descController),
       body: AddFolderSetBody(
           formKey: _formKey,
           titleController: _titleController,
           descController: _descController),
+      bottomNavigationBar: const CreateNewBottomBar(),
     );
   }
 

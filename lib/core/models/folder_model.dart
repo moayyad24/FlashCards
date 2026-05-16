@@ -2,6 +2,7 @@ class FolderModel {
   final int id;
   final String title;
   final String description;
+  final String color;
   final int numOfSets;
   final int numOfCards;
   final String? createdAt;
@@ -10,6 +11,7 @@ class FolderModel {
       {required this.id,
       required this.title,
       required this.description,
+      required this.color,
       required this.numOfSets,
       required this.numOfCards,
       this.createdAt});
@@ -19,6 +21,7 @@ class FolderModel {
         id: map['folder_id'],
         title: map['folder_title'],
         description: map['folder_desc'],
+        color: map['folder_color'],
         numOfSets: map['num_of_sets'],
         numOfCards: map['num_of_cards'],
         createdAt: map['created_at']);

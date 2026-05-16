@@ -1,5 +1,5 @@
+import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/theme/colors.dart';
-import 'package:cardy/features/home/ui/widgets/home_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,7 +11,7 @@ class MyFloatingActionButton extends StatelessWidget {
     return InkWell(
       borderRadius: BorderRadius.circular(18),
       onTap: () {
-        _buildModalBottomSheet(context);
+        Navigator.pushNamed(context, Routes.addFolderSetScreen);
       },
       child: Container(
         width: 60.w,
@@ -43,17 +43,6 @@ class MyFloatingActionButton extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Future<dynamic> _buildModalBottomSheet(BuildContext context) {
-    return showModalBottomSheet(
-      context: context,
-      backgroundColor: AppColors.black,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return const HomeBottomSheet();
-      },
     );
   }
 }

@@ -1,5 +1,8 @@
-import 'package:cardy/core/widgets/app_text_field.dart';
+import 'package:cardy/core/widgets/custom_input_field.dart';
+import 'package:cardy/features/home/ui/widgets/choose_toggle_button.dart';
+import 'package:cardy/features/home/ui/widgets/visual_identity_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddFolderSetBody extends StatelessWidget {
   const AddFolderSetBody({
@@ -21,30 +24,37 @@ class AddFolderSetBody extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Form(
         key: _formKey,
-        child: Column(
-          children: [
-            AppTextField(
-              controller: _titleController,
-              hintText: 'Title',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a title';
-                }
-                return null;
-              },
-            ),
-            const SizedBox(height: 20),
-            AppTextField(
-              controller: _descController,
-              hintText: 'Description',
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a description';
-                }
-                return null;
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              ChooseToggleButton(
+                onOptionChanged: (selectedOption) {
+                  if (selectedOption == ToggleOption.sets) {
+                    print("User selected: New Set");
+                  } else {
+                    print("User selected: New Bundle");
+                  }
+                },
+              ),
+              30.verticalSpace,
+              const CustomInputField(
+                label: 'Title',
+                hintText: 'e.g. English Phrases',
+              ),
+              const SizedBox(height: 20),
+              const CustomInputField(
+                label: 'Description (Optional)',
+                hintText: "Explain what's inside this study set...",
+                maxLines: 4,
+                textInputAction: TextInputAction.done,
+              ),
+              const SizedBox(height: 20),
+              VisualIdentityCard(onIdentityChanged: (c, i) {
+                print(c);
+                print(i);
+              })
+            ],
+          ),
         ),
       ),
     );

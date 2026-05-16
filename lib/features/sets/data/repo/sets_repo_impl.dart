@@ -12,6 +12,8 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     set_id,
     set_title,
     set_desc,
+    set_color,
+    set_icon,
     folder_id,
     (
       SELECT COUNT(*) FROM cards WHERE cards.set_id = sets.set_id

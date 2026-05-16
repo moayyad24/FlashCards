@@ -32,7 +32,7 @@ class AppRouter {
       case Routes.homeScreen:
         return _buildHomeScreenRoute();
       case Routes.addFolderSetScreen:
-        return _buildAddFolderSetScreenRoute(settings.arguments as int);
+        return _buildAddFolderSetScreenRoute();
       case Routes.cardsListScreen:
         return _buildCardsListScreenRoute(
             settings.arguments as Map<String, dynamic>);
@@ -68,10 +68,9 @@ class AppRouter {
     );
   }
 
-  Route _buildAddFolderSetScreenRoute(int argument) {
+  Route _buildAddFolderSetScreenRoute() {
     return MaterialPageRoute(
       builder: (_) => const AddFolderSetScreen(),
-      settings: RouteSettings(arguments: argument),
     );
   }
 

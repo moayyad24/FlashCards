@@ -36,6 +36,8 @@ class _EditSetScreenState extends State<EditSetScreen> {
       id: widget.setModel.id,
       title: _titleController.text,
       description: _descController.text,
+      color: '',
+      icon: '',
       folderId: widget.setModel.folderId,
       numOfCards: widget.setModel.numOfCards,
     );

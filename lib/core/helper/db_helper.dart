@@ -18,6 +18,7 @@ class DbHelper {
     folder_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
     folder_title TEXT NOT NULL,
     folder_desc  TEXT NOT NULL,
+    folder_color  TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 ''';
@@ -27,6 +28,8 @@ class DbHelper {
         set_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         set_title TEXT NOT NULL,
         set_desc TEXT NOT NULL,
+        set_color TEXT NOT NULL,
+        set_icon TEXT NOT NULL,
         folder_id INTEGER NOT NULL DEFAULT 0, --if folder_id is 0 then its not related to any folder
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (folder_id) REFERENCES folders(folder_id)
