@@ -1,4 +1,7 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SaveCardButton extends StatelessWidget {
   final VoidCallback? onPressed;
@@ -13,8 +16,8 @@ class SaveCardButton extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-            Color(0xFF4A80FF), // Blue
-            Color(0xFF6938FF), // Purple
+            Color(0xFF4A80FF),
+            Color(0xFF6938FF),
           ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
@@ -30,22 +33,18 @@ class SaveCardButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        child: const Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'Save Card',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
+              style: AppTextStyles.bold18.copyWith(color: AppColors.white),
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Icon(
               Icons.check_circle_outline,
-              color: Colors.white,
-              size: 24,
+              color: AppColors.white,
+              size: 24.w,
             ),
           ],
         ),
@@ -67,18 +66,14 @@ class SaveAndAddAnotherButton extends StatelessWidget {
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: Color(0xFF3B4054), width: 1.5),
+          side: const BorderSide(color: AppColors.border424754, width: 1.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
           ),
         ),
-        child: const Text(
+        child: Text(
           'Save & Add Another',
-          style: TextStyle(
-            color: Color(0xFFA6C8FF), // Light blue text matching the image
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-          ),
+          style: AppTextStyles.bold18.copyWith(color: AppColors.blueADC6FF),
         ),
       ),
     );

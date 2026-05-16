@@ -4,6 +4,7 @@ import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_
 import 'package:cardy/features/cards/ui/widgets/card_list_view_body.dart';
 import 'package:cardy/features/cards/ui/widgets/cards_list_app_bar.dart';
 import 'package:cardy/features/cards/ui/widgets/cards_list_floating_action_button.dart';
+import 'package:cardy/features/cards/ui/widgets/search_bar.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,6 +36,7 @@ class CardsListScreen extends StatelessWidget {
         child: const Column(
           children: [
             CardsListAppBar(),
+            CustomSearchBar(),
             CardListViewBody(),
           ],
         ),
