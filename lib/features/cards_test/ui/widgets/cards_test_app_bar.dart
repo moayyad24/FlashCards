@@ -12,23 +12,22 @@ AppBar cardsTestAppBar(BuildContext context) {
       style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
     ),
     actions: [
-      IconButton(
-        onPressed: () {
-          (cardsTestCubit.currentIndex < cardsTestCubit.cardsList.length)
-              ? Navigator.of(context)
-                  .pushNamed(Routes.editCardScreen, arguments: {
-                  'cardModel': context
-                      .read<CardsListCubit>()
-                      .filteredCardsList[cardsTestCubit.currentIndex],
-                  'cardListCubit': context.read<CardsListCubit>(),
-                })
-              : null;
-        },
-        icon: const Icon(Icons.edit),
-      ),
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.more_vert),
+      Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: IconButton(
+          onPressed: () {
+            (cardsTestCubit.currentIndex < cardsTestCubit.cardsList.length)
+                ? Navigator.of(context)
+                    .pushNamed(Routes.editCardScreen, arguments: {
+                    'cardModel': context
+                        .read<CardsListCubit>()
+                        .filteredCardsList[cardsTestCubit.currentIndex],
+                    'cardListCubit': context.read<CardsListCubit>(),
+                  })
+                : null;
+          },
+          icon: const Icon(Icons.edit),
+        ),
       ),
     ],
   );
