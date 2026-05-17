@@ -187,7 +187,7 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
                         child: FlareActor(
                           'assets/flare/bottomSlime.flr',
                           color: widget.color
-                              .withOpacity((widget.slimeEnabled) ? 1 : 0),
+                              .withAlpha((widget.slimeEnabled) ? 255 : 0),
                           animation: activeAnimation,
                           sizeFromArtboard: true,
                           alignment: Alignment.bottomCenter,
@@ -229,8 +229,8 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
                     width: widget.width,
                     child: FlareActor(
                       'assets/flare/topSlime.flr',
-                      color: widget.color
-                          .withOpacity((widget.slimeEnabled) ? 1 : 0),
+                      color:
+                          widget.color.withAlpha((widget.slimeEnabled) ? 1 : 0),
                       animation: activeAnimation,
                       sizeFromArtboard: true,
                       alignment: Alignment.topCenter,
@@ -256,7 +256,7 @@ class _SlimyCardState extends State<SlimyCard> with TickerProviderStateMixin {
                   borderRadius: BorderRadius.circular(15),
                   boxShadow: [
                     BoxShadow(
-                      color: widget.color.withOpacity(0.3),
+                      color: widget.color.withAlpha(40),
                       blurRadius: 20,
                       spreadRadius: 1,
                     ),
