@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cardy/core/models/card_model.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_state.dart';
+import 'package:cardy/features/cards_test/models/answer_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,7 +13,7 @@ class CardsTestCubit extends Cubit<CardsTestState> {
   late List<CardModel> cardsList;
   late CardsListCubit cardsListCubit;
   int currentIndex = 0;
-  int isCorrectAnswer = 0;
+  AnswerStatus answerStatus = AnswerStatus.none;
   int numberOfCorrectAnswer = 0;
   void initState(CardsListCubit cards) {
     cardsListCubit = cards;
@@ -25,21 +26,31 @@ class CardsTestCubit extends Cubit<CardsTestState> {
     await refreshTheCardsList();
   }
 
+  Future<void> onAnswerPressed(AnswerStatus status) async {
+    if (answerStatus != status) {
+      answerStatus = status;
+      emit(CardsTestOnUpdate());
+    }
+    await checkIfItsCorrectAnswer();
+    incrementTheCurrentIndex();
+    await refreshTheCardsList();
+  }
+
   void onUpdate(details) {
-    int updatedAnswer;
+    AnswerStatus updatedAnswer;
 
     switch (details.direction) {
       case DismissDirection.startToEnd:
-        updatedAnswer = 1;
+        updatedAnswer = AnswerStatus.correct;
         break;
       case DismissDirection.endToStart:
-        updatedAnswer = 2;
+        updatedAnswer = AnswerStatus.incorrect;
         break;
       default:
         return;
     }
-    if (isCorrectAnswer != updatedAnswer) {
-      isCorrectAnswer = updatedAnswer;
+    if (answerStatus != updatedAnswer) {
+      answerStatus = updatedAnswer;
       emit(CardsTestOnUpdate());
     }
   }
@@ -47,16 +58,18 @@ class CardsTestCubit extends Cubit<CardsTestState> {
   Future<void> checkIfItsCorrectAnswer() async {
     final cardId = cardsList[currentIndex].id!;
     int numberOfForget = cardsList[currentIndex].numberOfForgets!;
-    switch (isCorrectAnswer) {
-      case 1:
+    switch (answerStatus) {
+      case AnswerStatus.correct:
         numberOfCorrectAnswer++;
         await markCardAsStudied(cardId, true);
         await incrementForgettingNumber(cardId, 0);
         break;
-      case 2:
+      case AnswerStatus.incorrect:
         await markCardAsStudied(cardId, false);
         numberOfForget++;
         await incrementForgettingNumber(cardId, numberOfForget);
+        break;
+      case AnswerStatus.none:
         break;
     }
   }
@@ -71,7 +84,7 @@ class CardsTestCubit extends Cubit<CardsTestState> {
 
   void incrementTheCurrentIndex() {
     if (currentIndex < cardsList.length) {
-      isCorrectAnswer = 0;
+      answerStatus = AnswerStatus.none;
       currentIndex++;
       emit(CardsTestOnDismissed());
     }

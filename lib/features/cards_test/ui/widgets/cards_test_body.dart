@@ -1,6 +1,5 @@
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_state.dart';
-import 'package:cardy/features/cards_test/ui/widgets/is_correct_answer_animated_opacity.dart';
 import 'package:cardy/features/cards_test/ui/widgets/my_card.dart';
 import 'package:cardy/features/cards_test/ui/widgets/test_result.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,14 +22,7 @@ class CardsTestBody extends StatelessWidget {
               key: ValueKey(cardsTestCubit.currentIndex),
               onUpdate: cardsTestCubit.onUpdate,
               onDismissed: cardsTestCubit.onDismissed,
-              child: Column(
-                children: [
-                  IsCorrectAnswerAnimatedOpacity(
-                    isCorrectAnswer: cardsTestCubit.isCorrectAnswer,
-                  ),
-                  const Expanded(child: MyCard()),
-                ],
-              ),
+              child: const SizedBox.expand(child: MyCard()),
             ),
           );
         }
