@@ -16,16 +16,20 @@ class SetsListView extends StatelessWidget {
       builder: (context, state) {
         if (state is SetsSuccess || state is SetsFolderEdited) {
           return Expanded(
-              child: ListView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 12, vertical: 12)
-                          .r,
-                  itemCount: context.read<SetsCubit>().setsList.length,
-                  itemBuilder: (context, index) {
-                    return SetCard(
-                      setModel: context.read<SetsCubit>().setsList[index],
-                    );
-                  }));
+            child: ListView.separated(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 12).r,
+              itemCount: context.read<SetsCubit>().setsList.length,
+              itemBuilder: (context, index) {
+                return SetCard(
+                  setModel: context.read<SetsCubit>().setsList[index],
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(
+                height: 14,
+              ),
+            ),
+          );
         } else {
           return const Center(
             child: CircularProgressIndicator(),

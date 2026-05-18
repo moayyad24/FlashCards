@@ -22,32 +22,23 @@ class DefaultAppBar extends StatelessWidget {
         },
       ),
       actions: [
-        PopupMenuButton<String>(
-          color: AppColors.greyLightE1E2EC,
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem<String>(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(Routes.editSetScreen, arguments: {
-                    'setModel': context.read<CardsListCubit>().setModel,
-                    'cardListCubit': BlocProvider.of<CardsListCubit>(context),
-                  });
-                },
-                child: const Row(
-                  children: [
-                    Icon(Icons.edit),
-                    SizedBox(width: 10),
-                    Text(
-                      'Edit abstract',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-              ),
-            ];
+        IconButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(Routes.editSetScreen, arguments: {
+              'setModel': context.read<CardsListCubit>().setModel,
+              'cardListCubit': BlocProvider.of<CardsListCubit>(context),
+            });
           },
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.grey282B36,
+            side: BorderSide(
+              color: AppColors.border8C909F.withAlpha(90),
+            ),
+          ),
+          icon: const Icon(Icons.mode_edit_rounded,
+              color: AppColors.greyLightE1E2EC),
         ),
+        const SizedBox(width: 15),
       ],
     );
   }

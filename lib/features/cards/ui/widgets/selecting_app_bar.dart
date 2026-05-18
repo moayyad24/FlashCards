@@ -1,4 +1,6 @@
 import 'package:cardy/core/models/set_model.dart';
+import 'package:cardy/core/theme/app_text_styles.dart';
+import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_bloc.dart';
 import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_event.dart';
@@ -12,18 +14,27 @@ class SelectingAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading:
-          IconButton(onPressed: () {}, icon: const Icon(Icons.close_rounded)),
       title: Text(
         '${context.read<SelectInListBloc>().selectedCardIdsList.length} Selected',
-        style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+        style: AppTextStyles.medium22,
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              _showDeleteConfirmationDialog(context);
-            },
-            icon: const Icon(Icons.delete)),
+          onPressed: () {
+            _showDeleteConfirmationDialog(context);
+          },
+          style: IconButton.styleFrom(
+            backgroundColor: AppColors.grey282B36,
+            side: BorderSide(
+              color: AppColors.border8C909F.withAlpha(90),
+            ),
+          ),
+          icon: const Icon(
+            Icons.delete_forever_rounded,
+            color: AppColors.orangeFFB786,
+          ),
+        ),
+        const SizedBox(width: 15),
       ],
     );
   }
