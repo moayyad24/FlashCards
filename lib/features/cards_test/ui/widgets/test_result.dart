@@ -1,3 +1,4 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/core/widgets/custom_button.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:cardy/features/cards_test/ui/widgets/range_pointer.dart';
 import 'package:cardy/features/cards_test/ui/widgets/result_card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TestResult extends StatelessWidget {
   const TestResult({
@@ -48,31 +50,32 @@ class TestResult extends StatelessWidget {
               context.read<CardsTestCubit>().cardsList.length,
               context.read<CardsTestCubit>().numberOfCorrectAnswer,
             ),
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w500,
-            ),
+            style: AppTextStyles.bold22,
           ),
         ),
-        const SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            CustomButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              title: 'Back',
-              backgroundColor: AppColors.grey20232A,
-            ),
-            CustomButton(
-              onPressed: () {
-                context.read<CardsTestCubit>().refreshTheCardsListAfterTest();
-              },
-              title: 'Continue',
-              backgroundColor: AppColors.cornflowerBlue,
-            ),
-          ],
+        25.verticalSpace,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              CustomButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                title: 'Back',
+                backgroundColor: AppColors.grey20232A,
+              ),
+              12.horizontalSpace,
+              CustomButton(
+                onPressed: () {
+                  context.read<CardsTestCubit>().refreshTheCardsListAfterTest();
+                },
+                title: 'Continue',
+                backgroundColor: AppColors.blue002E6A,
+              ),
+            ],
+          ),
         ),
         ListView.builder(
             physics: const NeverScrollableScrollPhysics(),
@@ -84,6 +87,7 @@ class TestResult extends StatelessWidget {
                     context.read<CardsListCubit>().filteredCardsList[index],
               );
             }),
+        16.verticalSpace,
       ],
     );
   }

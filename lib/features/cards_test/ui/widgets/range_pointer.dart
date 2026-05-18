@@ -1,3 +1,4 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
@@ -26,34 +27,34 @@ class MyRangePointer extends StatelessWidget {
           radiusFactor: 0.8,
           axisLineStyle: const AxisLineStyle(
             thicknessUnit: GaugeSizeUnit.factor,
-            color: AppColors.grey20232A,
+            color: AppColors.border1C1F26,
             thickness: 0.15,
           ),
           annotations: <GaugeAnnotation>[
             GaugeAnnotation(
               angle: 180,
               widget: Text(
-                'Score: $numberOfCorrectAnswer/$numberOfQuestions',
-                style: const TextStyle(
-                  color: AppColors.grey20232A,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                ),
+                'Score\n$numberOfCorrectAnswer/$numberOfQuestions',
+                style: AppTextStyles.bold20,
+                textAlign: TextAlign.center,
               ),
             ),
           ],
           pointers: [
             RangePointer(
               value: numberOfCorrectAnswer.toDouble(),
-              cornerStyle: CornerStyle.bothCurve,
+              cornerStyle: CornerStyle.bothFlat,
               enableAnimation: true,
               animationDuration: 1200,
               sizeUnit: GaugeSizeUnit.factor,
               gradient: const SweepGradient(
-                colors: <Color>[AppColors.cornflowerBlue, AppColors.orangeFFB786],
+                colors: <Color>[
+                  AppColors.cornflowerBlue,
+                  AppColors.orangeFFB786
+                ],
                 stops: <double>[0.25, 0.75],
               ),
-              color: const Color(0xFF00A8B5),
+              color: AppColors.blueADC6FF,
               width: 0.15,
             ),
           ],
