@@ -30,7 +30,7 @@ class FolderCard extends StatelessWidget {
                   Navigator.pop(context);
                   appDialog(
                     context: context,
-                    title: 'Delete this set?',
+                    title: 'Delete this folder?',
                     onPressed: () {
                       BlocProvider.of<HomeCubit>(context)
                           .deleteFolder(folder.id);
@@ -70,10 +70,11 @@ class FolderCard extends StatelessWidget {
                   folder.title,
                   style: AppTextStyles.bold20,
                 ),
-                const Icon(
-                  Icons.more_vert,
-                  color: AppColors.greyC2C6D6,
-                ),
+                //TODO: Implement this
+                // const Icon(
+                //   Icons.more_vert,
+                //   color: AppColors.greyC2C6D6,
+                // ),
               ],
             ),
 

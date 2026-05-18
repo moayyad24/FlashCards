@@ -23,6 +23,7 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     sets
   WHERE
     folder_id = $folderId
+  ORDER BY sets.created_at DESC;
 ''';
     var dataMap = await inquiry(sql);
     for (var e in dataMap) {

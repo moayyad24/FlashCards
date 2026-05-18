@@ -16,26 +16,30 @@ class ListTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          color: AppColors.orangeFFB786,
-        ),
-        10.horizontalSpace,
-        Text(
-          title,
-          style: AppTextStyles.bold20,
-        ),
-        const Spacer(),
-        TextButton(
-          onPressed: onViewAllPressed,
-          child: Text(
-            'View All',
-            style: AppTextStyles.bold16.copyWith(color: AppColors.blueADC6FF),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 12.0).r,
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: AppColors.orangeFFB786,
           ),
-        )
-      ],
+          10.horizontalSpace,
+          Text(
+            title,
+            style: AppTextStyles.bold20,
+          ),
+          //TODO: Implemnt this
+          // const Spacer(),
+          // TextButton(
+          //   onPressed: onViewAllPressed,
+          //   child: Text(
+          //     'View All',
+          //     style: AppTextStyles.bold16.copyWith(color: AppColors.blueADC6FF),
+          //   ),
+          // )
+        ],
+      ),
     );
   }
 }
