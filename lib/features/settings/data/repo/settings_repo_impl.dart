@@ -83,9 +83,29 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
     }
   }
 
+  Future<bool> _requestStoragePermission() async {
+    if (Platform.isAndroid) {
+      // For Android 11+
+      var status = await Permission.manageExternalStorage.status;
+      if (!status.isGranted) {
+        status = await Permission.manageExternalStorage.request();
+      }
+      if (status.isGranted) {
+        return true;
+      }
+    }
+
+    // Fallback for older Android versions & other platforms
+    var status = await Permission.storage.status;
+    if (!status.isGranted) {
+      status = await Permission.storage.request();
+    }
+    return status.isGranted;
+  }
+
   @override
   Future<void> backupDatabase() async {
-    if (await Permission.storage.request().isGranted) {
+    if (await _requestStoragePermission()) {
       // Specify the source and destination directories
       String databasePath = await getDatabasesPath(); //database path
 
@@ -100,14 +120,14 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
         debugPrint('Error backing up database: $e');
       }
     } else {
-      await Permission.storage.request();
+      await showAppToast("Storage permission is required for backup.");
       debugPrint('Storage permission is required for backup.');
     }
   }
 
   @override
   Future<void> restoreDatabase() async {
-    if (await Permission.storage.request().isGranted) {
+    if (await _requestStoragePermission()) {
       // Specify the source and destination directories
       String databasePath = await getDatabasesPath(); //database path
       try {
@@ -123,8 +143,8 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
         debugPrint('Error backing up database: $e');
       }
     } else {
-      await Permission.storage.request();
-      debugPrint('Storage permission is required for backup.');
+      await showAppToast("Storage permission is required for restore.");
+      debugPrint('Storage permission is required for restore.');
     }
   }
 }
