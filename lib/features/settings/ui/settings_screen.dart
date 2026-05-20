@@ -1,7 +1,8 @@
-import 'package:cardy/features/settings/ui/widgets/question_amount_per_test.dart';
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/features/settings/ui/widgets/backup_and_restore.dart';
-import 'package:cardy/features/settings/ui/widgets/study_setting.dart';
+import 'package:cardy/features/settings/ui/widgets/study_preferences.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -10,18 +11,20 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
+          title: Text(
         'Settings',
-        style: TextStyle(fontSize: 26, fontWeight: FontWeight.w500),
+        style: AppTextStyles.bold24,
       )),
-      body: const SafeArea(
+      body: SafeArea(
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              StudySetting(),
-              QuestionAmountPerTest(),
-              BackupAndRestore(),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 14.0).r,
+            child: const Column(
+              children: [
+                StudyPreferences(),
+                BackupAndRestore(),
+              ],
+            ),
           ),
         ),
       ),

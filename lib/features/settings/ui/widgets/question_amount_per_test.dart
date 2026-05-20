@@ -1,8 +1,10 @@
+import 'package:cardy/core/theme/app_text_styles.dart' show AppTextStyles;
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/features/settings/manager/settings_cubit/settings_cubit.dart';
 import 'package:cardy/features/settings/manager/settings_cubit/settings_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class QuestionAmountPerTest extends StatelessWidget {
   const QuestionAmountPerTest({
@@ -11,95 +13,70 @@ class QuestionAmountPerTest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (_) {
-            return const QuestionsCountDialog();
-          },
+    return BlocBuilder<SettingsCubit, SettingsState>(
+      builder: (context, state) {
+        final amount =
+            context.read<SettingsCubit>().settingsModel.questionsAmount;
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            ListTile(
+              contentPadding: const EdgeInsets.symmetric(horizontal: 16).r,
+              leading: Container(
+                width: 44.w,
+                height: 44.w,
+                decoration: const BoxDecoration(
+                  color: AppColors.grey1D2127,
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.radar_rounded,
+                    color: AppColors.blueADC6FF,
+                  ),
+                ),
+              ),
+              title: Text(
+                'Target Cards',
+                style: AppTextStyles.bold16,
+              ),
+              subtitle: Text(
+                'Number of cards per test',
+                style: AppTextStyles.regular12,
+              ),
+              trailing: Text(
+                amount.toString(),
+                style:
+                    AppTextStyles.bold22.copyWith(color: AppColors.blueADC6FF),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12).r,
+              child: SliderTheme(
+                data: SliderTheme.of(context).copyWith(
+                  activeTrackColor: AppColors.blueADC6FF,
+                  inactiveTrackColor: const Color(0xFF32353C),
+                  thumbColor: AppColors.blueADC6FF,
+                  overlayColor: AppColors.blueADC6FF.withAlpha(80),
+                  trackHeight: 8,
+                ),
+                child: Slider(
+                  value: amount.toDouble().clamp(10.0, 100.0),
+                  min: 10,
+                  max: 100,
+                  divisions: 9,
+                  onChanged: (value) {
+                    context
+                        .read<SettingsCubit>()
+                        .updateQuestionAmount(value.toInt());
+                  },
+                ),
+              ),
+            ),
+          ],
         );
       },
-      title: const Text('Question amount per test'),
-      subtitle: BlocBuilder<SettingsCubit, SettingsState>(
-        builder: (context, state) {
-          return Text(
-              '${context.read<SettingsCubit>().settingsModel.questionsAmount} questions');
-        },
-      ),
-      subtitleTextStyle: const TextStyle(color: AppColors.greyLightE1E2EC),
-    );
-  }
-}
-
-class QuestionsCountDialog extends StatefulWidget {
-  const QuestionsCountDialog({super.key});
-
-  @override
-  State<QuestionsCountDialog> createState() => _QuestionsCountDialogState();
-}
-
-class _QuestionsCountDialogState extends State<QuestionsCountDialog> {
-  late int groupValue;
-  final List<int> questionCounts = [3, 5, 10, 25, 50, 100];
-
-  @override
-  void initState() {
-    groupValue = context.read<SettingsCubit>().settingsModel.questionsAmount;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 50),
-      title: const Text('Questions'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: questionCounts.asMap().entries.map((entry) {
-          int value = entry.value;
-          return QuestionCount(value, groupValue, (value) {
-            setState(() {
-              groupValue = value!;
-            });
-          });
-        }).toList(),
-      ),
-      actions: [
-        TextButton(
-          child: const Text('Cancel'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: const Text('Ok'),
-          onPressed: () {
-            context.read<SettingsCubit>().updateQuestionAmount(groupValue);
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class QuestionCount extends StatelessWidget {
-  final int value;
-  final int groupValue;
-
-  final void Function(int?)? onChanged;
-
-  const QuestionCount(this.value, this.groupValue, this.onChanged, {super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Radio(value: value, groupValue: groupValue, onChanged: onChanged),
-        Text(value.toString()),
-      ],
     );
   }
 }
