@@ -8,6 +8,7 @@ class CustomInputField extends StatelessWidget {
   final String hintText;
   final TextEditingController? controller;
   final int maxLines;
+  final int? maxLength;
   final TextInputAction textInputAction;
   final String? Function(String?)? validator;
 
@@ -17,6 +18,7 @@ class CustomInputField extends StatelessWidget {
     required this.hintText,
     this.controller,
     this.maxLines = 1,
+    this.maxLength,
     this.textInputAction = TextInputAction.next,
     this.validator,
   });
@@ -45,6 +47,7 @@ class CustomInputField extends StatelessWidget {
         TextFormField(
           controller: controller,
           maxLines: maxLines,
+          maxLength: maxLength,
           textInputAction: textInputAction,
           validator: validator,
           style: TextStyle(

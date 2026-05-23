@@ -104,10 +104,13 @@ class SetCard extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      Text(
-                        setModel.description,
-                        style: AppTextStyles.regular14.copyWith(
-                          color: AppColors.greyC2C6D6,
+                      Flexible(
+                        child: Text(
+                          setModel.description,
+                          style: AppTextStyles.regular14.copyWith(
+                            color: AppColors.greyC2C6D6,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ],

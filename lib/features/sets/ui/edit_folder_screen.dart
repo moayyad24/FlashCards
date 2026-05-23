@@ -80,6 +80,7 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
                   label: 'Title',
                   hintText: 'e.g. English Phrases',
                   controller: _titleController,
+                  maxLength: 20,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter a title';
@@ -94,6 +95,7 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
                   maxLines: 4,
                   textInputAction: TextInputAction.done,
                   controller: _descController,
+                  maxLength: 100,
                 ),
                 const SizedBox(height: 20),
                 VisualIdentityCard(
@@ -110,6 +112,7 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
         ),
       ),
       bottomNavigationBar: EditBottomBar(
+        title: 'Apply Changes',
         onPressed: () async {
           await _onConfirm(context);
         },

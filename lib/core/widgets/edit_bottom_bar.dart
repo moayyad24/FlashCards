@@ -6,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class EditBottomBar extends StatelessWidget {
   const EditBottomBar({
     super.key,
+    required String title,
     required void Function()? onPressed,
-  }) : _onPressed = onPressed;
-
+  })  : _title = title,
+        _onPressed = onPressed;
+  final String _title;
   final void Function()? _onPressed;
 
   @override
@@ -41,7 +43,7 @@ class EditBottomBar extends StatelessWidget {
                 ),
                 const SizedBox(width: 8),
                 Text(
-                  'Apply Changes',
+                  _title,
                   style: AppTextStyles.medium16
                       .copyWith(color: AppColors.purple2B2148),
                 ),

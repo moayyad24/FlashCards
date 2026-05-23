@@ -92,6 +92,7 @@ class _EditSetScreenState extends State<EditSetScreen> {
                   label: 'Title',
                   hintText: 'e.g. English Phrases',
                   controller: _titleController,
+                  maxLength: 20,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
                       return 'Please enter a title';
@@ -106,6 +107,7 @@ class _EditSetScreenState extends State<EditSetScreen> {
                   maxLines: 4,
                   textInputAction: TextInputAction.done,
                   controller: _descController,
+                  maxLength: 100,
                 ),
                 const SizedBox(height: 20),
                 VisualIdentityCard(
@@ -123,6 +125,7 @@ class _EditSetScreenState extends State<EditSetScreen> {
         ),
       ),
       bottomNavigationBar: EditBottomBar(
+        title: 'Apply Changes',
         onPressed: () async {
           await _onConfirm(context);
         },

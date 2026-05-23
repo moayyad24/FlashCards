@@ -43,6 +43,7 @@ class AddFolderSetBody extends StatelessWidget {
                 label: 'Title',
                 hintText: 'e.g. English Phrases',
                 controller: _titleController,
+                maxLength: 20,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter a title';
@@ -57,6 +58,7 @@ class AddFolderSetBody extends StatelessWidget {
                 maxLines: 4,
                 textInputAction: TextInputAction.done,
                 controller: _descController,
+                maxLength: 100,
               ),
               const SizedBox(height: 20),
               VisualIdentityCard(
