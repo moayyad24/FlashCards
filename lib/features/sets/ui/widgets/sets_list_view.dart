@@ -1,3 +1,4 @@
+import 'package:cardy/features/home/ui/widgets/empty_placeholder.dart';
 import 'package:cardy/features/home/ui/widgets/set_card.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_state.dart';
@@ -15,14 +16,26 @@ class SetsListView extends StatelessWidget {
     return BlocBuilder<SetsCubit, SetsState>(
       builder: (context, state) {
         if (state is SetsSuccess || state is SetsFolderEdited) {
+          final setsList = context.read<SetsCubit>().setsList;
+
+          if (setsList.isEmpty) {
+            return const Expanded(
+              child: EmptyPlaceholder(
+                title: 'This folder is empty',
+                subtitle:
+                    'Add some sets here to start organizing your study material!',
+              ),
+            );
+          }
+
           return Expanded(
             child: ListView.separated(
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 12).r,
-              itemCount: context.read<SetsCubit>().setsList.length,
+              itemCount: setsList.length,
               itemBuilder: (context, index) {
                 return SetCard(
-                  setModel: context.read<SetsCubit>().setsList[index],
+                  setModel: setsList[index],
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(

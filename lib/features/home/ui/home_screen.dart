@@ -65,9 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    FolderCardList(folders: state.homeData.folders),
-                    20.verticalSpace,
-                    SetsList(sets: state.homeData.sets)
+                    if (state.homeData.folders.isNotEmpty) ...[
+                      FolderCardList(folders: state.homeData.folders),
+                      20.verticalSpace,
+                    ],
+                    if (state.homeData.sets.isNotEmpty)
+                      SetsList(sets: state.homeData.sets),
                   ],
                 ),
               );

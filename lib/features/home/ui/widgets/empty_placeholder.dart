@@ -4,8 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EmptyPlaceholder extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
   const EmptyPlaceholder({
     super.key,
+    this.title = 'Start your learning journey!',
+    this.subtitle =
+        'Looks like you don\'t have any flashcards yet. Create your first folder or set to begin!',
   });
 
   @override
@@ -29,13 +35,13 @@ class EmptyPlaceholder extends StatelessWidget {
               ),
               10.verticalSpace,
               Text(
-                'Start your learning journey!',
+                title,
                 style: AppTextStyles.bold26,
                 textAlign: TextAlign.center,
               ),
               10.verticalSpace,
               Text(
-                'Looks like you don\'t have any flashcards yet. Create your first folder or set to begin!',
+                subtitle,
                 style: AppTextStyles.medium16
                     .copyWith(color: AppColors.greyC2C6D6),
                 textAlign: TextAlign.center,
