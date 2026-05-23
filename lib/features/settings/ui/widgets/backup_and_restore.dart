@@ -10,16 +10,12 @@ class BackupAndRestore extends StatelessWidget {
     super.key,
   });
   final String note = '''
-    1. Open your file manager app on your phone (look for “Files,” “My Files,” etc.).
-    2. Go to your internal storage (this may be labeled "Internal Storage" or "Phone Storage").
-    3. Find the folder named “Cardy.”
-    4. Send the “Cardy” folder to your second phone.
-    5. On your second phone, open the file manager app.
-    6. Go to its internal storage.
-    7. Paste the “Cardy” folder there.
-    8. Open the app on your second phone.
-    9. Go to settings and tap the “Restore” button.
-    10. Follow any additional prompts to finish restoring your data.''';
+To move your data to a new phone:
+
+1. Tap 'Backup' on your old phone.
+2. Find the "Cardy" folder in your phone's Internal Storage.
+3. Copy the "Cardy" folder to your new phone's Internal Storage.
+4. Open Cardy on your new phone and tap 'Restore'.''';
   @override
   Widget build(BuildContext context) {
     return SettingsSection(
@@ -29,7 +25,30 @@ class BackupAndRestore extends StatelessWidget {
           children: [
             ListTile(
               onTap: () {
-                context.read<SettingsCubit>().backupDatabase();
+                showDialog(
+                  context: context,
+                  builder: (dialogContext) {
+                    return AlertDialog(
+                      title: Text('Backup Data', style: AppTextStyles.bold16),
+                      content: Text(
+                          'Are you sure you want to backup your data? This will overwrite any existing backup.',
+                          style: AppTextStyles.medium12),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(dialogContext),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(dialogContext);
+                            context.read<SettingsCubit>().backupDatabase();
+                          },
+                          child: const Text('Backup'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               title: const Text('Backup'),
               titleTextStyle: AppTextStyles.bold16,
@@ -38,12 +57,37 @@ class BackupAndRestore extends StatelessWidget {
               trailing: const Icon(Icons.backup_outlined),
             ),
             ListTile(
-              onTap: () async {
-                await context.read<SettingsCubit>().restoreDatabase();
-                if (context.mounted) {
-                  context.read<SettingsCubit>().fetchSettings();
-                  context.read<HomeCubit>().homeFetchData();
-                }
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (dialogContext) {
+                    return AlertDialog(
+                      title: Text('Restore Data', style: AppTextStyles.bold16),
+                      content: Text(
+                          'Are you sure you want to restore? This will OVERWRITE your current folders and sets.',
+                          style: AppTextStyles.medium12),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(dialogContext),
+                          child: const Text('Cancel'),
+                        ),
+                        TextButton(
+                          onPressed: () async {
+                            Navigator.pop(dialogContext);
+                            await context
+                                .read<SettingsCubit>()
+                                .restoreDatabase();
+                            if (context.mounted) {
+                              context.read<SettingsCubit>().fetchSettings();
+                              context.read<HomeCubit>().homeFetchData();
+                            }
+                          },
+                          child: const Text('Restore'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               },
               title: const Text('Restore'),
               titleTextStyle: AppTextStyles.bold16,
@@ -64,6 +108,12 @@ class BackupAndRestore extends StatelessWidget {
                           note,
                           style: AppTextStyles.medium12,
                         ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(_),
+                            child: const Text('Got it'),
+                          ),
+                        ],
                       );
                     },
                   );

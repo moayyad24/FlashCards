@@ -8,10 +8,6 @@ AppBar editCardAppBar(BuildContext context, CardModel cardModel) {
   return AppBar(
     title: const Text('Edit cards'),
     titleTextStyle: const TextStyle(fontSize: 24),
-    leading: IconButton(
-      onPressed: () {},
-      icon: const Icon(Icons.close_rounded),
-    ),
     actions: [
       IconButton(
         onPressed: () async {

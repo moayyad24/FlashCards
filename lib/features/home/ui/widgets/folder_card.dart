@@ -78,16 +78,20 @@ class FolderCard extends StatelessWidget {
               ],
             ),
 
-            8.verticalSpace,
-
             // --- Description Text ---
-            Text(
-              folder.description,
-              style: AppTextStyles.regular16
-                  .copyWith(color: AppColors.greyC2C6D6, height: 1.4),
-              maxLines: 3,
-              overflow: TextOverflow.ellipsis,
-            ),
+            if (folder.description.isNotEmpty)
+              Column(
+                children: [
+                  8.verticalSpace,
+                  Text(
+                    folder.description,
+                    style: AppTextStyles.regular16
+                        .copyWith(color: AppColors.greyC2C6D6, height: 1.4),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
 
             20.verticalSpace,
 
@@ -104,9 +108,9 @@ class FolderCard extends StatelessWidget {
                     _buildBadge("${folder.numOfCards} Cards"),
                   ],
                 ),
-
+                //TODO: Implement this
                 // Progress Circle
-                _buildProgressCircle(percentage: 50),
+                // _buildProgressCircle(percentage: 50),
               ],
             ),
           ],
