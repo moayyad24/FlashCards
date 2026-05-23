@@ -7,18 +7,19 @@ class SetModel {
   final Color color;
   final String icon;
   final int folderId;
-  final int numOfCards;
+  final int? numOfCards;
   final String? createdAt;
 
-  SetModel(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.color,
-      required this.icon,
-      required this.folderId,
-      required this.numOfCards,
-      this.createdAt});
+  SetModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.color,
+    required this.icon,
+    required this.folderId,
+    this.numOfCards,
+    this.createdAt,
+  });
 
   factory SetModel.fromSql(Map<String, dynamic> map) {
     return SetModel(

@@ -60,7 +60,6 @@ class CreateNewBottomBar extends StatelessWidget {
                   color: _selectedColor,
                   icon: _iconToDb(_selectedIcon),
                   folderId: 0,
-                  numOfCards: 0,
                 );
                 await context.read<HomeCubit>().insertAnewSet(newSet);
               } else {
@@ -69,8 +68,6 @@ class CreateNewBottomBar extends StatelessWidget {
                   title: _titleController.text,
                   description: _descController.text,
                   color: _selectedColor,
-                  numOfSets: 0,
-                  numOfCards: 0,
                 );
                 await context.read<HomeCubit>().insertAnewFolder(newFolder);
               }

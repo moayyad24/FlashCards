@@ -63,10 +63,10 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     String sql =
         'UPDATE folders SET  folder_title = ?, folder_desc = ?, folder_color = ? WHERE folder_id = ?';
     List<dynamic> arguments = [
+      folder.id,
       folder.title,
       folder.description,
       folder.color.value.toRadixString(16).padLeft(8, '0'),
-      folder.id,
     ];
     try {
       int result = await update(sql, arguments);

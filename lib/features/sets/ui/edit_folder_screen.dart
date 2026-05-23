@@ -46,8 +46,6 @@ class _EditFolderScreenState extends State<EditFolderScreen> {
       title: _titleController.text,
       description: _descController.text,
       color: _selectedColor,
-      numOfSets: widget.folderModel.numOfSets,
-      numOfCards: widget.folderModel.numOfCards,
     );
     var setsCubit = context.read<SetsCubit>();
     var editSetCubit = context.read<EditFolderCubit>();

@@ -52,7 +52,6 @@ class _EditSetScreenState extends State<EditSetScreen> {
       color: _selectedColor,
       icon: _selectedIcon,
       folderId: widget.setModel.folderId,
-      numOfCards: widget.setModel.numOfCards,
     );
 
     var cardListCubit = context.read<CardsListCubit>();

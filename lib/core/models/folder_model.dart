@@ -5,18 +5,19 @@ class FolderModel {
   final String title;
   final String description;
   final Color color;
-  final int numOfSets;
-  final int numOfCards;
+  final int? numOfSets;
+  final int? numOfCards;
   final String? createdAt;
 
-  FolderModel(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.color,
-      required this.numOfSets,
-      required this.numOfCards,
-      this.createdAt});
+  FolderModel({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.color,
+    this.numOfSets,
+    this.numOfCards,
+    this.createdAt,
+  });
 
   factory FolderModel.fromSql(Map<String, dynamic> map) {
     return FolderModel(

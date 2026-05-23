@@ -94,7 +94,6 @@ class _AddSetScreenState extends State<AddSetScreen> {
               color: _selectedColor,
               icon: _iconToDb(_selectedIcon),
               folderId: widget.folderId,
-              numOfCards: 0,
             );
             await BlocProvider.of<SetsCubit>(context).insertAnewSet(newSet);
             if (context.mounted) {
