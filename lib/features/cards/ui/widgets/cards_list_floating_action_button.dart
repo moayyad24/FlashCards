@@ -1,3 +1,4 @@
+import 'package:cardy/core/cubits/ads_cubit/ads_cubit.dart';
 import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/core/widgets/app_snack_bar.dart';
@@ -39,6 +40,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
               CardsListCubit c = context.read<CardsListCubit>();
               await c.filterCardsBySettings();
               if (context.mounted && c.filteredCardsList.isNotEmpty) {
+                context.read<AdsCubit>().loadInterstitialAd();
                 Navigator.of(context).pushNamed(
                   Routes.cardsTestScreen,
                   arguments: context.read<CardsListCubit>(),

@@ -1,3 +1,4 @@
+import 'package:cardy/core/cubits/ads_cubit/ads_cubit.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_state.dart';
 import 'package:cardy/features/cards_test/ui/widgets/my_card.dart';
@@ -9,7 +10,12 @@ class CardsTestBody extends StatelessWidget {
   const CardsTestBody({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CardsTestCubit, CardsTestState>(
+    return BlocConsumer<CardsTestCubit, CardsTestState>(
+      listener: (context, state) {
+        if (state is CardsTestFinish) {
+          context.read<AdsCubit>().showInterstitialAd();
+        }
+      },
       builder: (context, state) {
         CardsTestCubit cardsTestCubit = context.read<CardsTestCubit>();
         if (state is CardsTestFinish) {
