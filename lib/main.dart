@@ -1,3 +1,4 @@
+import 'package:cardy/core/cubits/ads_cubit/ads_cubit.dart';
 import 'package:cardy/core/helper/app_router.dart';
 import 'package:cardy/core/helper/dependency_injection.dart';
 import 'package:cardy/core/helper/simple_bloc_observer.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +22,7 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  MobileAds.instance.initialize();
   await ScreenUtil.ensureScreenSize();
   setupGetIt();
   runApp(DevicePreview(
@@ -47,6 +50,9 @@ class Cardy extends StatelessWidget {
             lazy: false,
             create: (context) =>
                 SettingsCubit(getIt.get<SettingsRepoImpl>())..fetchSettings(),
+          ),
+          BlocProvider(
+            create: (context) => AdsCubit(),
           ),
           BlocProvider(
             create: (context) =>
