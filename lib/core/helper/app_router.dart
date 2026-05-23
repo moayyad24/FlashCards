@@ -23,12 +23,15 @@ import 'package:cardy/features/sets/ui/add_set_screen.dart';
 import 'package:cardy/features/sets/ui/edit_folder_screen.dart';
 import 'package:cardy/features/sets/ui/sets_list_screen.dart';
 import 'package:cardy/features/settings/ui/settings_screen.dart';
+import 'package:cardy/features/splash/ui/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppRouter {
   Route? generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case Routes.splashScreen:
+        return _buildSplashScreenRoute();
       case Routes.homeScreen:
         return _buildHomeScreenRoute();
       case Routes.addFolderSetScreen:
@@ -60,6 +63,12 @@ class AppRouter {
       default:
         return null;
     }
+  }
+
+  Route _buildSplashScreenRoute() {
+    return MaterialPageRoute(
+      builder: (_) => const SplashScreen(),
+    );
   }
 
   Route _buildHomeScreenRoute() {

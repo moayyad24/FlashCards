@@ -1,5 +1,6 @@
 class Routes {
-  static const String homeScreen = '/';
+  static const String splashScreen = '/';
+  static const String homeScreen = '/homeScreen';
   static const String addFolderSetScreen = '/addFolderSetScreen';
   static const String cardsListScreen = '/cardsListScreen';
   static const String addNewCardScreen = '/addNewCardScreen';
