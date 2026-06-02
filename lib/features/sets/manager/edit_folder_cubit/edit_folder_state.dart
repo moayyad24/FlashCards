@@ -1,7 +1,7 @@
 abstract class EditFolderState {}
 
-final class EditFolderInitial extends EditFolderState {}
+class EditFolderInitial extends EditFolderState {}
 
-final class EditFolderLoading extends EditFolderState {}
+class EditFolderLoading extends EditFolderState {}
 
-final class EditFolderSuccess extends EditFolderState {}
+class EditFolderSuccess extends EditFolderState {}

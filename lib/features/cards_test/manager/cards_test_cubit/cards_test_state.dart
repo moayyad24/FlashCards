@@ -1,11 +1,11 @@
 abstract class CardsTestState {}
 
-final class CardsTestInitial extends CardsTestState {}
+class CardsTestInitial extends CardsTestState {}
 
-final class CardsTestOnDismissed extends CardsTestState {}
+class CardsTestOnDismissed extends CardsTestState {}
 
-final class CardsTestOnUpdate extends CardsTestState {}
+class CardsTestOnUpdate extends CardsTestState {}
 
-final class CardsTestFinish extends CardsTestState {}
+class CardsTestFinish extends CardsTestState {}
 
-final class CardsTestTakeAnewTest extends CardsTestState {}
+class CardsTestTakeAnewTest extends CardsTestState {}

@@ -1,7 +1,7 @@
 abstract class EditCardState {}
 
-final class EditCardInitial extends EditCardState {}
+class EditCardInitial extends EditCardState {}
 
-final class EditCardLoading extends EditCardState {}
+class EditCardLoading extends EditCardState {}
 
-final class EditCardSuccess extends EditCardState {}
+class EditCardSuccess extends EditCardState {}
