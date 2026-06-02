@@ -10,12 +10,13 @@ class BackupAndRestore extends StatelessWidget {
     super.key,
   });
   final String note = '''
-To move your data to a new phone:
-
-1. Tap 'Backup' on your old phone.
-2. Find the "Cardy" folder in your phone's Internal Storage.
-3. Copy the "Cardy" folder to your new phone's Internal Storage.
-4. Open Cardy on your new phone and tap 'Restore'.''';
+• On your old phone, tap 'Backup'
+• Locate the backup file in your device storage
+• Copy the file to your new phone's Internal Storage
+• Open Cardy on your new phone
+• Tap 'Restore' and select your backup file
+• All done - your data is now transferred!
+''';
   @override
   Widget build(BuildContext context) {
     return SettingsSection(
@@ -25,30 +26,7 @@ To move your data to a new phone:
           children: [
             ListTile(
               onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (dialogContext) {
-                    return AlertDialog(
-                      title: Text('Backup Data', style: AppTextStyles.bold16),
-                      content: Text(
-                          'Are you sure you want to backup your data? This will overwrite any existing backup.',
-                          style: AppTextStyles.medium12),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(dialogContext),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(dialogContext);
-                            context.read<SettingsCubit>().backupDatabase();
-                          },
-                          child: const Text('Backup'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+                context.read<SettingsCubit>().backupDatabase();
               },
               title: const Text('Backup'),
               titleTextStyle: AppTextStyles.bold16,
@@ -101,12 +79,12 @@ To move your data to a new phone:
                     builder: (_) {
                       return AlertDialog(
                         title: Text(
-                          'How to Restore Your Data from Another Phone:',
+                          'How to transfer your data to a new phone:',
                           style: AppTextStyles.bold16,
                         ),
                         content: Text(
                           note,
-                          style: AppTextStyles.medium12,
+                          style: AppTextStyles.medium14,
                         ),
                         actions: [
                           TextButton(

@@ -3,13 +3,12 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:cardy/core/helper/db_helper.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:cardy/core/widgets/show_app_toast.dart';
 import 'package:cardy/features/settings/data/repo/settings_repo.dart';
 import 'package:cardy/features/settings/data/model/settings_model.dart';
 
 class SettingsRepoImpl extends DbHelper implements SettingsRepo {
-  String backupsPath = Directory('/storage/emulated/0/Cardy/Backups').path;
   @override
   Future<SettingsModel> fetchSettings() async {
     List<SettingsModel> settingsList = [];
@@ -64,87 +63,67 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
   }
 
 //backup database to local storage
-  Future<void> copyDirectory(Directory source, Directory destination) async {
-    // Create the destination directory if it doesn't exist
-    if (!await destination.exists()) {
-      await destination.create(recursive: true);
-    }
-
-    // Iterate over all files and directories in the source directory
-    await for (var entity in source.list()) {
-      if (entity is File) {
-        // Copy the file to the destination
-        await entity.copy(join(destination.path, basename(entity.path)));
-      } else if (entity is Directory) {
-        // If it's a directory, recursively copy its contents
-        await copyDirectory(
-            entity, Directory(join(destination.path, basename(entity.path))));
-      }
-    }
-  }
-
-  Future<bool> _requestStoragePermission() async {
-    if (Platform.isAndroid) {
-      // For Android 11+
-      var status = await Permission.manageExternalStorage.status;
-      if (!status.isGranted) {
-        status = await Permission.manageExternalStorage.request();
-      }
-      if (status.isGranted) {
-        return true;
-      }
-    }
-
-    // Fallback for older Android versions & other platforms
-    var status = await Permission.storage.status;
-    if (!status.isGranted) {
-      status = await Permission.storage.request();
-    }
-    return status.isGranted;
-  }
-
   @override
   Future<void> backupDatabase() async {
-    if (await _requestStoragePermission()) {
-      // Specify the source and destination directories
-      String databasePath = await getDatabasesPath(); //database path
+    String databasePath = await getDatabasesPath();
+    String dbPath = join(databasePath, 'flash_cards.db');
+    File dbFile = File(dbPath);
 
-      // Create a new backup directory if it doesn't exist
-      Directory(backupsPath).createSync(recursive: true);
-
+    if (await dbFile.exists()) {
       try {
-        await copyDirectory(Directory(databasePath), Directory(backupsPath));
-        await showAppToast("Backed up to: /storage/emulated/0/Cardy/Backups");
-        debugPrint('Database backed up to: $backupsPath');
+        Uint8List dbBytes = await dbFile.readAsBytes();
+
+        // Generate a timestamp like "2026-06-02_14-30-00"
+        String timestamp = DateTime.now().toString().split(' ')[0];
+
+        String? outputFile = await FilePicker.saveFile(
+          dialogTitle: 'Save Database Backup',
+          fileName: 'flash_cards_backup_$timestamp.db',
+          bytes: dbBytes,
+        );
+
+        if (outputFile != null) {
+          await showAppToast("Backed up successfully");
+          debugPrint('Database backed up to: $outputFile');
+        } else {
+          await showAppToast("Backup cancelled.");
+          debugPrint('Backup cancelled.');
+        }
       } catch (e) {
         debugPrint('Error backing up database: $e');
+        await showAppToast("Error during backup");
       }
     } else {
-      await showAppToast("Storage permission is required for backup.");
-      debugPrint('Storage permission is required for backup.');
+      await showAppToast("No database found to backup.");
     }
   }
 
   @override
   Future<void> restoreDatabase() async {
-    if (await _requestStoragePermission()) {
-      // Specify the source and destination directories
-      String databasePath = await getDatabasesPath(); //database path
-      try {
-        if (await Directory(backupsPath).exists()) {
-          await copyDirectory(Directory(backupsPath), Directory(databasePath));
-          await showAppToast("Successfully restored");
-          debugPrint('Database backed up to: $databasePath');
-        } else {
-          await showAppToast("Make sure you have a backup");
-          debugPrint('No backup found.');
-        }
-      } catch (e) {
-        debugPrint('Error backing up database: $e');
+    try {
+      FilePickerResult? result = await FilePicker.pickFiles(
+        dialogTitle: 'Select Database Backup',
+        type: FileType.any,
+      );
+
+      if (result != null && result.files.single.path != null) {
+        String databasePath = await getDatabasesPath();
+        String dbPath = join(databasePath, 'flash_cards.db');
+
+        File sourceFile = File(result.files.single.path!);
+        File targetFile = File(dbPath);
+
+        await sourceFile.copy(targetFile.path);
+
+        await showAppToast("Successfully restored");
+        debugPrint('Database restored from: ${result.files.single.path}');
+      } else {
+        await showAppToast("Restore cancelled.");
+        debugPrint('Restore cancelled.');
       }
-    } else {
-      await showAppToast("Storage permission is required for restore.");
-      debugPrint('Storage permission is required for restore.');
+    } catch (e) {
+      debugPrint('Error restoring database: $e');
+      await showAppToast("Error restoring database");
     }
   }
 }
