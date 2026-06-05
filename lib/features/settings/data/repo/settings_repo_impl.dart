@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter/foundation.dart';
+import 'package:share_plus/share_plus.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:archive/archive_io.dart';
 import 'package:cardy/core/helper/db_helper.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:cardy/core/widgets/show_app_toast.dart';
@@ -65,36 +68,65 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
 //backup database to local storage
   @override
   Future<void> backupDatabase() async {
-    String databasePath = await getDatabasesPath();
-    String dbPath = join(databasePath, 'flash_cards.db');
-    File dbFile = File(dbPath);
-
-    if (await dbFile.exists()) {
-      try {
-        Uint8List dbBytes = await dbFile.readAsBytes();
-
-        // Generate a timestamp like "2026-06-02_14-30-00"
-        String timestamp = DateTime.now().toString().split(' ')[0];
-
-        String? outputFile = await FilePicker.saveFile(
-          dialogTitle: 'Save Database Backup',
-          fileName: 'flash_cards_backup_$timestamp.db',
-          bytes: dbBytes,
-        );
-
-        if (outputFile != null) {
-          await showAppToast("Backed up successfully");
-          debugPrint('Database backed up to: $outputFile');
-        } else {
-          await showAppToast("Backup cancelled.");
-          debugPrint('Backup cancelled.');
-        }
-      } catch (e) {
-        debugPrint('Error backing up database: $e');
-        await showAppToast("Error during backup");
+    try {
+      Database? db = await getInstance;
+      if (db != null) {
+        await db.rawQuery('PRAGMA wal_checkpoint(FULL)');
       }
-    } else {
-      await showAppToast("No database found to backup.");
+
+      String databasePath = await getDatabasesPath();
+      String dbPath = join(databasePath, 'flash_cards.db');
+      File dbFile = File(dbPath);
+
+      if (await dbFile.exists()) {
+        final archive = Archive();
+
+        // Add the main db file
+        final dbBytes = await dbFile.readAsBytes();
+        archive.addFile(ArchiveFile('flash_cards.db', dbBytes.length, dbBytes));
+
+        // Check for wal and shm files and add them if they exist
+        final walFile = File('$dbPath-wal');
+        if (await walFile.exists()) {
+          final walBytes = await walFile.readAsBytes();
+          archive.addFile(
+              ArchiveFile('flash_cards.db-wal', walBytes.length, walBytes));
+        }
+
+        final shmFile = File('$dbPath-shm');
+        if (await shmFile.exists()) {
+          final shmBytes = await shmFile.readAsBytes();
+          archive.addFile(
+              ArchiveFile('flash_cards.db-shm', shmBytes.length, shmBytes));
+        }
+
+        final zipEncoder = ZipEncoder();
+        final zipBytes = zipEncoder.encode(archive);
+
+        String timestamp = DateTime.now()
+            .toString()
+            .replaceAll(' ', '_')
+            .replaceAll(':', '-')
+            .split('.')[0];
+        final tempDir = await getTemporaryDirectory();
+        final backupFilePath =
+            join(tempDir.path, 'flash_cards_backup_$timestamp.zip');
+
+        final backupFile = File(backupFilePath);
+        await backupFile.writeAsBytes(zipBytes);
+
+        await SharePlus.instance.share(
+          ShareParams(
+            files: [XFile(backupFile.path)],
+            text: 'Flash Cards Backup',
+          ),
+        );
+      } else {
+        await showAppToast("No database found to backup.");
+      }
+    } catch (e) {
+      debugPrint('Error backing up database: $e');
+      await showAppToast("Error during backup");
     }
   }
 
@@ -103,20 +135,39 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
     try {
       FilePickerResult? result = await FilePicker.pickFiles(
         dialogTitle: 'Select Database Backup',
-        type: FileType.any,
+        type: FileType.custom,
+        allowedExtensions: ['zip', 'db'],
       );
 
       if (result != null && result.files.single.path != null) {
+        String backupPath = result.files.single.path!;
+        File backupFile = File(backupPath);
+
+        await closeDatabase();
+
         String databasePath = await getDatabasesPath();
         String dbPath = join(databasePath, 'flash_cards.db');
 
-        File sourceFile = File(result.files.single.path!);
-        File targetFile = File(dbPath);
+        if (backupPath.endsWith('.zip')) {
+          final bytes = await backupFile.readAsBytes();
+          final archive = ZipDecoder().decodeBytes(bytes);
 
-        await sourceFile.copy(targetFile.path);
+          for (final file in archive) {
+            if (file.isFile) {
+              final data = file.content as List<int>;
+              final outFile = File(join(databasePath, file.name));
+              await outFile.writeAsBytes(data, flush: true);
+            }
+          }
+        } else if (backupPath.endsWith('.db')) {
+          await backupFile.copy(dbPath);
+        }
+
+        // Reopen DB to ensure it works
+        await getInstance;
 
         await showAppToast("Successfully restored");
-        debugPrint('Database restored from: ${result.files.single.path}');
+        debugPrint('Database restored from: $backupPath');
       } else {
         await showAppToast("Restore cancelled.");
         debugPrint('Restore cancelled.');

@@ -104,4 +104,11 @@ class DbHelper {
     int count = await db!.rawDelete(sqlTxt, arguments);
     return count;
   }
+
+  Future<void> closeDatabase() async {
+    if (_db != null) {
+      await _db!.close();
+      _db = null;
+    }
+  }
 }
