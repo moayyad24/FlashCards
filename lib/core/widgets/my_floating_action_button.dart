@@ -12,10 +12,10 @@ class MyFloatingActionButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(18),
       onTap: onTap,
       child: Container(
-        width: 60.w,
-        height: 60.w,
+        width: 60.h,
+        height: 60.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(18).r,
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -33,11 +33,11 @@ class MyFloatingActionButton extends StatelessWidget {
             ),
           ],
         ),
-        child: const Center(
+        child: Center(
           child: Icon(
-            Icons.add,
+            Icons.add_rounded,
             color: AppColors.white,
-            size: 30,
+            size: 30.w,
           ),
         ),
       ),

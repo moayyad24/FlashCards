@@ -1,4 +1,3 @@
-import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/features/settings/ui/widgets/backup_and_restore.dart';
 import 'package:cardy/features/settings/ui/widgets/study_preferences.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +12,8 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(
           title: Text(
         'Settings',
-        style: AppTextStyles.bold24,
+        style: TextStyle(
+            fontSize: 1.sw > 760 ? 42 : 28, fontWeight: FontWeight.bold),
       )),
       body: SafeArea(
         child: SingleChildScrollView(

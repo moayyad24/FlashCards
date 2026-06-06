@@ -37,8 +37,8 @@ class _SettingsListTileState extends State<SettingsListTile> {
     return ListTile(
       contentPadding: const EdgeInsets.only(left: 16, right: 12).r,
       leading: Container(
-        width: 44.w,
-        height: 44.w,
+        width: 44,
+        height: 44,
         decoration: const BoxDecoration(
           color: AppColors.grey1D2127,
           shape: BoxShape.circle,

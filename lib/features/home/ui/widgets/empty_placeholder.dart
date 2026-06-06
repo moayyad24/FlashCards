@@ -30,20 +30,23 @@ class EmptyPlaceholder extends StatelessWidget {
             children: [
               Image.asset(
                 'assets/images/app_logo.png',
-                width: 120.w,
-                height: 120.w,
+                width: 120,
+                height: 120,
               ),
               10.verticalSpace,
               Text(
                 title,
-                style: AppTextStyles.bold26,
+                style:
+                    const TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
               10.verticalSpace,
               Text(
                 subtitle,
-                style: AppTextStyles.medium16
-                    .copyWith(color: AppColors.greyC2C6D6),
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.greyC2C6D6),
                 textAlign: TextAlign.center,
               ),
             ],

@@ -45,7 +45,7 @@ class CreateNewBottomBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16.0),
       child: SafeArea(
         child: SizedBox(
-          height: 56,
+          height: 50.h,
           child: ElevatedButton(
             onPressed: () async {
               if (!(_formKey.currentState?.validate() ?? false)) {

@@ -28,7 +28,10 @@ class CardsListsFloatingActionButton extends StatelessWidget {
             },
             heroTag: 'first',
             backgroundColor: AppColors.greyLightE1E2EC,
-            child: const Icon(Icons.add),
+            child: Icon(
+              Icons.add_rounded,
+              size: 20.w,
+            ),
           ),
         ),
         const SizedBox(height: 10),
@@ -53,9 +56,10 @@ class CardsListsFloatingActionButton extends StatelessWidget {
               }
             },
             heroTag: 'second',
-            child: const Icon(
+            child: Icon(
               Icons.play_arrow_rounded,
               color: AppColors.grey282B36,
+              size: 22.w,
             ),
           ),
         ),

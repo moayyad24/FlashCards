@@ -45,10 +45,13 @@ class _ChooseToggleButtonState extends State<ChooseToggleButton> {
               AnimatedPositioned(
                 duration: const Duration(milliseconds: 250),
                 curve: Curves.easeInOutCubic,
-                left: _selectedOption == ToggleOption.sets ? 0 : (0.91).sw / 2,
+                top: 0,
+                bottom: 0,
+                left: _selectedOption == ToggleOption.sets
+                    ? 0
+                    : (constraints.maxWidth - 12.r) / 2,
+                width: (constraints.maxWidth - 12.r) / 2,
                 child: Container(
-                  width: (0.9).sw / 2,
-                  height: (56.h) - 16,
                   decoration: BoxDecoration(
                     color: activeColor,
                     borderRadius: BorderRadius.circular(12),

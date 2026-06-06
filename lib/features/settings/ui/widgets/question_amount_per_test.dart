@@ -24,8 +24,8 @@ class QuestionAmountPerTest extends StatelessWidget {
             ListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 16).r,
               leading: Container(
-                width: 44.w,
-                height: 44.w,
+                width: 44,
+                height: 44,
                 decoration: const BoxDecoration(
                   color: AppColors.grey1D2127,
                   shape: BoxShape.circle,

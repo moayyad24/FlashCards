@@ -12,7 +12,7 @@ class SaveCardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 56,
+      height: 50.h,
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
@@ -62,7 +62,7 @@ class SaveAndAddAnotherButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: double.infinity,
-      height: 56,
+      height: 50.h,
       child: OutlinedButton(
         onPressed: onPressed,
         style: OutlinedButton.styleFrom(

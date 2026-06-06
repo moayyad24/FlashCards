@@ -1,7 +1,9 @@
+import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_cubit.dart';
 import 'package:cardy/features/sets/manager/sets_cubit/sets_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SetsListScreenTitle extends StatelessWidget {
   const SetsListScreenTitle({super.key});
@@ -9,14 +11,14 @@ class SetsListScreenTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 15).r,
       child: Align(
         alignment: Alignment.topLeft,
         child: BlocBuilder<SetsCubit, SetsState>(
           builder: (context, state) {
             return Text(
               context.read<SetsCubit>().folderModel.title,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w500),
+              style: AppTextStyles.bold24,
             );
           },
         ),

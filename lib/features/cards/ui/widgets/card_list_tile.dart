@@ -9,6 +9,7 @@ import 'package:cardy/features/cards/manager/select_in_list_bloc/select_in_list_
 import 'package:cardy/features/cards/ui/widgets/check_box_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CardListTile extends StatelessWidget {
   const CardListTile({
@@ -29,7 +30,8 @@ class CardListTile extends StatelessWidget {
             selectBloc.selectedCardIdsList.isNotEmpty;
 
         return Padding(
-          padding: const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0),
+          padding:
+              const EdgeInsets.only(left: 12.0, right: 12.0, bottom: 12.0).r,
           child: Container(
             decoration: BoxDecoration(
                 color: isSelected
@@ -83,7 +85,7 @@ class CardListTile extends StatelessWidget {
                             cardModel.question,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: AppTextStyles.medium16,
+                            style: AppTextStyles.bold16,
                           ),
                           const SizedBox(height: 4),
                           Text(

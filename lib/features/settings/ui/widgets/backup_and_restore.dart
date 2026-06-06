@@ -30,7 +30,7 @@ class BackupAndRestore extends StatelessWidget {
               },
               title: const Text('Backup'),
               titleTextStyle: AppTextStyles.bold16,
-              subtitle: const Text('Backup your cards into your local storage'),
+              subtitle: const Text('Share your cards and keep them'),
               subtitleTextStyle: AppTextStyles.regular12,
               trailing: const Icon(Icons.backup_outlined),
             ),
