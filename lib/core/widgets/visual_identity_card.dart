@@ -123,7 +123,7 @@ class _VisualIdentityCardState extends State<VisualIdentityCard> {
               shrinkWrap: true,
               itemCount: _learningIcons.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
+                crossAxisCount: 1.sw > 750 ? 6 : 4,
                 crossAxisSpacing: 16.w,
                 mainAxisSpacing: 16.h,
               ),
@@ -148,7 +148,7 @@ class _VisualIdentityCardState extends State<VisualIdentityCard> {
                     child: Icon(
                       currentIcon,
                       color: isSelected ? _currentValuesColor : Colors.white70,
-                      size: 28.w,
+                      size: 26.w,
                     ),
                   ),
                 );
@@ -198,7 +198,7 @@ class _VisualIdentityCardState extends State<VisualIdentityCard> {
             children: [
               Text(
                 'Visual Identity',
-                style: AppTextStyles.bold18,
+                style: AppTextStyles.bold16,
               ),
 
               // Color Dots List

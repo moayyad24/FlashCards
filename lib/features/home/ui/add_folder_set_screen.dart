@@ -5,7 +5,6 @@ import 'package:cardy/features/home/ui/widgets/choose_toggle_button.dart';
 import 'package:cardy/features/home/ui/widgets/add_folder_set_body.dart';
 import 'package:cardy/features/home/ui/widgets/create_new_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AddFolderSetScreen extends StatefulWidget {
   const AddFolderSetScreen({super.key});
@@ -36,10 +35,7 @@ class _AddFolderSetScreenState extends State<AddFolderSetScreen> {
       appBar: AppBar(
         title: Text(
           'Create New',
-          style: TextStyle(
-            color: AppColors.blueADC6FF,
-            fontSize: 1.sw > 760 ? 42 : 32,
-            fontWeight: FontWeight.bold),
+          style: AppTextStyles.bold32.copyWith(color: AppColors.blueADC6FF),
         ),
       ),
       body: AddFolderSetBody(

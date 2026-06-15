@@ -44,6 +44,24 @@ class Cardy extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       splitScreenMode: true,
+      fontSizeResolver: (fontSize, instance) {
+        // Get the raw scaled font size using the height-based method
+        double rawScaled = FontSizeResolvers.height(fontSize, instance);
+
+        // Define maximum font sizes for different text categories
+        // You can adjust these values based on your design needs
+        if (fontSize <= 14) {
+          // Small text (captions, hints) - max 18 on tablets
+          return rawScaled.clamp(12.0, 18.0);
+        } else if (fontSize <= 20) {
+          // Body text - max 24 on tablets
+          return rawScaled.clamp(14.0, 24.0);
+        } else {
+          // Headings - max 32 on tablets
+          return rawScaled.clamp(20.0, 32.0);
+        }
+      },
+      designSize: const Size(375, 812),
       child: MultiBlocProvider(
         providers: [
           BlocProvider(

@@ -23,8 +23,9 @@ class ListTitle extends StatelessWidget {
           Icon(
             icon,
             color: AppColors.orangeFFB786,
+            size: 24.h,
           ),
-          10.horizontalSpace,
+          const SizedBox(width: 10),
           Text(
             title,
             style: AppTextStyles.bold20,

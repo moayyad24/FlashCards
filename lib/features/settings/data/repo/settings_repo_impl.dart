@@ -177,4 +177,85 @@ class SettingsRepoImpl extends DbHelper implements SettingsRepo {
       await showAppToast("Error restoring database");
     }
   }
+
+  // Future<void> importCardsFromTxt({required int setId}) async {
+  //   try {
+  //     FilePickerResult? result = await FilePicker.pickFiles(
+  //       dialogTitle: 'Select flashcards (.txt)',
+  //       type: FileType.custom,
+  //       allowedExtensions: ['txt'],
+  //     );
+
+  //     if (result == null || result.files.single.path == null) {
+  //       await showAppToast("Import cancelled.");
+  //       return;
+  //     }
+
+  //     String filePath = result.files.single.path!;
+  //     File txtFile = File(filePath);
+  //     String content = await txtFile.readAsString();
+
+  //     // Handle UTF-8 BOM
+  //     if (content.startsWith('\uFEFF')) {
+  //       content = content.substring(1);
+  //     }
+
+  //     // Split by Windows (\r\n) or Unix (\n) line endings
+  //     List<String> lines = content.split(RegExp(r'\r?\n'));
+  //     int addedCount = 0;
+  //     int skippedCount = 0;
+
+  //     for (int i = 0; i < lines.length; i++) {
+  //       String line = lines[i];
+  //       // Trim only whitespace, but keep empty fields as empty strings
+  //       if (line.trim().isEmpty) continue;
+
+  //       List<String> columns = line.split('\t');
+  //       debugPrint('Line ${i + 1}: raw columns count = ${columns.length}');
+  //       debugPrint('  columns: $columns');
+
+  //       if (columns.length != 4) {
+  //         debugPrint(
+  //             'Skipping line ${i + 1}: expected 4 columns, got ${columns.length}');
+  //         skippedCount++;
+  //         continue;
+  //       }
+
+  //       CardModel card = CardModel(
+  //         question: columns[0].trim(),
+  //         supplementQuestion: columns[1].trim(),
+  //         answer: columns[2].trim(),
+  //         supplementAnswer: columns[3].trim(),
+  //         isStudied: false,
+  //         numberOfForgets: 0,
+  //         setId: setId,
+  //       );
+
+  //       String sql = '''
+  //       INSERT INTO cards (card_question, card_s_question, card_answer, card_s_answer, set_id) 
+  //       VALUES (?, ?, ?, ?, ?);
+  //     ''';
+  //       List<dynamic> arguments = [
+  //         card.question,
+  //         card.supplementQuestion,
+  //         card.answer,
+  //         card.supplementAnswer,
+  //         card.setId,
+  //       ];
+
+  //       await insert(sql, arguments);
+  //       addedCount++;
+  //       debugPrint('  -> Added card: ${card.question}');
+  //     }
+
+  //     await showAppToast(
+  //         "Imported $addedCount cards (skipped $skippedCount invalid lines)");
+  //     debugPrint(
+  //         'TXT import finished: $addedCount added, $skippedCount skipped');
+  //   } catch (e, stack) {
+  //     debugPrint('Error importing TXT: $e');
+  //     debugPrint('Stack trace: $stack');
+  //     await showAppToast("Import failed: $e");
+  //   }
+  // }
 }
