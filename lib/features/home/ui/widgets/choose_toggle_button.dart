@@ -49,8 +49,8 @@ class _ChooseToggleButtonState extends State<ChooseToggleButton> {
                 bottom: 0,
                 left: _selectedOption == ToggleOption.sets
                     ? 0
-                    : (constraints.maxWidth - 12.r) / 2,
-                width: (constraints.maxWidth - 12.r) / 2,
+                    : (constraints.maxWidth - 16.r) / 2,
+                width: (constraints.maxWidth - 16.r) / 2,
                 child: Container(
                   decoration: BoxDecoration(
                     color: activeColor,

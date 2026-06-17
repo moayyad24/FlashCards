@@ -4,8 +4,6 @@ import 'package:cardy/core/widgets/slimy_card.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_cubit.dart';
 import 'package:cardy/features/cards/manager/cards_list_cubit/cards_list_state.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
-import 'package:cardy/features/cards_test/models/answer_status.dart';
-import 'package:cardy/features/cards_test/ui/widgets/answer_button.dart';
 import 'package:cardy/features/cards_test/ui/widgets/bottom_card.dart';
 import 'package:cardy/features/cards_test/ui/widgets/swiping_hint.dart';
 import 'package:cardy/features/cards_test/ui/widgets/top_card.dart';
@@ -24,7 +22,6 @@ class MyCard extends StatelessWidget {
             context.read<CardsListCubit>().filteredCardsList;
         final cardsTestCubit = context.read<CardsTestCubit>();
         var index = cardsTestCubit.currentIndex;
-        final answerStatus = context.watch<CardsTestCubit>().answerStatus;
         if (state is CardListSuccess) {
           return Column(
             mainAxisSize: MainAxisSize.max,
@@ -42,35 +39,6 @@ class MyCard extends StatelessWidget {
                     topCardWidget: TopCardWidget(card: cardsList[index]),
                     bottomCardWidget: BottomCardWidget(card: cardsList[index]),
                   ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(left: 16, right: 16, bottom: 30).r,
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: AnswerButton(
-                        label: 'Wrong',
-                        icon: Icons.close_rounded,
-                        isSelected: answerStatus == AnswerStatus.incorrect,
-                        accentColor: Colors.red.shade600,
-                        onPressed: () => cardsTestCubit
-                            .onAnswerPressed(AnswerStatus.incorrect),
-                      ),
-                    ),
-                    14.horizontalSpace,
-                    Expanded(
-                      child: AnswerButton(
-                        label: 'Correct',
-                        icon: Icons.check_rounded,
-                        isSelected: answerStatus == AnswerStatus.correct,
-                        accentColor: Colors.green.shade600,
-                        onPressed: () => cardsTestCubit
-                            .onAnswerPressed(AnswerStatus.correct),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ],

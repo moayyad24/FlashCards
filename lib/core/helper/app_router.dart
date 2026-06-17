@@ -14,6 +14,7 @@ import 'package:cardy/features/cards/ui/edit_card_screen.dart';
 import 'package:cardy/features/cards/ui/edit_set_screen.dart';
 import 'package:cardy/features/cards_test/manager/cards_test_cubit/cards_test_cubit.dart';
 import 'package:cardy/features/cards_test/ui/cards_test_screen.dart';
+import 'package:cardy/features/cards_test/ui/test_result_screen.dart';
 import 'package:cardy/features/home/ui/add_folder_set_screen.dart';
 import 'package:cardy/features/home/ui/home_screen.dart';
 import 'package:cardy/features/sets/data/repo/sets_repo_impl.dart';
@@ -58,6 +59,9 @@ class AppRouter {
             settings.arguments as Map<String, dynamic>);
       case Routes.cardsTestScreen:
         return _buildCardsTestScreenRoute(settings.arguments as CardsListCubit);
+      case Routes.testResultScreen:
+        return _buildTestResultScreenRoute(
+            settings.arguments as Map<String, dynamic>);
       case Routes.settingsScreen:
         return _buildSettingsScreenRoute();
       default:
@@ -186,6 +190,20 @@ class AppRouter {
           create: (context) => CardsTestCubit()..initState(cardListCubit),
           child: const CardsTestScreen(),
         ),
+      ),
+    );
+  }
+
+  Route _buildTestResultScreenRoute(Map<String, dynamic> data) {
+    CardsTestCubit cardsTestCubit = data['cardsTestCubit'];
+    CardsListCubit cardListCubit = data['cardListCubit'];
+    return MaterialPageRoute(
+      builder: (_) => MultiBlocProvider(
+        providers: [
+          BlocProvider.value(value: cardsTestCubit),
+          BlocProvider.value(value: cardListCubit),
+        ],
+        child: const TestResultScreen(),
       ),
     );
   }
