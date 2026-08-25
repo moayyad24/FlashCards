@@ -74,7 +74,7 @@ class CardsRepoImpl extends DbHelper implements CardsRepo {
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
-      setModel.color.value.toRadixString(16).padLeft(8, '0'),
+      setModel.color.toARGB32().toRadixString(16).padLeft(8, '0'),
       setModel.icon,
       setModel.id,
     ];

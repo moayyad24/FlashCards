@@ -42,7 +42,7 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
-      setModel.color.value.toRadixString(16).padLeft(8, '0'),
+      setModel.color.toARGB32().toRadixString(16).padLeft(8, '0'),
       setModel.icon,
       setModel.folderId,
     ];
@@ -59,7 +59,7 @@ class HomeRepoImpl extends DbHelper implements HomeRepo {
     List<dynamic> arguments = [
       folderModel.title,
       folderModel.description,
-      folderModel.color.value.toRadixString(16).padLeft(8, '0'),
+      folderModel.color.toARGB32().toRadixString(16).padLeft(8, '0'),
     ];
     int result = await insert(sql, arguments);
     return result;

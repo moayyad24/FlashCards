@@ -41,7 +41,7 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
     List<dynamic> arguments = [
       setModel.title,
       setModel.description,
-      setModel.color.value.toRadixString(16).padLeft(8, '0'),
+      setModel.color.toARGB32().toRadixString(16).padLeft(8, '0'),
       setModel.icon,
       setModel.folderId,
     ];
@@ -66,7 +66,7 @@ class SetsRepoImpl extends DbHelper implements SetsRepo {
       folder.id,
       folder.title,
       folder.description,
-      folder.color.value.toRadixString(16).padLeft(8, '0'),
+      folder.color.toARGB32().toRadixString(16).padLeft(8, '0'),
     ];
     try {
       int result = await update(sql, arguments);
