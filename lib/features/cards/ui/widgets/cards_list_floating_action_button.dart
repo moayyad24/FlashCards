@@ -43,7 +43,7 @@ class CardsListsFloatingActionButton extends StatelessWidget {
               CardsListCubit c = context.read<CardsListCubit>();
               await c.filterCardsBySettings();
               if (context.mounted && c.filteredCardsList.isNotEmpty) {
-                context.read<AdsCubit>().loadInterstitialAd();
+                context.read<AdsCubit>().showInterstitialAd();
                 Navigator.of(context).pushNamed(
                   Routes.cardsTestScreen,
                   arguments: context.read<CardsListCubit>(),

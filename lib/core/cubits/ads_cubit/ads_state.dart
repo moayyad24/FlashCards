@@ -5,6 +5,7 @@ class AdsState {
 
   final bool isInterstitialLoading;
   final bool isInterstitialSuccess;
+  final bool isInterstitialReady;
   final bool isInterstitialFailure;
 
   const AdsState({
@@ -13,6 +14,7 @@ class AdsState {
     this.isBannerFailure = false,
     this.isInterstitialLoading = false,
     this.isInterstitialSuccess = false,
+    this.isInterstitialReady = false,
     this.isInterstitialFailure = false,
   });
 
@@ -22,6 +24,7 @@ class AdsState {
     bool? isBannerFailure,
     bool? isInterstitialLoading,
     bool? isInterstitialSuccess,
+    bool? isInterstitialReady,
     bool? isInterstitialFailure,
   }) {
     return AdsState(
@@ -32,6 +35,7 @@ class AdsState {
           isInterstitialLoading ?? this.isInterstitialLoading,
       isInterstitialSuccess:
           isInterstitialSuccess ?? this.isInterstitialSuccess,
+      isInterstitialReady: isInterstitialReady ?? this.isInterstitialReady,
       isInterstitialFailure:
           isInterstitialFailure ?? this.isInterstitialFailure,
     );

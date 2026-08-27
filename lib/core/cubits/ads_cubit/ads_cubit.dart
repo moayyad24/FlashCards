@@ -1,6 +1,6 @@
 import 'package:cardy/core/cubits/ads_cubit/ads_state.dart';
+import 'package:cardy/core/helper/dependency_injection.dart';
 import 'package:cardy/core/services/ad_mob_service.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -41,7 +41,7 @@ class AdsCubit extends Cubit<AdsState> {
         adLoadCallback: InterstitialAdLoadCallback(
           // Called when an ad is successfully received.
           onAdLoaded: (ad) {
-            debugPrint('$ad loaded.');
+            logger.d('$ad loaded.');
             ad.fullScreenContentCallback = FullScreenContentCallback(
                 // Called when the ad showed the full screen content.
                 onAdShowedFullScreenContent: (ad) {},
@@ -56,34 +56,39 @@ class AdsCubit extends Cubit<AdsState> {
                 onAdDismissedFullScreenContent: (ad) {
                   ad.dispose();
                   interstitialAd = null;
-                  // Optionally reload here if you want it ready for next time:
-                  // loadInterstitialAd();
+                  emit(state.copyWith(isInterstitialSuccess: false));
+                  loadInterstitialAd();
                 },
                 // Called when a click is recorded for an ad.
                 onAdClicked: (ad) {});
             // Keep a reference to the ad so you can show it later.
             interstitialAd = ad;
             emit(state.copyWith(
-                isInterstitialLoading: false, isInterstitialSuccess: true));
+              isInterstitialLoading: false,
+              isInterstitialSuccess: true,
+              isInterstitialReady: true,
+            ));
           },
           // Called when an ad request failed.
           onAdFailedToLoad: (LoadAdError error) {
-            debugPrint('InterstitialAd failed to load: $error');
+            logger.e('InterstitialAd failed to load: $error');
             interstitialAd = null;
             emit(state.copyWith(
-                isInterstitialLoading: false, isInterstitialFailure: true));
+              isInterstitialLoading: false,
+              isInterstitialFailure: true,
+              isInterstitialReady: false,
+            ));
           },
         ));
   }
 
   /// Show the loaded interstitial ad.
   void showInterstitialAd() {
-    if (interstitialAd != null) {
+    if (interstitialAd != null && state.isInterstitialReady) {
       interstitialAd!.show();
-      // Emitting default state for interstitial so it can be reloaded later
-      emit(state.copyWith(isInterstitialSuccess: false));
     } else {
-      debugPrint('Warning: attempt to show interstitial before loaded.');
+      logger.w('Warning: attempt to show interstitial before loaded.');
+      loadInterstitialAd();
     }
   }
 

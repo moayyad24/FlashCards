@@ -73,7 +73,8 @@ class Cardy extends StatelessWidget {
                 SettingsCubit(getIt.get<SettingsRepoImpl>())..fetchSettings(),
           ),
           BlocProvider(
-            create: (context) => AdsCubit(getIt.get<AdMobService>()),
+            create: (context) =>
+                AdsCubit(getIt.get<AdMobService>())..loadInterstitialAd(),
           ),
           BlocProvider(
             create: (context) =>
