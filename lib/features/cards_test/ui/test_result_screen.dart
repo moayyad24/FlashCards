@@ -10,10 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class TestResultScreen extends StatelessWidget {
+class TestResultScreen extends StatefulWidget {
   const TestResultScreen({
     super.key,
   });
+
+  @override
+  State<TestResultScreen> createState() => _TestResultScreenState();
+}
+
+class _TestResultScreenState extends State<TestResultScreen> {
   String evaluatePerformance(int totalQuestions, int correctAnswers) {
     // Guard clause for invalid input
     if (totalQuestions <= 0) {
@@ -36,8 +42,13 @@ class TestResultScreen extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     context.read<AdsCubit>().showInterstitialAd();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: ListView(
         children: [

@@ -5,20 +5,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class AdsCubit extends Cubit<AdsState> {
-  AdsCubit() : super(const AdsState());
+  final AdMobService adMobService;
+  AdsCubit(this.adMobService) : super(const AdsState());
 
   BannerAd? banner;
   InterstitialAd? interstitialAd;
 
   void createBannerAd() {
-    if (AdMobService.bannerAdUnitId == null) return;
-
     emit(state.copyWith(
         isBannerLoading: true, isBannerSuccess: false, isBannerFailure: false));
     banner = BannerAd(
       size: AdSize.banner,
       request: const AdRequest(),
-      adUnitId: AdMobService.bannerAdUnitId!,
+      adUnitId: adMobService.bannerAdUnitId,
       listener: BannerAdListener(
         onAdLoaded: (ad) =>
             emit(state.copyWith(isBannerLoading: false, isBannerSuccess: true)),
@@ -32,14 +31,12 @@ class AdsCubit extends Cubit<AdsState> {
   }
 
   void loadInterstitialAd() {
-    if (AdMobService.interstitialAdUnitId == null) return;
-
     emit(state.copyWith(
         isInterstitialLoading: true,
         isInterstitialSuccess: false,
         isInterstitialFailure: false));
     InterstitialAd.load(
-        adUnitId: AdMobService.interstitialAdUnitId!,
+        adUnitId: adMobService.interstitialAdUnitId,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           // Called when an ad is successfully received.

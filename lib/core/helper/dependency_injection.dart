@@ -1,3 +1,4 @@
+import 'package:cardy/core/services/ad_mob_service.dart';
 import 'package:cardy/features/cards/data/repo/cards_repo_impl.dart';
 import 'package:cardy/features/home/data/repo/home_repo_impl.dart';
 import 'package:cardy/features/sets/data/repo/sets_repo_impl.dart';
@@ -16,4 +17,6 @@ void setupGetIt() {
   getIt.registerLazySingleton<CardsRepoImpl>(() => CardsRepoImpl());
   //Settings
   getIt.registerLazySingleton<SettingsRepoImpl>(() => SettingsRepoImpl());
+  //ِAds
+  getIt.registerLazySingleton<AdMobService>(() => AdMobService());
 }
