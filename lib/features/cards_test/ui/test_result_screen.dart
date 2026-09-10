@@ -1,4 +1,5 @@
 import 'package:cardy/core/cubits/ads_cubit/ads_cubit.dart';
+import 'package:cardy/core/helper/routes.dart';
 import 'package:cardy/core/theme/app_text_styles.dart';
 import 'package:cardy/core/theme/colors.dart';
 import 'package:cardy/core/widgets/custom_button.dart';
@@ -83,9 +84,10 @@ class _TestResultScreenState extends State<TestResultScreen> {
                 12.horizontalSpace,
                 CustomButton(
                   onPressed: () {
-                    context
-                        .read<CardsTestCubit>()
-                        .refreshTheCardsListAfterTest();
+                    Navigator.of(context).pushReplacementNamed(
+                      Routes.cardsTestScreen,
+                      arguments: context.read<CardsListCubit>(),
+                    );
                   },
                   title: 'Continue',
                   backgroundColor: AppColors.blue002E6A,

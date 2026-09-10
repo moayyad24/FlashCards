@@ -98,13 +98,6 @@ class CardsTestCubit extends Cubit<CardsTestState> {
     }
   }
 
-  Future<void> refreshTheCardsListAfterTest() async {
-    currentIndex = 0;
-    numberOfCorrectAnswer = 0;
-    await cardsListCubit.refreshCardsList();
-    emit(CardsTestTakeAnewTest());
-  }
-
   Widget transitionBuilder(Widget child, Animation<double> animation) {
     final curvedAnimation =
         CurvedAnimation(parent: animation, curve: Curves.easeInOut);
