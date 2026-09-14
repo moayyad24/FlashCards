@@ -21,7 +21,7 @@ class CardListViewBody extends StatelessWidget {
             child: visibleCards.isEmpty
                 ? Center(
                     child: Text(
-                      'No cards found',
+                      'No cards yet — start by adding a new card',
                       style: AppTextStyles.medium16,
                     ),
                   )
@@ -64,8 +64,7 @@ class _AnimatedCardItemState extends State<_AnimatedCardItem>
   @override
   void initState() {
     super.initState();
-    // Each item animates with a small delay based on its index (staggered effect)
-    final startDelay = Duration(milliseconds: widget.index * 50);
+    final startDelay = Duration(milliseconds: 10 * widget.index);
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 400),
